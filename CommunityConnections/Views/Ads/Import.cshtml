@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Import";
+}
+
+<div class="card">
+    <div class="card-body">
+        @using (Html.BeginForm("Import", "Ads", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.Raw(ViewBag.Error)
+            <span>
+                Excel File
+            </span>
+            <input type="file" name="excelfile" />
+            <br />
+            <input type="submit" value="Import" />
+        }
+
+
+        @if (ViewBag.ListAds != null)
+        {
+            <table cellpadding="2" cellspacing="2" border="1">
+                <tr>
+                    <th>
+                        Page No
+                    </th>
+                    <th>
+                        Layout
+                    </th>
+                    <th>
+                        Ad Size
+                    </th>
+                    <th>
+                        Path
+                    </th>
+                </tr>
+                @foreach (var item in ViewBag.ListAds)
+                {
+                    <tr>
+                        <td>@item.PageNo</td>
+                        <td>@item.Layout</td>
+                        <td>@item.AdSize</td>
+                        <td>@item.Path</td>
+
+                    </tr>
+                }
+            </table>
+        }
+
+
+    </div>
+</div>
+

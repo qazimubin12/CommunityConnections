@@ -56,6 +56,11 @@
       <HintPath>..\packages\LinqToExcel.1.11.0\lib\LinqToExcel.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Excel\15.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
     <Reference Include="Remotion, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
       <HintPath>..\packages\LinqToExcel.1.11.0\lib\Remotion.dll</HintPath>
     </Reference>
@@ -188,6 +193,7 @@
     <Content Include="Views\Ads\Delete.cshtml" />
     <Content Include="Views\Ads\Action.cshtml" />
     <Content Include="Views\Ads\_Listing.cshtml" />
+    <Content Include="Views\Ads\Import.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

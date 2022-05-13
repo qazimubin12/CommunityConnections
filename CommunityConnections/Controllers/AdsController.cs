@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Excel = Microsoft.Office.Interop.Excel;
 namespace CommunityConnections.Controllers
 {
     public class AdsController : Controller
@@ -52,6 +52,65 @@ namespace CommunityConnections.Controllers
                 return View("Action", model);
             }
         }
+
+
+        [HttpGet]
+        public ActionResult Import()
+        {
+            return View();
+        }
+
+
+
+        [HttpPost]
+        public ActionResult Import(HttpPostedFileBase excelfile)
+        {
+            if (excelfile == null || excelfile.ContentLength == 0)
+            {
+                ViewBag.Error = "Please Select Excel File";
+                    return View();
+            }
+            else
+            {
+                if (excelfile.FileName.EndsWith("xls") || excelfile.FileName.EndsWith("xlsx"))
+                {
+                    string path = Server.MapPath("~/Content/" + excelfile.FileName);
+                    if(System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+                    excelfile.SaveAs(path);
+
+                    Excel.Application application = new Excel.Application();
+                    Excel.Workbook workbook = application.Workbooks.Open(path);
+                    Excel.Worksheet worksheet = workbook.ActiveSheet;
+                    Excel.Range range = worksheet.UsedRange;
+                    List<Ads> list = new List<Ads>();
+                    for (int row = 2; row < range.Rows.Count; row++)
+                    {
+                        var Ads = new Ads();
+                        Ads.PageNo = int.Parse(((Excel.Range)range.Cells[row, 1]).Text);
+                        Ads.Layout = ((Excel.Range)range.Cells[row, 2]).Text;
+                        Ads.AdSize = ((Excel.Range)range.Cells[row, 3]).Text;
+                        Ads.Path = ((Excel.Range)range.Cells[row, 4]).Text;
+                        list.Add(Ads);
+                        AdsServices.Instance.SaveAds(Ads);
+
+                    }
+                    ViewBag.ListAds = list;
+                    return View();
+                }
+                else
+                {
+                    ViewBag.Error = "Incorrect File";
+
+                    return View();
+                }
+            }
+        }
+
+
+      
 
 
 
