@@ -41,7 +41,7 @@ namespace CommunityConnections.Services
             {
                 if (!string.IsNullOrEmpty(SearchTerm))
                 {
-                    Adss = context.Ads.Where(x => x.Layout == SearchTerm).ToList();
+                    Adss = context.Ads.Where(x => x.Name == SearchTerm).ToList();
                 }
                 else
                 {

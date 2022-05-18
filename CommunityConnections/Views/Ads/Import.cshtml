@@ -11,15 +11,17 @@
             <span>
                 Excel File
             </span>
-            <input type="file" name="excelfile" />
+            <input class="form-control" type="file" name="excelfile" />
             <br />
-            <input type="submit" value="Import" />
+            <input class="btn btn-block btn-outline-primary" type="submit" value="Import" />
+            <br />
         }
+        <a class="btn btn-block btn-outline-success"  href="@Url.Action("Index","Ads")">Back to Ads</a> 
 
 
         @if (ViewBag.ListAds != null)
         {
-            <table cellpadding="2" cellspacing="2" border="1">
+            <table class="table table-responsive"  cellpadding="2" cellspacing="2" border="1">
                 <tr>
                     <th>
                         Page No

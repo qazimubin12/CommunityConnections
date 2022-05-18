@@ -15,6 +15,7 @@ namespace CommunityConnections.ViewModels
     {
         public int ID { get; set; }
         public int PageNo { get; set; }
+        public string Name { get; set; }
         public string Layout { get; set; }
         public string AdSize { get; set; }
         public string Path { get; set; }

@@ -43,8 +43,9 @@ namespace CommunityConnections.Controllers
                 model.Layout = ad.Layout;
                 model.AdSize = ad.AdSize;
                 model.Path = ad.Path;
+                model.Name = ad.Name;
                 
-                return View("Action", model);
+                return PartialView("Action", model);
 
             }
             else
@@ -93,6 +94,7 @@ namespace CommunityConnections.Controllers
                         Ads.Layout = ((Excel.Range)range.Cells[row, 2]).Text;
                         Ads.AdSize = ((Excel.Range)range.Cells[row, 3]).Text;
                         Ads.Path = ((Excel.Range)range.Cells[row, 4]).Text;
+                        Ads.Name = ((Excel.Range)range.Cells[row, 5]).Text;
                         list.Add(Ads);
                         AdsServices.Instance.SaveAds(Ads);
 
@@ -127,7 +129,7 @@ namespace CommunityConnections.Controllers
                 ad.PageNo = model.PageNo;
                 ad.AdSize = model.AdSize;
                 ad.Path = model.Path;
-              
+                ad.Name = model.Name;
                 AdsServices.Instance.UpdateAds(ad);
 
             }
@@ -138,6 +140,7 @@ namespace CommunityConnections.Controllers
                 ad.PageNo = model.PageNo;
                 ad.AdSize = model.AdSize;
                 ad.Path = model.Path;
+                ad.Name = model.Name;
                 AdsServices.Instance.SaveAds(ad);
             }
            

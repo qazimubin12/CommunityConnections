@@ -1,0 +1,242 @@
+﻿@model CommunityConnections.ViewModels.MainScreenViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+    int count = 0;
+}
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>The  Community Connections</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/Content/template/~/Content/template/vendors/feather/feather.css">
+    <link rel="stylesheet" href="~/Content/template/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Content/template/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="~/Content/template/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="~/Content/template/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/template/js/select.dataTables.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/Content/template/css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="~/Content/template/images/favicon.png" />
+    <script src="~/Content/template/js/jquery.min.js"></script>
+</head>
+<style>
+    .card {
+        margin-top: 2em;
+        padding: 1.5em 0.5em 0.5em;
+        border-radius: 2em;
+        text-align: center;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+        .card img {
+            width: 65%;
+            border-radius: 50%;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .card .card-title {
+            font-weight: 700;
+            font-size: 1.5em;
+        }
+
+        .card .btn {
+            border-radius: 2em;
+            background-color: teal;
+            color: #ffffff;
+            padding: 0.5em 1.5em;
+        }
+
+            .card .btn:hover {
+                background-color: rgba(0, 128, 128, 0.7);
+                color: #ffffff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            }
+</style>
+<body>
+    <div class="container">
+        <div class="row">
+            <a class="btn btn-block btn-outline-primary" href="@Url.Action("","")">Back To Dashboard</a>
+        </div>
+
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-3 table-responsive">
+
+            <table style="margin-top:5px;" class="table table-condensed table-hover table-responsive ">
+                <thead>
+                    <tr>
+
+                        <th>
+                            Ad
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Ads)
+                    {
+                        <tr>
+
+                            <td class="item" draggable="true" id="@item.ID">@item.Name ||  @item.AdSize</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+
+        <div class="col-md-9">
+            <table cellpadding="3">
+                @{ var counter = 1;
+                    int newcounter = 0;}
+                <tr>
+
+                    @for (int i = 1; i <= Model.Pages.PageNo; i++)
+                    {
+
+                        <td>
+                            <div class="card" style="height:300px;width: 10rem;">
+                                <div class="card-body">
+                                    @{newcounter++;
+                                    }
+                                    @for (int n = 0; n < Model.Ads.Count; n++)
+                                    {
+
+
+                                        if (Model.Ads[n].PageNo == i)
+                                        {
+                                            if (Model.Ads[n].AdSize == "Full Page")
+                                            {
+                                                <div class="card" style="background-color:burlywood; height:300px;width: 10rem;margin-left: -28px;margin-top: -44px;">
+                                                    <div class="card-body">
+                                                        <h4 style="color:white">@Model.Ads[n].Name</h4>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                            if (Model.Ads[n].AdSize == "3/4")
+                                            {
+                                                <div class="card" style="background-color:cornflowerblue; height:220px;width: 10rem;margin-left: -28px;margin-top: -44px;">
+                                                    <div class="card-body">
+                                                        <h4 style="color:white">@Model.Ads[n].Name</h4>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                            if (Model.Ads[n].AdSize == "half page vertical")
+                                            {
+                                                <div class="card" style="background-color:darkslategray; height:300px;width: 6rem;margin-left: -28px;margin-top: -44px;">
+                                                    <div class="card-body">
+                                                        <h6 style="color: white">@Model.Ads[n].Name</h6>
+                                                    </div>
+                                                </div>
+                                            }
+                                            
+                if (Model.Ads[n].AdSize == "1/8")
+                {
+                    <div class="card" style="background-color: burlywood; height: 100px; width: 5rem; margin-left: -28px; margin-top: 157px;">
+                        <div class="card-body">
+                            <label style="color: white; margin-top: -38px; margin-left: -22px;">@Model.Ads[n].Name</label>
+                        </div>
+                    </div>
+                }
+@*
+                if (Model.Ads[n].AdSize == "Full Page")
+                {
+                    <div class="card" style="background-color:burlywood; height:300px;width: 10rem;margin-left: -28px;margin-top: -44px;">
+                        <div class="card-body">
+                            <h4 style="color:white">@Model.Ads[n].Name</h4>
+                        </div>
+                    </div>
+                }*@
+                                        }
+
+                                    }
+
+
+                                    @{count++;}
+                                </div>
+
+
+
+                                @*counter*@
+                                <h4>@count.ToString()</h4>
+
+                            </div>
+
+                        </td>
+
+                        if (counter % 6 == 0)
+                        {
+                        @:</tr><tr>
+                        }
+                        { counter++; }
+
+
+
+
+
+                    }
+                </tr>
+
+            </table>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="~/Content/template/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="~/Content/template/vendors/chart.js/Chart.min.js"></script>
+    <script src="~/Content/template/vendors/datatables.net/jquery.dataTables.js"></script>
+    <script src="~/Content/template/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <script src="~/Content/template/js/dataTables.select.min.js"></script>
+
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="~/Content/template/js/off-canvas.js"></script>
+    <script src="~/Content/template/js/hoverable-collapse.js"></script>
+    <script src="~/Content/template/js/template.js"></script>
+    <script src="~/Content/template/js/settings.js"></script>
+    <script src="~/Content/template/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="~/Content/template/js/dashboard.js"></script>
+    <script src="~/Content/template/js/Chart.roundedBarCharts.js"></script>
+</body>

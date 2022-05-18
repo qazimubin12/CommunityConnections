@@ -46,7 +46,12 @@
                             </select>
                         </div>
 
-                        
+                        <div class="form-group col-md-4">
+                            <label class="col-sm-12">Name</label>
+                            <input required class="form-control" id="Name" value="@Model.Name" name="Name" placeholder="Enter Add Name">
+
+                        </div>
+
 
                         <div class="form-group col-md-4">
                             <label class="col-sm-12">Layout</label>
@@ -56,23 +61,20 @@
                     </div>
 
                     <div class="form-row col-md-12">
-                        <div class="form-group col-md-11">
+                        <div class="form-group col-md-5">
                             <label class="col-sm-12">Page No</label>
                             <input required class="form-control" id="PageNo" value="@Model.PageNo" name="PageNo" placeholder="Enter Page Number">
 
                         </div>
 
-                        <div class="form-group">
-                            <label for="exampleInputFile">Path</label>
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input disabled class="form-control" name="Path" id="Path" />
-                                    <input class="form-control" id="selectpath" name="selectpath" type="file" />
-                                </div>
+                        <div class="form-group col-md-5">
+                            <label>Path</label>
+                            <div class="custom-file">
+                                <input hidden disabled class="form-control" name="Path" id="Path" />
+                                <input class="form-control" id="selectpath" name="selectpath" type="file" />
                             </div>
-                            <br />
-                          
                         </div>
+
 
 
 

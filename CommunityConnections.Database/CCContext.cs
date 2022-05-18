@@ -16,6 +16,7 @@ namespace CommunityConnections.Database
         }
 
         public DbSet<Ads> Ads { get; set; }
-        public DbSet<Page> Pages { get; set; }
+        public DbSet<Pages> Pages { get; set; }
     }
+
 }

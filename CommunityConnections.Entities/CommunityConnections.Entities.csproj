@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="Ads.cs" />
     <Compile Include="BaseEntity.cs" />
-    <Compile Include="Page.cs" />
+    <Compile Include="Pages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

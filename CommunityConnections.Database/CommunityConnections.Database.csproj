@@ -60,6 +60,18 @@
     <Compile Include="Migrations\202205131103297_somefixed.designer.cs">
       <DependentUpon>202205131103297_somefixed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205170853452_nameaddedinads.cs" />
+    <Compile Include="Migrations\202205170853452_nameaddedinads.designer.cs">
+      <DependentUpon>202205170853452_nameaddedinads.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205170925144_pageremoved.cs" />
+    <Compile Include="Migrations\202205170925144_pageremoved.designer.cs">
+      <DependentUpon>202205170925144_pageremoved.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205180844444_pagesadded.cs" />
+    <Compile Include="Migrations\202205180844444_pagesadded.designer.cs">
+      <DependentUpon>202205180844444_pagesadded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -79,6 +91,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205131103297_somefixed.resx">
       <DependentUpon>202205131103297_somefixed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205170853452_nameaddedinads.resx">
+      <DependentUpon>202205170853452_nameaddedinads.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205170925144_pageremoved.resx">
+      <DependentUpon>202205170925144_pageremoved.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205180844444_pagesadded.resx">
+      <DependentUpon>202205180844444_pagesadded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
