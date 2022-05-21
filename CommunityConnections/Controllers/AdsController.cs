@@ -73,6 +73,7 @@ namespace CommunityConnections.Controllers
             }
             else
             {
+                bool isPresent = false;
                 if (excelfile.FileName.EndsWith("xls") || excelfile.FileName.EndsWith("xlsx"))
                 {
                     string path = Server.MapPath("~/Content/" + excelfile.FileName);
@@ -95,8 +96,38 @@ namespace CommunityConnections.Controllers
                         Ads.AdSize = ((Excel.Range)range.Cells[row, 3]).Text;
                         Ads.Path = ((Excel.Range)range.Cells[row, 4]).Text;
                         Ads.Name = ((Excel.Range)range.Cells[row, 5]).Text;
-                        list.Add(Ads);
-                        AdsServices.Instance.SaveAds(Ads);
+                        var List = AdsServices.Instance.GetAdss();
+                       
+                        if(List.Count != 0) {
+                            foreach (var item in List)
+                            {
+                                if (item.Name == Ads.Name && item.PageNo == Ads.PageNo)
+                                {
+                                    isPresent = true;
+                                    break;
+                                }
+                                else
+                                {
+                                    isPresent = false;
+                                }
+
+                                
+
+
+                            }
+                            if (isPresent == false)
+                            {
+                                list.Add(Ads);
+                                AdsServices.Instance.SaveAds(Ads);
+                            }
+
+
+                        }
+                        else
+                        {
+                            list.Add(Ads);
+                            AdsServices.Instance.SaveAds(Ads);
+                        }
 
                     }
                     ViewBag.ListAds = list;

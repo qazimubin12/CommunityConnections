@@ -18,5 +18,27 @@ namespace CommunityConnections.Controllers
             
             return View(model);
         }
+
+
+        [HttpGet]
+        public ActionResult SelectLayout(int DataID, int DroppedPage)
+        {
+            MainScreenViewModel model = new MainScreenViewModel();
+            var LayoutList = new List<string>();
+            LayoutList.Add("Full Page W’ Bleed");
+            LayoutList.Add("Full Page");
+            LayoutList.Add("3/4 Page");
+            LayoutList.Add("1/2 Page Vertical");
+            LayoutList.Add("1/2 Page");
+            LayoutList.Add("1/3 Page");
+            LayoutList.Add("1/4 Page");
+            LayoutList.Add("1/8 Page");
+            LayoutList.Add("Full Spread");
+            LayoutList.Add("3/4 Spread");
+            model.Layouts = LayoutList;
+            model.Ad = AdsServices.Instance.GetAds(DataID);
+            model.Page = DroppedPage;
+            return View(model);
+        }
     }
 }

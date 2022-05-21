@@ -20,9 +20,9 @@ namespace CommunityConnections.Controllers
 
                 var fileName = Path.GetExtension(file.FileName);
 
-                var path = Path.Combine(Server.MapPath("~/Content/themedata/dist/img/"), fileName);
+                var path = Path.Combine(Server.MapPath("~/Content/template/images/"), file.FileName);
                 file.SaveAs(path);
-                result.Data = new { Success = true, Path = string.Format("/Content/themedata/dist/img/{0}", fileName) };
+                result.Data = new { Success = true, Path = string.Format("/Content/template/images/{0}", file.FileName) };
                 //var newImage = new Image() { Name = fileName };
             }
             catch (Exception ex)

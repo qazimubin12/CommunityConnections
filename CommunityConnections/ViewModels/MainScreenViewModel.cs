@@ -11,7 +11,13 @@ namespace CommunityConnections.ViewModels
         public List<Ads> Ads { get; set; }
         public Pages Pages { get; set; }
         public List<MyList> CompleteList { get; set; }
+
+        public Ads Ad { get; set; }
+        public int Page { get; set; }
+        public List<string> Layouts { get; set; }
     }
+
+
 
     public class MyList
     {

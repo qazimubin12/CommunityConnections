@@ -25,12 +25,16 @@
     <!-- endinject -->
     <link rel="shortcut icon" href="~/Content/template/images/favicon.png" />
     <script src="~/Content/template/js/jquery.min.js"></script>
+
+    <!-- Jquery UI -->
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
+
 </head>
 <style>
     .card {
         margin-top: 2em;
         padding: 1.5em 0.5em 0.5em;
-        border-radius: 2em;
+        border-radius: 1em;
         text-align: center;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     }
@@ -73,7 +77,7 @@
     <div class="row">
         <div class="col-md-3 table-responsive">
 
-            <table style="margin-top:5px;" class="table table-condensed table-hover table-responsive ">
+            <table id="launchPad" style="z-index:9;margin-top:5px; overflow:hidden;" class="table table-condensed table-hover table-responsive ">
                 <thead>
                     <tr>
 
@@ -87,8 +91,12 @@
                     @foreach (var item in Model.Ads)
                     {
                         <tr>
-
-                            <td class="item" draggable="true" id="@item.ID">@item.Name ||  @item.AdSize</td>
+                            
+                            <td id="@item.ID" class="draggable" >
+                                <div>
+                                    <h4>@item.Name</h4>
+                                </div>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -97,7 +105,7 @@
         </div>
 
 
-        <div class="col-md-9">
+        <div  class="col-md-9">
             <table cellpadding="3">
                 @{ var counter = 1;
                     int newcounter = 0;}
@@ -106,8 +114,8 @@
                     @for (int i = 1; i <= Model.Pages.PageNo; i++)
                     {
 
-                        <td>
-                            <div class="card" style="height:300px;width: 10rem;">
+                        <td id="@counter">
+                            <div class="card droppable" style="height:300px;width: 10rem;">
                                 <div class="card-body">
                                     @{newcounter++;
                                     }
@@ -143,24 +151,15 @@
                                                     </div>
                                                 </div>
                                             }
-                                            
-                if (Model.Ads[n].AdSize == "1/8")
-                {
-                    <div class="card" style="background-color: burlywood; height: 100px; width: 5rem; margin-left: -28px; margin-top: 157px;">
-                        <div class="card-body">
-                            <label style="color: white; margin-top: -38px; margin-left: -22px;">@Model.Ads[n].Name</label>
-                        </div>
-                    </div>
-                }
-@*
-                if (Model.Ads[n].AdSize == "Full Page")
-                {
-                    <div class="card" style="background-color:burlywood; height:300px;width: 10rem;margin-left: -28px;margin-top: -44px;">
-                        <div class="card-body">
-                            <h4 style="color:white">@Model.Ads[n].Name</h4>
-                        </div>
-                    </div>
-                }*@
+
+                                            if (Model.Ads[n].AdSize == "1/8 Page")
+                                            {
+                                                <div class="card" style="background-color: burlywood; height: 100px; width: 5rem; margin-left: -29px; margin-top: 156px; ">
+                                                    <div class="card-body">
+                                                        <label style="color: white; margin-top: -38px; margin-left: -22px;">@Model.Ads[n].Name</label>
+                                                    </div>
+                                                </div>
+                                            }
                                         }
 
                                     }
@@ -201,6 +200,56 @@
 
 
 
+    <script>
+
+        $("#launchPad").height($(window).height() - 20);
+        var dropSpace = $(window).width() - $("#launchPad").width();
+        $("#dropZone").width(dropSpace - 70);
+        $("#dropZone").height($("#launchPad").height());
+
+
+        $(".draggable").draggable({
+            appendTo: "body",
+            cursor: "move",
+            helper: 'clone',
+            revert: "invalid"
+        });
+
+
+        $(".droppable").droppable({
+
+            tolerance: "intersect",
+            accept: ".draggable",
+            activeClass: "ui-state-default",
+            hoverClass: "ui-state-hover",
+            drop: function (event, ui) {
+                var DataID = ui.draggable.attr("id");
+                var DroppedPage = (this).innerText;
+                $.ajax({
+                    url: '@Url.Action("SelectLayout", "MainScreen")',
+                    type: 'GET',
+                    data: {
+                        DataID: DataID,
+                        DroppedPage: DroppedPage
+                    }
+
+
+                }).done(function (oData) {
+
+                    $("#actionContainer").html(oData);
+                     
+
+                });
+
+            }
+
+
+        });
+
+
+    </script>
+        
+  
 
 
 
@@ -211,11 +260,7 @@
 
 
 
-
-
-
-
-
+    
 
 
 
