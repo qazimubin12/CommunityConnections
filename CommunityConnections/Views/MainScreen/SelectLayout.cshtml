@@ -5,22 +5,56 @@
 
 <div id="actionContainer" class="card">
     <div class="card-body">
-        <h4 class="card-title">@Model.Ad.Name -- Select Layout</h4>
-        <table class="table table-responsive">
+        <form id="selectLayoutForm">
+            <h4 class="card-title">@Model.Ad.Name -- Select Layout</h4>
+            <input type="hidden" id="AdID" value="@Model.Ad.ID" />
+            <input type="hidden" id="AdPage" value="@Model.Page" />
+            <table class="table table-responsive">
 
-            <tr>
-                <td>
-                    @{ int counter = 0;}
+                <tr>
+                    <td>
 
-                    @foreach (var item in Model.Layouts)
-                    {
-                        {counter++; }
-                        <button value="@counter">@item</button>
-                    }
-                </td>
-            </tr>
+                        @foreach (var item in Model.Layouts)
+                        {
+                            <button type="button" class="btnLayout btn btn-outline-info" value="@item">@item</button>
+                        }
+                    </td>
+                </tr>
 
-        </table>
+            </table>
+        </form>
     </div>
 </div>
 
+<script>
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+
+
+    $(".btnLayout").click(function () {
+        var AdSize = $(this).val();
+        var AdID = document.getElementById("AdID").value;
+        var AdPage = document.getElementById("AdPage").value;
+		$.ajax({
+			url: '@Url.Action("PlaceAd", "MainScreen")',
+			type: "post",
+            data: {
+                AdSize: AdSize,
+                AdID: AdID,
+                AdPage: AdPage  
+            }
+		})
+		.done(function () {
+
+            window.location.href = "@Url.Action("Index","MainScreen")";
+
+		});
+	});
+
+
+
+
+</script>

@@ -41,7 +41,7 @@ namespace CommunityConnections.Services
             {
                 if (!string.IsNullOrEmpty(SearchTerm))
                 {
-                    Adss = context.Ads.Where(x => x.Name == SearchTerm).ToList();
+                    Adss = context.Ads.Where(x=>x.Name == SearchTerm).ToList();
                 }
                 else
                 {
@@ -50,6 +50,42 @@ namespace CommunityConnections.Services
             }
             return Adss;
         }
+
+
+        public List<Ads> GetNotPlacedAdss(string SearchTerm = "")
+        {
+            List<Ads> Adss = null;
+            using (var context = new CCContext())
+            {
+                if (!string.IsNullOrEmpty(SearchTerm))
+                {
+                    Adss = context.Ads.Where(x => x.AdStatus == "Not Placed" && x.Name == SearchTerm).ToList();
+                }
+                else
+                {
+                    Adss = context.Ads.Where(x => x.AdStatus == "Not Placed").ToList();
+                }
+            }
+            return Adss;
+        }
+
+        public List<Ads> GetPlacedAdss(string SearchTerm = "")
+        {
+            List<Ads> Adss = null;
+            using (var context = new CCContext())
+            {
+                if (!string.IsNullOrEmpty(SearchTerm))
+                {
+                    Adss = context.Ads.Where(x => x.AdStatus == "Placed" && x.Name == SearchTerm).ToList();
+                }
+                else
+                {
+                    Adss = context.Ads.Where(x => x.AdStatus == "Placed").ToList();
+                }
+            }
+            return Adss;
+        }
+
 
         public void SaveAds(Ads Ads)
         {

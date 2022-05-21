@@ -88,11 +88,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Ads)
+                    @foreach (var item in Model.ad)
                     {
                         <tr>
-                            
-                            <td id="@item.ID" class="draggable" >
+
+                            <td id="@item.ID" class="draggable">
                                 <div>
                                     <h4>@item.Name</h4>
                                 </div>
@@ -105,7 +105,7 @@
         </div>
 
 
-        <div  class="col-md-9">
+        <div class="col-md-9">
             <table cellpadding="3">
                 @{ var counter = 1;
                     int newcounter = 0;}
@@ -119,44 +119,44 @@
                                 <div class="card-body">
                                     @{newcounter++;
                                     }
-                                    @for (int n = 0; n < Model.Ads.Count; n++)
+                                    @for (int n = 0; n < Model.PlacedAds.Count; n++)
                                     {
 
 
-                                        if (Model.Ads[n].PageNo == i)
+                                        if (Model.PlacedAds[n].PageNo == i)
                                         {
-                                            if (Model.Ads[n].AdSize == "Full Page")
+                                            if (Model.PlacedAds[n].AdSize == "Full Page")
                                             {
                                                 <div class="card" style="background-color:burlywood; height:300px;width: 10rem;margin-left: -28px;margin-top: -44px;">
                                                     <div class="card-body">
-                                                        <h4 style="color:white">@Model.Ads[n].Name</h4>
+                                                        <h4 style="color:white">@Model.PlacedAds[n].Name</h4>
                                                     </div>
                                                 </div>
                                             }
 
-                                            if (Model.Ads[n].AdSize == "3/4")
+                                            if (Model.PlacedAds[n].AdSize == "3/4 Page")
                                             {
                                                 <div class="card" style="background-color:cornflowerblue; height:220px;width: 10rem;margin-left: -28px;margin-top: -44px;">
                                                     <div class="card-body">
-                                                        <h4 style="color:white">@Model.Ads[n].Name</h4>
+                                                        <h4 style="color:white">@Model.PlacedAds[n].Name</h4>
                                                     </div>
                                                 </div>
                                             }
 
-                                            if (Model.Ads[n].AdSize == "half page vertical")
+                                            if (Model.PlacedAds[n].AdSize == "half page vertical")
                                             {
                                                 <div class="card" style="background-color:darkslategray; height:300px;width: 6rem;margin-left: -28px;margin-top: -44px;">
                                                     <div class="card-body">
-                                                        <h6 style="color: white">@Model.Ads[n].Name</h6>
+                                                        <h6 style="color: white">@Model.PlacedAds[n].Name</h6>
                                                     </div>
                                                 </div>
                                             }
 
-                                            if (Model.Ads[n].AdSize == "1/8 Page")
+                                            if (Model.PlacedAds[n].AdSize == "1/8 Page")
                                             {
                                                 <div class="card" style="background-color: burlywood; height: 100px; width: 5rem; margin-left: -29px; margin-top: 156px; ">
                                                     <div class="card-body">
-                                                        <label style="color: white; margin-top: -38px; margin-left: -22px;">@Model.Ads[n].Name</label>
+                                                        <label style="color: white; margin-top: -38px; margin-left: -22px;">@Model.PlacedAds[n].Name</label>
                                                     </div>
                                                 </div>
                                             }
@@ -195,12 +195,30 @@
         </div>
     </div>
 
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        @{
+            if (Model.Ad != null)
+            {
+                Html.RenderPartial("SelectLayout", Model);
+            }
+        }
+
+    </div>
+
 
 
 
 
 
     <script>
+
+
+        
+
+
+
 
         $("#launchPad").height($(window).height() - 20);
         var dropSpace = $(window).width() - $("#launchPad").width();
@@ -236,8 +254,10 @@
 
                 }).done(function (oData) {
 
-                    $("#actionContainer").html(oData);
-                     
+                    modal.style.display = "block";
+
+                    $("#myModal").html(oData);
+
 
                 });
 
@@ -247,9 +267,27 @@
         });
 
 
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the button, open the modal
+
+
+       
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+
     </script>
-        
-  
 
 
 
@@ -260,7 +298,9 @@
 
 
 
-    
+
+
+
 
 
 

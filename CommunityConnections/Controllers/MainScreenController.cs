@@ -13,10 +13,26 @@ namespace CommunityConnections.Controllers
         // GET: MainScreen
         public ActionResult Index(MainScreenViewModel model)
         {
-            model.Ads = AdsServices.Instance.GetAdss();
+            model.Ads = AdsServices.Instance.GetNotPlacedAdss();
             model.Pages = PagesServices.Instance.GetPages();
-            
+            model.PlacedAds = AdsServices.Instance.GetPlacedAdss();
+            model.NonPlacedAds = AdsServices.Instance.GetNotPlacedAdss();
             return View(model);
+        }
+
+
+        [HttpPost]
+        public ActionResult PlaceAd(string AdSize, int AdID, int AdPage)
+        {
+            var Ad = AdsServices.Instance.GetAds(AdID);
+            Ad.AdSize = AdSize;
+            Ad.PageNo = AdPage;
+            Ad.AdStatus = "Placed";
+            AdsServices.Instance.UpdateAds(Ad);
+
+            return RedirectToAction("Index", "MainScreen");
+            
+
         }
 
 
@@ -38,7 +54,7 @@ namespace CommunityConnections.Controllers
             model.Layouts = LayoutList;
             model.Ad = AdsServices.Instance.GetAds(DataID);
             model.Page = DroppedPage;
-            return View(model);
+            return PartialView(model);
         }
     }
 }

@@ -44,7 +44,7 @@ namespace CommunityConnections.Controllers
                 model.AdSize = ad.AdSize;
                 model.Path = ad.Path;
                 model.Name = ad.Name;
-                
+                model.AdStatus = ad.AdStatus;
                 return PartialView("Action", model);
 
             }
@@ -96,6 +96,7 @@ namespace CommunityConnections.Controllers
                         Ads.AdSize = ((Excel.Range)range.Cells[row, 3]).Text;
                         Ads.Path = ((Excel.Range)range.Cells[row, 4]).Text;
                         Ads.Name = ((Excel.Range)range.Cells[row, 5]).Text;
+                        Ads.AdStatus = "Not Placed";
                         var List = AdsServices.Instance.GetAdss();
                        
                         if(List.Count != 0) {
@@ -161,6 +162,7 @@ namespace CommunityConnections.Controllers
                 ad.AdSize = model.AdSize;
                 ad.Path = model.Path;
                 ad.Name = model.Name;
+                ad.AdStatus = model.AdStatus;
                 AdsServices.Instance.UpdateAds(ad);
 
             }
@@ -172,6 +174,8 @@ namespace CommunityConnections.Controllers
                 ad.AdSize = model.AdSize;
                 ad.Path = model.Path;
                 ad.Name = model.Name;
+                ad.AdStatus = model.AdStatus;
+
                 AdsServices.Instance.SaveAds(ad);
             }
            

@@ -72,6 +72,10 @@
     <Compile Include="Migrations\202205180844444_pagesadded.designer.cs">
       <DependentUpon>202205180844444_pagesadded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205211603130_adstatus.cs" />
+    <Compile Include="Migrations\202205211603130_adstatus.designer.cs">
+      <DependentUpon>202205211603130_adstatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -100,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205180844444_pagesadded.resx">
       <DependentUpon>202205180844444_pagesadded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205211603130_adstatus.resx">
+      <DependentUpon>202205211603130_adstatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

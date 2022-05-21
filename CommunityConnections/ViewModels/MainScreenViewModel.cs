@@ -9,6 +9,10 @@ namespace CommunityConnections.ViewModels
     public class MainScreenViewModel
     {
         public List<Ads> Ads { get; set; }
+
+        public List<Ads> PlacedAds { get; set; }
+
+        public List<Ads> NonPlacedAds { get; set; }
         public Pages Pages { get; set; }
         public List<MyList> CompleteList { get; set; }
 
@@ -16,6 +20,7 @@ namespace CommunityConnections.ViewModels
         public int Page { get; set; }
         public List<string> Layouts { get; set; }
     }
+
 
 
 

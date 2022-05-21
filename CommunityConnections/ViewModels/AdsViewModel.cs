@@ -19,6 +19,7 @@ namespace CommunityConnections.ViewModels
         public string Layout { get; set; }
         public string AdSize { get; set; }
         public string Path { get; set; }
+        public string AdStatus { get; set; }
         public List<string> Layouts { get; set; }
     }
 }
