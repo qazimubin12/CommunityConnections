@@ -35,6 +35,19 @@ namespace CommunityConnections.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult UndoPlacing(int DataID)
+        {
+            var Ad = AdsServices.Instance.GetAds(DataID);
+
+            Ad.AdStatus = "Not Placed";
+            AdsServices.Instance.UpdateAds(Ad);
+
+            return RedirectToAction("Index", "MainScreen");
+
+        }
+
+
 
         [HttpGet]
         public ActionResult SelectLayout(int DataID, int DroppedPage)

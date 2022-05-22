@@ -3,6 +3,7 @@
     ViewBag.Title = "Index";
     Layout = null;
     int count = 0;
+
 }
 
 <head>
@@ -63,6 +64,15 @@
                 color: #ffffff;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             }
+
+
+    .parent {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
 </style>
 <body>
     <div class="container">
@@ -88,7 +98,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.ad)
+                    @foreach (var item in Model.NonPlacedAds)
                     {
                         <tr>
 
@@ -115,7 +125,7 @@
                     {
 
                         <td id="@counter">
-                            <div class="card droppable" style="height:300px;width: 10rem;">
+                            <div id="@counter" class="card droppable" style="height:300px;width: 10rem;">
                                 <div class="card-body">
                                     @{newcounter++;
                                     }
@@ -127,7 +137,7 @@
                                         {
                                             if (Model.PlacedAds[n].AdSize == "Full Page")
                                             {
-                                                <div class="card" style="background-color:burlywood; height:300px;width: 10rem;margin-left: -28px;margin-top: -44px;">
+                                                <div id="@Model.PlacedAds[n].ID" class="draggable card" style="background-color:burlywood; height:300px;width: 10rem;margin-left: -28px;margin-top: -44px;">
                                                     <div class="card-body">
                                                         <h4 style="color:white">@Model.PlacedAds[n].Name</h4>
                                                     </div>
@@ -136,30 +146,38 @@
 
                                             if (Model.PlacedAds[n].AdSize == "3/4 Page")
                                             {
-                                                <div class="card" style="background-color:cornflowerblue; height:220px;width: 10rem;margin-left: -28px;margin-top: -44px;">
+                                                <div id="@Model.PlacedAds[n].ID" class="draggable card" style="background-color:cornflowerblue; height:220px;width: 10rem;margin-left: -28px;margin-top: -44px;">
                                                     <div class="card-body">
                                                         <h4 style="color:white">@Model.PlacedAds[n].Name</h4>
                                                     </div>
                                                 </div>
                                             }
 
-                                            if (Model.PlacedAds[n].AdSize == "half page vertical")
+                                            if (Model.PlacedAds[n].AdSize == "1/2 Page Vertical")
                                             {
-                                                <div class="card" style="background-color:darkslategray; height:300px;width: 6rem;margin-left: -28px;margin-top: -44px;">
+                                                <div id="@Model.PlacedAds[n].ID" class="draggable card" style="background-color:darkslategray; height:300px;width: 6rem;margin-left: -28px;margin-top: -44px;">
                                                     <div class="card-body">
                                                         <h6 style="color: white">@Model.PlacedAds[n].Name</h6>
                                                     </div>
                                                 </div>
                                             }
 
+
                                             if (Model.PlacedAds[n].AdSize == "1/8 Page")
                                             {
-                                                <div class="card" style="background-color: burlywood; height: 100px; width: 5rem; margin-left: -29px; margin-top: 156px; ">
-                                                    <div class="card-body">
-                                                        <label style="color: white; margin-top: -38px; margin-left: -22px;">@Model.PlacedAds[n].Name</label>
-                                                    </div>
-                                                </div>
+
+                                    <div id="@Model.PlacedAds[n].ID" class="draggable card" style="background-color: burlywood; height: 100px; width: 5rem; margin-left: -29px; margin-top: -20px; ">
+                                        <div class="card-body">
+                                            <label style="color: white; margin-left: -22px;">@Model.PlacedAds[n].Name</label>
+                                        </div>
+                                    </div>
+
+
+
+
+
                                             }
+
                                         }
 
                                     }
@@ -215,7 +233,7 @@
     <script>
 
 
-        
+
 
 
 
@@ -228,13 +246,13 @@
 
         $(".draggable").draggable({
             appendTo: "body",
-            cursor: "move",
+            cursor: "hand",
             helper: 'clone',
             revert: "invalid"
         });
 
 
-        $(".droppable").droppable({
+        $("#launchPad").droppable({
 
             tolerance: "intersect",
             accept: ".draggable",
@@ -242,7 +260,34 @@
             hoverClass: "ui-state-hover",
             drop: function (event, ui) {
                 var DataID = ui.draggable.attr("id");
-                var DroppedPage = (this).innerText;
+                $.ajax({
+                    url: '@Url.Action("UndoPlacing", "MainScreen")',
+                    type: 'POST',
+                    data: {
+                        DataID: DataID,
+                    }
+
+
+                }).done(function (oData) {
+
+            window.location.href = "@Url.Action("Index","MainScreen")";
+
+
+                });
+
+            }
+
+
+        });
+
+        $(".droppable").droppable({
+            tolerance: "intersect",
+            accept: ".draggable",
+            activeClass: "ui-state-default",
+            hoverClass: "ui-state-hover",
+            drop: function (event, ui) {
+                var DataID = ui.draggable.attr("id");
+                var DroppedPage = (this).id;
                 $.ajax({
                     url: '@Url.Action("SelectLayout", "MainScreen")',
                     type: 'GET',
@@ -267,6 +312,7 @@
         });
 
 
+
         var modal = document.getElementById("myModal");
 
         // Get the button that opens the modal
@@ -277,7 +323,7 @@
         // When the user clicks on the button, open the modal
 
 
-       
+
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
