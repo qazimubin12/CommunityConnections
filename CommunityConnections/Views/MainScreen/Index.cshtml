@@ -35,14 +35,13 @@
     .card {
         margin-top: 2em;
         padding: 1.5em 0.5em 0.5em;
-        border-radius: 1em;
         text-align: center;
+        border:solid;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     }
 
         .card img {
             width: 65%;
-            border-radius: 50%;
             margin: 0 auto;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
@@ -124,76 +123,85 @@
                     @for (int i = 1; i <= Model.Pages.PageNo; i++)
                     {
 
-                        <td id="@counter">
-                            <div id="@counter" class="card droppable" style="height:300px;width: 10rem;">
-                                <div class="card-body">
-                                    @{newcounter++;
-                                    }
-                                    @for (int n = 0; n < Model.PlacedAds.Count; n++)
-                                    {
+                    <td id="@counter">
+                        <div id="@counter" class="card droppable" style="height:300px;width: 10rem;">
+                            <div>
+                                @{newcounter++;
+                                }
+                                @for (int n = 0; n < Model.PlacedAds.Count; n++)
+                                {
 
+                                    <table class="col-md-12">
 
-                                        if (Model.PlacedAds[n].PageNo == i)
+                                        @if (Model.PlacedAds[n].PageNo == i)
                                         {
-                                            if (Model.PlacedAds[n].AdSize == "Full Page")
-                                            {
-                                                <div id="@Model.PlacedAds[n].ID" class="draggable card" style="background-color:burlywood; height:300px;width: 10rem;margin-left: -28px;margin-top: -44px;">
-                                                    <div class="card-body">
+
+                                            <tr>
+                                                <td>
+                                                    <div id="@Model.PlacedAds[n].ID" class="draggable" style="background-color:burlywood;">
                                                         <h4 style="color:white">@Model.PlacedAds[n].Name</h4>
                                                     </div>
-                                                </div>
-                                            }
-
-                                            if (Model.PlacedAds[n].AdSize == "3/4 Page")
-                                            {
-                                                <div id="@Model.PlacedAds[n].ID" class="draggable card" style="background-color:cornflowerblue; height:220px;width: 10rem;margin-left: -28px;margin-top: -44px;">
-                                                    <div class="card-body">
-                                                        <h4 style="color:white">@Model.PlacedAds[n].Name</h4>
-                                                    </div>
-                                                </div>
-                                            }
-
-                                            if (Model.PlacedAds[n].AdSize == "1/2 Page Vertical")
-                                            {
-                                                <div id="@Model.PlacedAds[n].ID" class="draggable card" style="background-color:darkslategray; height:300px;width: 6rem;margin-left: -28px;margin-top: -44px;">
-                                                    <div class="card-body">
-                                                        <h6 style="color: white">@Model.PlacedAds[n].Name</h6>
-                                                    </div>
-                                                </div>
-                                            }
+                                                </td>
+                                            </tr>
 
 
-                                            if (Model.PlacedAds[n].AdSize == "1/8 Page")
-                                            {
-
-                                    <div id="@Model.PlacedAds[n].ID" class="draggable card" style="background-color: burlywood; height: 100px; width: 5rem; margin-left: -29px; margin-top: -20px; ">
-                                        <div class="card-body">
-                                            <label style="color: white; margin-left: -22px;">@Model.PlacedAds[n].Name</label>
-                                        </div>
+                                            @*if (Model.PlacedAds[n].AdSize == "Full Page")
+                            {
+                                <div id="@Model.PlacedAds[n].ID" class="draggable card" style="background-color:burlywood; height:300px;width: 10rem;margin-left: -28px;margin-top: -44px;">
+                                    <div class="card-body">
+                                        <h4 style="color:white">@Model.PlacedAds[n].Name</h4>
                                     </div>
+                                </div>
+                            }
+
+                            if (Model.PlacedAds[n].AdSize == "3/4 Page")
+                            {
+                                <div id="@Model.PlacedAds[n].ID" class="draggable card" style="background-color:cornflowerblue; height:220px;width: 10rem;margin-left: -28px;margin-top: -44px;">
+                                    <div class="card-body">
+                                        <h4 style="color:white">@Model.PlacedAds[n].Name</h4>
+                                    </div>
+                                </div>
+                            }
+
+                            if (Model.PlacedAds[n].AdSize == "1/2 Page Vertical")
+                            {
+                                <div id="@Model.PlacedAds[n].ID" class="draggable card" style="background-color:darkslategray; height:300px;width: 6rem;margin-left: -28px;margin-top: -44px;">
+                                    <div class="card-body">
+                                        <h6 style="color: white">@Model.PlacedAds[n].Name</h6>
+                                    </div>
+                                </div>
+                            }
 
 
+                            if (Model.PlacedAds[n].AdSize == "1/8 Page")
+                            {
 
-
-
-                                            }
-
-                                        }
-
-                                    }
-
-
-                                    @{count++;}
+                                <div id="@Model.PlacedAds[n].ID" class="draggable card" style="background-color: burlywood; height: 100px; width: 5rem; margin-left: -29px; margin-top: -20px; ">
+                                    <div class="card-body">
+                                        <label style="color: white; margin-left: -22px;">@Model.PlacedAds[n].Name</label>
+                                    </div>
                                 </div>
 
+                            }*@
+
+                                        }
+                                    </table>
+
+                                }
 
 
-                                @*counter*@
-                                <h4>@count.ToString()</h4>
-
+                                @{count++;}
                             </div>
 
-                        </td>
+
+
+                            @*counter*@
+
+                        </div>
+                        <h4 style="padding-left:70px;">@count.ToString()</h4>
+
+
+                    </td>
 
                         if (counter % 6 == 0)
                         {
