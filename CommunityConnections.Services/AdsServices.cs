@@ -105,6 +105,15 @@ namespace CommunityConnections.Services
             }
         }
 
+
+        public List<Ads> AdsonPage(int Page)
+        {
+            using(var context = new CCContext())
+            {
+                return context.Ads.Where(x => x.PageNo == Page).ToList();
+            }
+        }
+
         public void DeleteAds(int ID)
         {
             using (var context = new CCContext())

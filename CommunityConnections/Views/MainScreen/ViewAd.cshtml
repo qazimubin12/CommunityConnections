@@ -1,0 +1,101 @@
+﻿@model CommunityConnections.ViewModels.AdsActionViewModel
+@{
+    ViewBag.Title = "Index";
+}
+@if (Model != null)
+{
+
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">
+              
+                    <span>View Ad</span>
+                
+            </h2>
+            <hr />
+
+
+
+
+            <form id="actionForm">
+                <div class="row">
+
+                    <input type="hidden" id="ID" name="ID" value="@Model.ID" />
+
+                    <div class="form-row col-md-12">
+                        <div class="form-group col-md-4">
+                            <label class="col-sm-12">Ad Size</label>
+                            <select disabled name="AdSize" id="AdSize" class="form-control">
+                                @foreach (var item in Model.Layouts)
+                                {
+                                    if (Model.Layout == item)
+                                    {
+                                        <option selected value="@item">@item</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item">@item</option>
+                                    }
+
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label class="col-sm-12">Name</label>
+                            <input disabled required class="form-control" id="Name" value="@Model.Name" name="Name" placeholder="Enter Add Name">
+
+                        </div>
+
+
+                        <div class="form-group col-md-4">
+                            <label class="col-sm-12">Layout</label>
+                            <input disabled required class="form-control" id="AdSize" value="@Model.Layout" name="Layout" placeholder="Enter Layout">
+
+                        </div>
+                    </div>
+
+                    <div class="form-row col-md-12">
+                        <div class="form-group col-md-5">
+                            <label class="col-sm-12">Page No</label>
+                            <input disabled required class="form-control" id="PageNo" value="@Model.PageNo" name="PageNo" placeholder="Enter Page Number">
+
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label>Path</label>
+                            <div class="custom-file">
+                                <input hidden disabled class="form-control" name="Path" id="Path" />
+                                <input hidden class="form-control" name="AdStatus" id="AdStatus" />
+
+                                <input disabled class="form-control" id="selectpath" name="Path" type="file" />
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+                <br />
+ 
+                
+                <a href="@Url.Action("Index","Ads")" class="btn btn-outline-danger"> CANCEL</a>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="errorDiv">
+
+    </div>
+
+}
+
+
+

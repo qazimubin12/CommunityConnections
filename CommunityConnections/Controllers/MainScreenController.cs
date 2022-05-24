@@ -25,11 +25,34 @@ namespace CommunityConnections.Controllers
         public ActionResult PlaceAd(string AdSize, int AdID, int AdPage)
         {
             var Ad = AdsServices.Instance.GetAds(AdID);
-            Ad.AdSize = AdSize;
-            Ad.PageNo = AdPage;
-            Ad.AdStatus = "Placed";
-            AdsServices.Instance.UpdateAds(Ad);
+            var AdsonPage = AdsServices.Instance.AdsonPage(AdPage);
+            bool fullpagecheck = false;
+            foreach (var item in AdsonPage)
+            {
+                if(item.AdSize == "Full Page" && item.AdStatus == "Placed")
+                {
+                    fullpagecheck = true;
+                    break;
+                }
+                if(AdSize == "Full Page" && item.AdStatus == "Placed")
+                {
+                    fullpagecheck = true;
+                    break;
+                }
+                else
+                {
+                    fullpagecheck = false;
+                }
+            }
 
+          
+            if (fullpagecheck == false)
+            {
+                Ad.AdSize = AdSize;
+                Ad.PageNo = AdPage;
+                Ad.AdStatus = "Placed";
+                AdsServices.Instance.UpdateAds(Ad);
+            }
             return RedirectToAction("Index", "MainScreen");
             
 
@@ -48,6 +71,34 @@ namespace CommunityConnections.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult ViewAd(int ID)
+        {
+            AdsActionViewModel model = new AdsActionViewModel();
+            var LayoutList = new List<string>();
+            LayoutList.Add("Full Page W’ Bleed");
+            LayoutList.Add("Full Page");
+            LayoutList.Add("3/4 Page");
+            LayoutList.Add("1/2 Page Vertical");
+            LayoutList.Add("1/2 Page");
+            LayoutList.Add("1/3 Page");
+            LayoutList.Add("1/4 Page");
+            LayoutList.Add("1/8 Page");
+            LayoutList.Add("Full Spread");
+            LayoutList.Add("3/4 Spread");
+            model.Layouts = LayoutList;
+            var ad = AdsServices.Instance.GetAds(ID);
+            model.ID = ad.ID;
+            model.PageNo = ad.PageNo;
+            model.Layout = ad.Layout;
+            model.AdSize = ad.AdSize;
+            model.Path = ad.Path;
+            model.Name = ad.Name;
+            model.AdStatus = ad.AdStatus;
+            return View("ViewAd", model);
+
+
+        }
 
         [HttpGet]
         public ActionResult SelectLayout(int DataID, int DroppedPage)

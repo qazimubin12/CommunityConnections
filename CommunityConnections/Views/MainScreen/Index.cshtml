@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="~/Content/template/~/Content/template/vendors/feather/feather.css">
     <link rel="stylesheet" href="~/Content/template/vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" href="~/Content/template/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/Content/template/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Content/template/vendors/mdi/css/materialdesignicons.min.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="~/Content/template/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
@@ -27,21 +29,25 @@
     <link rel="shortcut icon" href="~/Content/template/images/favicon.png" />
     <script src="~/Content/template/js/jquery.min.js"></script>
 
-    <!-- Jquery UI -->
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
 
 </head>
 <style>
+    .draggable{
+        word-wrap:break-word;   
+    }
+
     .card {
         margin-top: 2em;
         padding: 1.5em 0.5em 0.5em;
+        border-radius: 1em;
         text-align: center;
-        border:solid;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     }
 
         .card img {
             width: 65%;
+            border-radius: 50%;
             margin: 0 auto;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
@@ -124,81 +130,61 @@
                     {
 
                     <td id="@counter">
-                        <div id="@counter" class="card droppable" style="height:300px;width: 10rem;">
-                            <div>
-                                @{newcounter++;
-                                }
-                                @for (int n = 0; n < Model.PlacedAds.Count; n++)
+                        <div class="btn-group-justified" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-outline-primary"><i class="ti-search btn-icon-append"></i></button>
+                            <button type="button" class="btn btn-outline-primary"><i class="mdi mdi-account-circle"></i></button>
+                        </div>
+                        <div id="@counter" class="droppable" style="border:solid; height:300px;width: 10rem;">
+                            @{newcounter++;
+                            }
+                            @for (int n = 0; n < Model.PlacedAds.Count; n++)
+                            {
+
+
+                                if (Model.PlacedAds[n].PageNo == i)
                                 {
 
-                                    <table class="col-md-12">
 
-                                        @if (Model.PlacedAds[n].PageNo == i)
-                                        {
 
-                                            <tr>
-                                                <td>
-                                                    <div id="@Model.PlacedAds[n].ID" class="draggable" style="background-color:burlywood;">
-                                                        <h4 style="color:white">@Model.PlacedAds[n].Name</h4>
+                                    if (Model.PlacedAds[n].AdSize == "Full Page")
+                                    {
+                                        <div id="@Model.PlacedAds[n].ID" class="draggable row">
+                                            <div class="col-md-12">
+                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                    <div  class="" style="background-color: burlywood; height: 294px;">
+                                                        <h5 class="card-body" style="color:white">@Model.PlacedAds[n].Name</h5>
                                                     </div>
-                                                </td>
-                                            </tr>
+                                                </a>
+                                            </div>
+                                        </div>
 
-
-                                            @*if (Model.PlacedAds[n].AdSize == "Full Page")
-                            {
-                                <div id="@Model.PlacedAds[n].ID" class="draggable card" style="background-color:burlywood; height:300px;width: 10rem;margin-left: -28px;margin-top: -44px;">
-                                    <div class="card-body">
-                                        <h4 style="color:white">@Model.PlacedAds[n].Name</h4>
+                                    }
+                                    else
+                                    {
+                                    <div id="@Model.PlacedAds[n].ID" class="draggable row">
+                                        <div class="col-md-12">
+                                            <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                <div  class="" style="background-color:burlywood;">
+                                                    <h5 class="card-body" style="color:white">@Model.PlacedAds[n].Name</h5>
+                                                </div>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                            }
-
-                            if (Model.PlacedAds[n].AdSize == "3/4 Page")
-                            {
-                                <div id="@Model.PlacedAds[n].ID" class="draggable card" style="background-color:cornflowerblue; height:220px;width: 10rem;margin-left: -28px;margin-top: -44px;">
-                                    <div class="card-body">
-                                        <h4 style="color:white">@Model.PlacedAds[n].Name</h4>
-                                    </div>
-                                </div>
-                            }
-
-                            if (Model.PlacedAds[n].AdSize == "1/2 Page Vertical")
-                            {
-                                <div id="@Model.PlacedAds[n].ID" class="draggable card" style="background-color:darkslategray; height:300px;width: 6rem;margin-left: -28px;margin-top: -44px;">
-                                    <div class="card-body">
-                                        <h6 style="color: white">@Model.PlacedAds[n].Name</h6>
-                                    </div>
-                                </div>
-                            }
-
-
-                            if (Model.PlacedAds[n].AdSize == "1/8 Page")
-                            {
-
-                                <div id="@Model.PlacedAds[n].ID" class="draggable card" style="background-color: burlywood; height: 100px; width: 5rem; margin-left: -29px; margin-top: -20px; ">
-                                    <div class="card-body">
-                                        <label style="color: white; margin-left: -22px;">@Model.PlacedAds[n].Name</label>
-                                    </div>
-                                </div>
-
-                            }*@
-
-                                        }
-                                    </table>
+                                    }
 
                                 }
 
+                            }
 
-                                @{count++;}
-                            </div>
+
+                            @{count++;}
 
 
 
                             @*counter*@
 
                         </div>
-                        <h4 style="padding-left:70px;">@count.ToString()</h4>
+                        <h4 style="margin-left:70px;">@count.ToString()</h4>
 
 
                     </td>
@@ -340,7 +326,9 @@
             }
         }
 
-
+        function ViewAdd(ID) {
+            window.location.href = "/MainScreen/ViewAd?ID=" + ID + "";
+        }
     </script>
 
 
