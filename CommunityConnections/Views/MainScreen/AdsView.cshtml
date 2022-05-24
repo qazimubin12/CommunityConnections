@@ -1,0 +1,32 @@
+﻿@model CommunityConnections.ViewModels.MainScreenViewModel 
+@{
+    ViewBag.Title = "AdsView";
+}
+
+<div id="actionContainer" class="card">
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <table class="table table-condensed">
+
+                    @foreach (var item in Model.AdsonPage)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@item.Path" class="btn btn-primary">
+                                    @item.Name
+                                </a>
+                            </td>
+                        </tr>
+
+                    }
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

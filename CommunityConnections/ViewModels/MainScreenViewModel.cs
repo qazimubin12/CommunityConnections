@@ -19,6 +19,9 @@ namespace CommunityConnections.ViewModels
         public Ads Ad { get; set; }
         public int Page { get; set; }
         public List<string> Layouts { get; set; }
+
+
+        public List<Ads> AdsonPage { get; set; }
     }
 
 

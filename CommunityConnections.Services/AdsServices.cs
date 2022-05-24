@@ -52,6 +52,8 @@ namespace CommunityConnections.Services
         }
 
 
+
+
         public List<Ads> GetNotPlacedAdss(string SearchTerm = "")
         {
             List<Ads> Adss = null;

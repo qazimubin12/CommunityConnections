@@ -120,5 +120,15 @@ namespace CommunityConnections.Controllers
             model.Page = DroppedPage;
             return PartialView(model);
         }
+
+
+        [HttpGet]
+        public ActionResult AdsView(int ID)
+        {
+            MainScreenViewModel model = new MainScreenViewModel();
+            model.AdsonPage = AdsServices.Instance.AdsonPage(ID);
+            return PartialView(model);
+        }
+        
     }
 }

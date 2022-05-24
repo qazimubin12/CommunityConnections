@@ -129,65 +129,65 @@
                     @for (int i = 1; i <= Model.Pages.PageNo; i++)
                     {
 
-                    <td id="@counter">
-                        <div class="btn-group-justified" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-outline-primary"><i class="ti-search btn-icon-append"></i></button>
-                            <button type="button" class="btn btn-outline-primary"><i class="mdi mdi-account-circle"></i></button>
-                        </div>
-                        <div id="@counter" class="droppable" style="border:solid; height:300px;width: 10rem;">
-                            @{newcounter++;
-                            }
-                            @for (int n = 0; n < Model.PlacedAds.Count; n++)
-                            {
-
-
-                                if (Model.PlacedAds[n].PageNo == i)
+                        <td id="@counter">
+                            <div class="btn-group-justified" role="group" aria-label="Basic example">
+                                <button data-id="@counter" onclick="" type="button" class="btnSearchAdsInPage btn btn-outline-warning"><i class="ti-search btn-icon-append"></i></button>
+                                <button data-id="@counter" onclick="" type="button" class="btnCustomerView btn btn-outline-warning"><i class="mdi mdi-account-circle"></i></button>
+                            </div>
+                            <div id="@counter" class="droppable" style="border:solid; height:300px;width: 10rem;">
+                                @{newcounter++;
+                                }
+                                @for (int n = 0; n < Model.PlacedAds.Count; n++)
                                 {
 
 
-
-                                    if (Model.PlacedAds[n].AdSize == "Full Page")
+                                    if (Model.PlacedAds[n].PageNo == i)
                                     {
-                                        <div id="@Model.PlacedAds[n].ID" class="draggable row">
-                                            <div class="col-md-12">
-                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
-                                                    <div  class="" style="background-color: burlywood; height: 294px;">
-                                                        <h5 class="card-body" style="color:white">@Model.PlacedAds[n].Name</h5>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
 
-                                    }
-                                    else
-                                    {
-                                    <div id="@Model.PlacedAds[n].ID" class="draggable row">
-                                        <div class="col-md-12">
-                                            <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
-                                                <div  class="" style="background-color:burlywood;">
-                                                    <h5 class="card-body" style="color:white">@Model.PlacedAds[n].Name</h5>
+
+
+                                        if (Model.PlacedAds[n].AdSize == "Full Page")
+                                        {
+                                            <div id="@Model.PlacedAds[n].ID" class="draggable row">
+                                                <div class="col-md-12">
+                                                    <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                        <div class="" style="background-color: burlywood; height: 294px;">
+                                                            <h5 class="card-body" style="color:white">@Model.PlacedAds[n].Name</h5>
+                                                        </div>
+                                                    </a>
                                                 </div>
-                                            </a>
-                                        </div>
-                                    </div>
+                                            </div>
+
+                                        }
+                                        else
+                                        {
+                                            <div id="@Model.PlacedAds[n].ID" class="draggable row">
+                                                <div class="col-md-12">
+                                                    <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                        <div class="" style="background-color:burlywood;">
+                                                            <h5 class="card-body" style="color:white">@Model.PlacedAds[n].Name</h5>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        }
+
                                     }
 
                                 }
 
-                            }
 
-
-                            @{count++;}
+                                @{count++;}
 
 
 
-                            @*counter*@
+                                @*counter*@
 
-                        </div>
-                        <h4 style="margin-left:70px;">@count.ToString()</h4>
+                            </div>
+                            <h4 style="margin-left:70px;">@count.ToString()</h4>
 
 
-                    </td>
+                        </td>
 
                         if (counter % 6 == 0)
                         {
@@ -214,6 +214,19 @@
             if (Model.Ad != null)
             {
                 Html.RenderPartial("SelectLayout", Model);
+            }
+        }
+
+    </div>
+
+
+    <div id="AdsViewModal" class="modal">
+
+        <!-- Modal content -->
+        @{
+            if (Model.Ad != null)
+            {
+                Html.RenderPartial("AdsView", Model);
             }
         }
 
@@ -305,9 +318,26 @@
 
         });
 
+         $(".btnSearchAdsInPage").click(function () {
+            $.ajax({
+                url: '@Url.Action("AdsView", "MainScreen")',
+                type: "GET",
+                data: { ID: $(this).attr("data-id") }
+            })
+                .done(function (oData) {
+                    adsViewModal.style.display = "block";
+
+                    $("#AdsViewModal").html(oData);
+                })
+                .error(function (error) {
+                    alert(error);
+                })
+        });
+
 
 
         var modal = document.getElementById("myModal");
+        var adsViewModal = document.getElementById("AdsViewModal");
 
         // Get the button that opens the modal
 
@@ -324,11 +354,22 @@
             if (event.target == modal) {
                 modal.style.display = "none";
             }
+            if (event.target == adsViewModal) {
+                adsViewModal.style.display = "none";
+            }
         }
 
         function ViewAdd(ID) {
             window.location.href = "/MainScreen/ViewAd?ID=" + ID + "";
-        }
+        };
+
+
+
+
+
+
+
+
     </script>
 
 

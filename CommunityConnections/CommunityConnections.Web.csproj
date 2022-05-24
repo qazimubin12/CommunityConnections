@@ -1958,6 +1958,7 @@
     <Content Include="Views\MainScreen\Index.cshtml" />
     <Content Include="Views\MainScreen\SelectLayout.cshtml" />
     <Content Include="Views\MainScreen\ViewAd.cshtml" />
+    <Content Include="Views\MainScreen\AdsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
