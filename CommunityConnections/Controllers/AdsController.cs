@@ -3,6 +3,7 @@ using CommunityConnections.Services;
 using CommunityConnections.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -98,6 +99,7 @@ namespace CommunityConnections.Controllers
                         Ads.Layout = ((Excel.Range)range.Cells[row, 2]).Text;
                         Ads.AdSize = ((Excel.Range)range.Cells[row, 3]).Text;
                         Ads.Path = ((Excel.Range)range.Cells[row, 4]).Text;
+                
                         Ads.Name = ((Excel.Range)range.Cells[row, 5]).Text;
                         Ads.AdStatus = "Not Placed";
                         var List = AdsServices.Instance.GetAdss();
@@ -152,32 +154,90 @@ namespace CommunityConnections.Controllers
 
 
         [HttpPost]
-        public ActionResult Action(AdsActionViewModel model)
+        public ActionResult Action(IEnumerable<HttpPostedFileBase> path,int ID, string AdSize,string Name, int PageNo, string Layout)
         {
-            
-            if (model.ID != 0) //update record
-            {
-                var ad = AdsServices.Instance.GetAds(model.ID);
 
-                ad.ID = model.ID;
-                ad.Layout = model.Layout;
-                ad.PageNo = model.PageNo;
-                ad.AdSize = model.AdSize;
-                ad.Path = model.Path;
-                ad.Name = model.Name;
-                ad.AdStatus = model.AdStatus;
+            var supportedPicTypes = new[] { "jpg", "jpeg", "png" };
+            var supportedPdfTypes = new[] { "pdf", "doc", "docx" };
+            var PicFileSize = 200000000;
+            var PathSize = 100000000000;
+            if (ID != 0) //update record
+            {
+                var ad = AdsServices.Instance.GetAds(ID);
+
+                ad.ID = ID;
+                ad.Layout = Layout;
+                ad.PageNo = PageNo;
+                ad.AdSize = AdSize;
+                
+                ad.Name = Name;
+                ad.AdStatus = "Not Placed";
+
+                if (path.Count() != 0)
+                {
+                    if (path.ElementAt(0) != null)
+                    {
+                        if (path.ElementAt(0).ContentLength > (PathSize))
+                        {
+                            ViewBag.Message = "File Size should be less than 10mb";
+                        }
+                        else if (!supportedPdfTypes.Contains(System.IO.Path.GetExtension(path.ElementAt(0).FileName).Substring(1)))
+                        {
+                            ViewBag.Message = "File Extension is not valid";
+                        }
+                        else
+                        {
+                            ViewBag.Message = "Record Already Exist!";
+
+                            string Upth = Path.Combine(Server.MapPath("~/paths"), Path.GetFileName(path.ElementAt(0).FileName));
+                            path.ElementAt(0).SaveAs(Upth);
+                        }
+
+                        ad.Path = "~/paths/" + path.ElementAt(0).FileName;
+                    }
+                }
+                else
+                {
+                    ad.Path = ad.Path;
+                }
                 AdsServices.Instance.UpdateAds(ad);
 
             }
             else
             {
                 var ad = new Ads();
-                ad.Layout = model.Layout;
-                ad.PageNo = model.PageNo;
-                ad.AdSize = model.AdSize;
-                ad.Path = model.Path;
-                ad.Name = model.Name;
-                ad.AdStatus = model.AdStatus;
+                ad.Layout = Layout;
+                ad.PageNo = PageNo;
+                ad.AdSize = AdSize;
+                if (path.Count() != 0)
+                {
+                    if (path.ElementAt(0) != null)
+                    {
+                        if (path.ElementAt(0).ContentLength > (PathSize))
+                        {
+                            ViewBag.Message = "File Size should be less than 10mb";
+                        }
+                        else if (!supportedPdfTypes.Contains(System.IO.Path.GetExtension(path.ElementAt(0).FileName).Substring(1)))
+                        {
+                            ViewBag.Message = "File Extension is not valid";
+                        }
+                        else
+                        {
+                            ViewBag.Message = "Record Already Exist!";
+
+                            string Upth = Path.Combine(Server.MapPath("~/paths"), Path.GetFileName(path.ElementAt(0).FileName));
+                            path.ElementAt(0).SaveAs(Upth);
+                        }
+
+                        ad.Path = "~/paths/" + path.ElementAt(0).FileName;
+                    }
+                }
+                else
+                {
+                    ad.Path = null;
+                }
+                ad.Name = Name;
+                ad.AdStatus = "Not Placed";
 
                 AdsServices.Instance.SaveAds(ad);
             }

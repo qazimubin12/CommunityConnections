@@ -63,14 +63,16 @@
                         </div>
 
                         <div class="form-group col-md-5">
-                            <label>Path</label>
-                            <div class="custom-file">
-                                <input hidden disabled class="form-control" name="Path" id="Path" />
-                                <input hidden class="form-control" name="AdStatus" id="AdStatus" />
+                            <div>
+                               
+                                @*<embed src="@Url.Content(Model.Path)" height="500" width="500" />*@
 
-                                <input disabled class="form-control" id="selectpath" name="Path" type="file" />
+                                <a class="btn btn-danger" href="@Url.Action("ViewAdInPC","MainScreen",new { ID = Model.ID })"> View </a>
                             </div>
                         </div>
+
+
+
 
 
 

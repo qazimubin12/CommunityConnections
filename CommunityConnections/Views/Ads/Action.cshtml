@@ -33,7 +33,7 @@
                             <select name="AdSize" id="AdSize" class="form-control">
                                 @foreach (var item in Model.Layouts)
                                 {
-                                    if (Model.Layout == item)
+                                    if (Model.AdSize == item)
                                     {
                                         <option selected value="@item">@item</option>
                                     }
@@ -55,7 +55,7 @@
 
                         <div class="form-group col-md-4">
                             <label class="col-sm-12">Layout</label>
-                            <input required class="form-control" id="AdSize" value="@Model.Layout" name="Layout" placeholder="Enter Layout">
+                            <input required class="form-control" id="Layout" value="@Model.Layout" name="Layout" placeholder="Enter Layout">
 
                         </div>
                     </div>
@@ -70,10 +70,9 @@
                         <div class="form-group col-md-5">
                             <label>Path</label>
                             <div class="custom-file">
-                                <input hidden disabled class="form-control" name="Path" id="Path" />
-                                <input hidden  class="form-control" name="AdStatus" id="AdStatus" />
+                                <input type="file" value="@Model.Path" name="Path" id="Path" /> 
+                                <input hidden class="form-control" name="AdStatus" id="AdStatus" />
 
-                                <input class="form-control" id="selectpath" name="Path" type="file" />
                             </div>
                         </div>
 
@@ -109,7 +108,7 @@
 }
 <script>
 
-    $("#selectpath").change(function () {
+    @*$("#selectpath").change(function () {
 
         var element = this;
         var formData = new FormData();
@@ -140,23 +139,59 @@
             .fail(function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("FAIL");
             })
-    });
+    });*@
 
 
 
 
     $("#actionButton").click(function () {
+        var formData = new FormData();
+        var path = document.getElementById("Path").files[0];
+        formData.append("path", path);
+
+        var ID = $('#ID').val().trim();
+        formData.append("ID", ID);
+
+        var c = document.getElementById("AdSize");
+        var AdSize = c.value;
+        formData.append("AdSize", AdSize);
+
+        var Name = $('#Name').val().trim();
+        formData.append("Name", Name);
+
+
+        var PageNo = $('#PageNo').val().trim();
+        formData.append("PageNo", PageNo);
+
+
+        var Layout = $('#Layout').val();
+        formData.append("Layout", Layout);
+
+
+
+
+
+
+
+
+
+
+
+
+        var url = '@Url.Action("Index", "Ads")';
 		$.ajax({
 			url: '@Url.Action("Action", "Ads")',
-			type: "post",
-			data: $("#actionForm").serialize()
+            type: "post",
+            data: formData,
+            processData: false,
+            contentType: false
 		})
-		.done(function () {
-
-            window.location.href = "@Url.Action("Index","Ads")";
+            .done(function (response) {
+                window.location.href = url;
 
 		});
-	});
+
+    });
 </script>
 
 

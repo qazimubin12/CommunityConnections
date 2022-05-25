@@ -159,6 +159,18 @@
                                             </div>
 
                                         }
+                                        else if (Model.PlacedAds[n].AdSize == "Full Page W’ Bleed")
+                                        {
+                                             <div id="@Model.PlacedAds[n].ID" class="draggable row">
+                                                <div class="col-md-12">
+                                                    <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                        <div class="" style="background-color: burlywood; height: 294px;">
+                                                            <h5 class="card-body" style="color:white">@Model.PlacedAds[n].Name</h5>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        }
                                         else
                                         {
                                             <div id="@Model.PlacedAds[n].ID" class="draggable row">
@@ -293,22 +305,20 @@
             activeClass: "ui-state-default",
             hoverClass: "ui-state-hover",
             drop: function (event, ui) {
-                var DataID = ui.draggable.attr("id");
-                var DroppedPage = (this).id;
+                var AdID = ui.draggable.attr("id");
+                var AdPage = (this).id;
                 $.ajax({
-                    url: '@Url.Action("SelectLayout", "MainScreen")',
-                    type: 'GET',
+                    url: '@Url.Action("PlaceAd", "MainScreen")',
+                    type: 'POST',
                     data: {
-                        DataID: DataID,
-                        DroppedPage: DroppedPage
+                        AdID: AdID,
+                        AdPage: AdPage
                     }
 
 
-                }).done(function (oData) {
+                }).done(function () {
 
-                    modal.style.display = "block";
-
-                    $("#myModal").html(oData);
+                    window.location.href = "@Url.Action("Index","MainScreen")";
 
 
                 });

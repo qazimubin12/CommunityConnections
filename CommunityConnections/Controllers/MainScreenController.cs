@@ -14,6 +14,7 @@ namespace CommunityConnections.Controllers
         public ActionResult Index(MainScreenViewModel model)
         {
             model.Ads = AdsServices.Instance.GetNotPlacedAdss();
+
             model.Pages = PagesServices.Instance.GetPages();
             model.PlacedAds = AdsServices.Instance.GetPlacedAdss();
             model.NonPlacedAds = AdsServices.Instance.GetNotPlacedAdss();
@@ -22,7 +23,7 @@ namespace CommunityConnections.Controllers
 
 
         [HttpPost]
-        public ActionResult PlaceAd(string AdSize, int AdID, int AdPage)
+        public ActionResult PlaceAd(int AdID, int AdPage)
         {
             var Ad = AdsServices.Instance.GetAds(AdID);
             var AdsonPage = AdsServices.Instance.AdsonPage(AdPage);
@@ -34,7 +35,7 @@ namespace CommunityConnections.Controllers
                     fullpagecheck = true;
                     break;
                 }
-                if(AdSize == "Full Page" && item.AdStatus == "Placed")
+                if(Ad.AdSize == "Full Page" && item.AdStatus == "Placed")
                 {
                     fullpagecheck = true;
                     break;
@@ -48,7 +49,6 @@ namespace CommunityConnections.Controllers
           
             if (fullpagecheck == false)
             {
-                Ad.AdSize = AdSize;
                 Ad.PageNo = AdPage;
                 Ad.AdStatus = "Placed";
                 AdsServices.Instance.UpdateAds(Ad);
@@ -95,9 +95,18 @@ namespace CommunityConnections.Controllers
             model.Path = ad.Path;
             model.Name = ad.Name;
             model.AdStatus = ad.AdStatus;
+            
             return View("ViewAd", model);
 
 
+        }
+
+
+
+        public void ViewAdInPC(int ID)
+        {
+            var AD = AdsServices.Instance.GetAds(ID);
+            System.Diagnostics.Process.Start(AD.Path);
         }
 
         [HttpGet]
