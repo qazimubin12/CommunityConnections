@@ -30,12 +30,12 @@ namespace CommunityConnections.Controllers
             bool fullpagecheck = false;
             foreach (var item in AdsonPage)
             {
-                if(item.AdSize == "Full Page" && item.AdStatus == "Placed")
+                if(item.AdSize == "Full Page" || item.AdSize == "Full Page W’ Bleed" && item.AdStatus == "Placed" )
                 {
                     fullpagecheck = true;
                     break;
                 }
-                if(Ad.AdSize == "Full Page" && item.AdStatus == "Placed")
+                if(Ad.AdSize == "Full Page" || item.AdSize== "Full Page W’ Bleed" && item.AdStatus == "Placed")
                 {
                     fullpagecheck = true;
                     break;
@@ -49,9 +49,18 @@ namespace CommunityConnections.Controllers
           
             if (fullpagecheck == false)
             {
+                
                 Ad.PageNo = AdPage;
                 Ad.AdStatus = "Placed";
                 AdsServices.Instance.UpdateAds(Ad);
+                if(Ad.AdSize == "Full Page W’ Bleed")
+                {
+                    AdPage++;
+                    Ad.PageTwo = AdPage;
+                    AdsServices.Instance.UpdateAds(Ad);
+
+                }
+
             }
             return RedirectToAction("Index", "MainScreen");
             

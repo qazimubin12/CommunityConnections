@@ -82,7 +82,7 @@ namespace CommunityConnections.Services
                 }
                 else
                 {
-                    Adss = context.Ads.Where(x => x.AdStatus == "Placed").ToList();
+                    Adss = context.Ads.Where(x => x.AdStatus == "Placed" ).ToList();
                 }
             }
             return Adss;

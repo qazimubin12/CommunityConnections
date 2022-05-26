@@ -46,6 +46,7 @@ namespace CommunityConnections.Controllers
                 model.Path = ad.Path;
                 model.Name = ad.Name;
                 model.AdStatus = ad.AdStatus;
+                model.PageTwo = ad.PageTwo;
                 return PartialView("Action", model);
 
             }
@@ -95,11 +96,11 @@ namespace CommunityConnections.Controllers
                     for (int row = 2; row < range.Rows.Count; row++)
                     {
                         var Ads = new Ads();
+                        Ads.AdSize = ((Excel.Range)range.Cells[row, 3]).Text;
+                        
                         Ads.PageNo = int.Parse(((Excel.Range)range.Cells[row, 1]).Text);
                         Ads.Layout = ((Excel.Range)range.Cells[row, 2]).Text;
-                        Ads.AdSize = ((Excel.Range)range.Cells[row, 3]).Text;
                         Ads.Path = ((Excel.Range)range.Cells[row, 4]).Text;
-                
                         Ads.Name = ((Excel.Range)range.Cells[row, 5]).Text;
                         Ads.AdStatus = "Not Placed";
                         var List = AdsServices.Instance.GetAdss();
@@ -154,7 +155,7 @@ namespace CommunityConnections.Controllers
 
 
         [HttpPost]
-        public ActionResult Action(IEnumerable<HttpPostedFileBase> path,int ID, string AdSize,string Name, int PageNo, string Layout)
+        public ActionResult Action(IEnumerable<HttpPostedFileBase> path,int ID, string AdSize,string Name, int PageNo,int PageTwo, string Layout)
         {
 
             var supportedPicTypes = new[] { "jpg", "jpeg", "png" };
@@ -169,7 +170,7 @@ namespace CommunityConnections.Controllers
                 ad.Layout = Layout;
                 ad.PageNo = PageNo;
                 ad.AdSize = AdSize;
-                
+                ad.PageTwo = PageTwo;
                 ad.Name = Name;
                 ad.AdStatus = "Not Placed";
 
@@ -209,6 +210,8 @@ namespace CommunityConnections.Controllers
                 ad.Layout = Layout;
                 ad.PageNo = PageNo;
                 ad.AdSize = AdSize;
+                ad.PageTwo = PageTwo;
+
                 if (path.Count() != 0)
                 {
                     if (path.ElementAt(0) != null)

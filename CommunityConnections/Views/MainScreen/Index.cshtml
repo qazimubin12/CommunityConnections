@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
     Layout = null;
     int count = 0;
-
+    int check = 0;
 }
 
 <head>
@@ -121,7 +121,7 @@
 
 
         <div class="col-md-9">
-            <table cellpadding="3">
+            <table>
                 @{ var counter = 1;
                     int newcounter = 0;}
                 <tr>
@@ -129,6 +129,85 @@
                     @for (int i = 1; i <= Model.Pages.PageNo; i++)
                     {
 
+                        if (counter % 2 == 0)
+                        {
+                    <td style="padding-right: 15px;" id="@counter">
+                        <div class="btn-group-justified" role="group" aria-label="Basic example">
+                            <button data-id="@counter" onclick="" type="button" class="btnSearchAdsInPage btn btn-outline-warning"><i class="ti-search btn-icon-append"></i></button>
+                            <button data-id="@counter" onclick="" type="button" class="btnCustomerView btn btn-outline-warning"><i class="mdi mdi-account-circle"></i></button>
+                        </div>
+                        <div id="@counter" class="droppable" style="border:solid; height:300px;width: 10rem;">
+                            @{newcounter++;
+                            }
+                            @for (int n = 0; n < Model.PlacedAds.Count; n++)
+                            {
+
+
+                                if (Model.PlacedAds[n].PageNo == i || Model.PlacedAds[n].PageTwo == i)
+                                {
+
+
+
+                                    if (Model.PlacedAds[n].AdSize == "Full Page")
+                                    {
+                                        <div id="@Model.PlacedAds[n].ID" class="draggable row">
+                                            <div class="col-md-12">
+                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                    <div class="" style="background-color: burlywood; height: 294px;">
+                                                        <h5 class="card-body" style="color:white">@Model.PlacedAds[n].Name</h5>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    }
+                                    else if (Model.PlacedAds[n].AdSize == "Full Page W’ Bleed")
+                                    {
+                                        <div id="@Model.PlacedAds[n].ID" class="draggable row">
+                                            <div class="col-md-12">
+                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                    <div class="" style="background-color: burlywood; height: 294px;">
+                                                        <h5 class="card-body" style="color:white">@Model.PlacedAds[n].Name</h5>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+
+
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div id="@Model.PlacedAds[n].ID" class="draggable row">
+                                            <div class="col-md-12">
+                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                    <div class="" style="background-color:burlywood;">
+                                                        <h5 class="card-body" style="color:white">@Model.PlacedAds[n].Name</h5>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    }
+
+                                }
+
+                            }
+
+
+                            @{count++;}
+
+
+
+                            @*counter*@
+
+                        </div>
+                        <h4 style="margin-left:70px;">@count.ToString()</h4>
+
+
+                    </td>
+                                }
+                                else
+                                {
                         <td id="@counter">
                             <div class="btn-group-justified" role="group" aria-label="Basic example">
                                 <button data-id="@counter" onclick="" type="button" class="btnSearchAdsInPage btn btn-outline-warning"><i class="ti-search btn-icon-append"></i></button>
@@ -161,7 +240,7 @@
                                         }
                                         else if (Model.PlacedAds[n].AdSize == "Full Page W’ Bleed")
                                         {
-                                             <div id="@Model.PlacedAds[n].ID" class="draggable row">
+                                            <div id="@Model.PlacedAds[n].ID" class="draggable row">
                                                 <div class="col-md-12">
                                                     <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
                                                         <div class="" style="background-color: burlywood; height: 294px;">
@@ -169,19 +248,22 @@
                                                         </div>
                                                     </a>
                                                 </div>
+
+                                                
+
                                             </div>
                                         }
                                         else
                                         {
-                                            <div id="@Model.PlacedAds[n].ID" class="draggable row">
-                                                <div class="col-md-12">
-                                                    <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
-                                                        <div class="" style="background-color:burlywood;">
-                                                            <h5 class="card-body" style="color:white">@Model.PlacedAds[n].Name</h5>
-                                                        </div>
-                                                    </a>
-                                                </div>
+                                            <div id = "@Model.PlacedAds[n].ID" class="draggable row">
+                                            <div class="col-md-12">
+                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                    <div class="" style="background-color:burlywood;">
+                                                        <h5 class="card-body" style="color:white">@Model.PlacedAds[n].Name</h5>
+                                                    </div>
+                                                </a>
                                             </div>
+                                        </div>
                                         }
 
                                     }
@@ -200,9 +282,10 @@
 
 
                         </td>
+                                    }
 
-                        if (counter % 6 == 0)
-                        {
+                                    if (counter % 6 == 0)
+                                    {
                         @:</tr><tr>
                         }
                         { counter++; }

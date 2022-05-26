@@ -61,16 +61,22 @@
                     </div>
 
                     <div class="form-row col-md-12">
-                        <div class="form-group col-md-5">
+                        <div class="form-group col-md-3">
                             <label class="col-sm-12">Page No</label>
                             <input required class="form-control" id="PageNo" value="@Model.PageNo" name="PageNo" placeholder="Enter Page Number">
+
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label class="col-sm-12">Page No</label>
+                            <input required class="form-control" id="PageTwo" value="@Model.PageTwo" name="PageTwo" placeholder="Enter Number in Case of Full Page WBleed">
 
                         </div>
 
                         <div class="form-group col-md-5">
                             <label>Path</label>
                             <div class="custom-file">
-                                <input type="file" value="@Model.Path" name="Path" id="Path" /> 
+                                <input type="file" value="@Model.Path" name="Path" id="Path" />
                                 <input hidden class="form-control" name="AdStatus" id="AdStatus" />
 
                             </div>
@@ -162,6 +168,9 @@
 
         var PageNo = $('#PageNo').val().trim();
         formData.append("PageNo", PageNo);
+
+        var PageTwo = $('#PageTwo').val().trim();
+        formData.append("PageTwo", PageTwo);
 
 
         var Layout = $('#Layout').val();

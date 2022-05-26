@@ -10,6 +10,7 @@ namespace CommunityConnections.Entities
     {
         public string Name { get; set; }
         public int PageNo { get; set; }
+        public int PageTwo { get; set; }
         public string Layout { get; set; }
         public string AdSize { get; set; }
         public string Path { get; set; }
