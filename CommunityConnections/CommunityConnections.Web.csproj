@@ -164,6 +164,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\template\css\vertical-layout-light\style.css" />
     <Content Include="Content\template\gulpfile.js" />
+    <Content Include="Content\template\images\80-160x300.jpg" />
     <Content Include="Content\template\images\auth\lockscreen-bg.jpg" />
     <Content Include="Content\template\images\auth\login-bg.jpg" />
     <Content Include="Content\template\images\auth\register-bg.jpg" />
@@ -271,6 +272,7 @@
     <Content Include="Content\template\images\logo-light.svg" />
     <Content Include="Content\template\images\logo-mini.svg" />
     <Content Include="Content\template\images\logo-white.svg" />
+    <Content Include="Content\template\images\Logo.png" />
     <Content Include="Content\template\images\logo.svg" />
     <Content Include="Content\template\images\logo1.svg" />
     <Content Include="Content\template\images\samples\1280x768\1.jpg" />

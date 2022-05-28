@@ -67,8 +67,8 @@
 
                         </div>
 
-                        <div class="form-group col-md-2">
-                            <label class="col-sm-12">Page No</label>
+                        <div class="form-group col-md-5">
+                            <label class="col-sm-12">Page No 2 (for Spread Ads)</label>
                             <input required class="form-control" id="PageTwo" value="@Model.PageTwo" name="PageTwo" placeholder="Enter Number in Case of Full Page WBleed">
 
                         </div>
@@ -76,8 +76,9 @@
                         <div class="form-group col-md-5">
                             <label>Path</label>
                             <div class="custom-file">
-                                <input type="file" value="@Model.Path" name="Path" id="Path" />
-                                <input hidden class="form-control" name="AdStatus" id="AdStatus" />
+                                <input type="file"/>
+                                <input hidden value="@Model.Path" name="Path" id="Path" type="text" />
+                                <input hidden class="form-control" value="Not Placed" name="AdStatus" id="AdStatus" />
 
                             </div>
                         </div>
@@ -114,6 +115,18 @@
 }
 <script>
 
+    $(document).ready(function () {
+        $('input[type="file"]').change(function (e) {
+            
+            var filename = e.target.files[0].name;
+
+            var path = document.getElementById("Path");
+          
+            path.value = filename;
+            
+        });
+    });
+
     @*$("#selectpath").change(function () {
 
         var element = this;
@@ -148,9 +161,20 @@
     });*@
 
 
-
-
     $("#actionButton").click(function () {
+		$.ajax({
+			url: '@Url.Action("Action", "Ads")',
+			type: "post",
+			data: $("#actionForm").serialize()
+		})
+		.done(function () {
+
+            window.location.href = "@Url.Action("Index","Ads")";
+
+		});
+	});
+
+    @*$("#actionButton").click(function () {
         var formData = new FormData();
         var path = document.getElementById("Path").files[0];
         formData.append("path", path);
@@ -200,7 +224,7 @@
 
 		});
 
-    });
+    });*@
 </script>
 
 

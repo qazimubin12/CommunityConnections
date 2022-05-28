@@ -28,7 +28,7 @@
                             <select disabled name="AdSize" id="AdSize" class="form-control">
                                 @foreach (var item in Model.Layouts)
                                 {
-                                    if (Model.Layout == item)
+                                    if (Model.AdSize == item)
                                     {
                                         <option selected value="@item">@item</option>
                                     }
@@ -67,7 +67,7 @@
                                
                                 @*<embed src="@Url.Content(Model.Path)" height="500" width="500" />*@
 
-                                <a class="btn btn-danger" href="@Url.Action("ViewAdInPC","MainScreen",new { ID = Model.ID })"> View </a>
+                                @*<a class="btn btn-danger" href="@Url.Action("ViewAdInPC","MainScreen",new { ID = Model.ID })"> View </a>*@
                             </div>
                         </div>
 

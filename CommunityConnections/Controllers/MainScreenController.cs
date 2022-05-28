@@ -30,12 +30,15 @@ namespace CommunityConnections.Controllers
             bool fullpagecheck = false;
             foreach (var item in AdsonPage)
             {
-                if(item.AdSize == "Full Page" || item.AdSize == "Full Page W’ Bleed" && item.AdStatus == "Placed" )
+              
+                if(item.AdStatus == "Placed" && Ad.AdSize == "Full Page" )
                 {
-                    fullpagecheck = true;
-                    break;
+                  
+                        fullpagecheck = true;
+                        break;
+                    
                 }
-                if(Ad.AdSize == "Full Page" || item.AdSize== "Full Page W’ Bleed" && item.AdStatus == "Placed")
+                if (item.AdStatus == "Placed" &&  item.AdSize == "Full Page W’ Bleed")
                 {
                     fullpagecheck = true;
                     break;
