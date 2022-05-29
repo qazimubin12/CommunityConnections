@@ -262,7 +262,7 @@ namespace CommunityConnections.Controllers
                 ad.Layout = model.Layout;
                 ad.PageNo = model.PageNo;
                 ad.AdSize = model.AdSize;
-                ad.Path = "paths/" + model.Path;
+                ad.Path = "Content/paths/" + model.Path;
                 ad.Name = model.Name;
                 ad.AdStatus = model.AdStatus;
                 AdsServices.Instance.UpdateAds(ad);
@@ -274,7 +274,7 @@ namespace CommunityConnections.Controllers
                 ad.Layout = model.Layout;
                 ad.PageNo = model.PageNo;
                 ad.AdSize = model.AdSize;
-                ad.Path = "paths/" + model.Path;
+                ad.Path = "Content/paths/" + model.Path;
                 ad.Name = model.Name;
                 ad.AdStatus = model.AdStatus;
 

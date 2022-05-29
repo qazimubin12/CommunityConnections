@@ -78,11 +78,11 @@ namespace CommunityConnections.Services
             {
                 if (!string.IsNullOrEmpty(SearchTerm))
                 {
-                    Adss = context.Ads.Where(x => x.AdStatus == "Placed" && x.Name == SearchTerm).ToList();
+                    Adss = context.Ads.Where(x => x.AdStatus == "Placed" && x.Name == SearchTerm).OrderBy(x=>x.Sort).ToList();
                 }
                 else
                 {
-                    Adss = context.Ads.Where(x => x.AdStatus == "Placed" ).ToList();
+                    Adss = context.Ads.Where(x => x.AdStatus == "Placed" ).OrderBy(x=>x.Sort).ToList();
                 }
             }
             return Adss;
@@ -112,7 +112,7 @@ namespace CommunityConnections.Services
         {
             using(var context = new CCContext())
             {
-                return context.Ads.Where(x => x.PageNo == Page).ToList();
+                return context.Ads.Where(x => x.PageNo == Page && x.AdStatus == "Placed").ToList();
             }
         }
 

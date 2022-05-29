@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>The  Community Connections</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="~/Content/template/~/Content/template/vendors/feather/feather.css">
+    <link rel="stylesheet" href="~/Content/template/vendors/feather/feather.css">
     <link rel="stylesheet" href="~/Content/template/vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" href="~/Content/template/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="~/Content/template/vendors/ti-icons/css/themify-icons.css">
@@ -72,6 +72,16 @@
         grid-row-gap: 0px;
     }
 
+    .col-md-6, .col-md-9, .col-md-12{
+        padding:0px;
+    }
+
+
+    .fullsized {
+        position: absolute;
+        width: 207%;
+        padding: 0px;
+    }
 
     .fullpageAD {
         margin-top: 4px;
@@ -84,6 +94,7 @@
         margin-top: 4px;
         margin-left: 4px;
         height: 88px;
+
         width: 146px;
     }
 
@@ -91,7 +102,7 @@
     .Ad3by4 {
         margin-top: 4px;
         margin-left: 4px;
-        height: 206px;
+        height: 220px;
         width: 146px;
     }
 
@@ -174,7 +185,7 @@
 
                                             if (Model.PlacedAds[n].AdSize == "Full Page")
                                             {
-                                                <div id="@Model.PlacedAds[n].ID" class="draggable row">
+                                                <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                     <div class="col-md-12">
                                                         <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
                                                             <div>
@@ -187,11 +198,11 @@
                                             }
                                             else if (Model.PlacedAds[n].AdSize == "Full Page W’ Bleed")
                                             {
-                                                <div id="@Model.PlacedAds[n].ID" class="draggable row">
-                                                    <div class="col-md-12">
+                                                <div id="@Model.PlacedAds[n].ID" class="draggable">
+                                                    <div class="col-md-12 fullsized">
                                                         <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
                                                             <div class="">
-                                                                <img src="@Model.PlacedAds[n].Path" style="height: 286px;width: 146px;" />
+                                                                <img hidden src="@Model.PlacedAds[n].Path" style="height: 291px; width: 100%;" />
                                                             </div>
                                                         </a>
                                                     </div>
@@ -202,7 +213,7 @@
                                             }
                                             else if (Model.PlacedAds[n].AdSize == "1/3 Page")
                                             {
-                                                <div id="@Model.PlacedAds[n].ID" class="draggable row">
+                                                <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                     <div class="col-md-12">
                                                         <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
                                                             <div class="">
@@ -214,7 +225,7 @@
                                             }
                                             else if (Model.PlacedAds[n].AdSize == "3/4 Page")
                                             {
-                                                <div id="@Model.PlacedAds[n].ID" class="draggable row">
+                                                <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                     <div class="col-md-12">
                                                         <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
                                                             <div class="">
@@ -224,11 +235,15 @@
                                                     </div>
                                                 </div>
                                             }
+
+
+
                                             else if (Model.PlacedAds[n].AdSize == "1/8 Page")
                                             {
-                                                
-                                                <div id="@Model.PlacedAds[n].ID" class="draggable row">
-                                                    <div class="col-md-12">
+
+
+                                                <div id="@Model.PlacedAds[n].ID" class="draggable">
+                                                    <div class="col-md-6">
                                                         <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
                                                             <div class="">
                                                                 <img class="AD1by8" src="@Model.PlacedAds[n].Path" />
@@ -262,7 +277,7 @@
                                     <button data-id="@counter" onclick="" type="button" class="btnSearchAdsInPage btn btn-outline-warning"><i class="ti-search btn-icon-append"></i></button>
                                     <button data-id="@counter" onclick="" type="button" class="btnCustomerView btn btn-outline-warning"><i class="mdi mdi-account-circle"></i></button>
                                 </div>
-                                <div id="@counter" class="droppable" style="border:solid; height:300px;width: 10rem;">
+                                <div id="@counter" class="droppable" style="border: solid; height: 300px; width: 10rem; position: relative;">
                                     @{newcounter++;
                                     }
                                     @for (int n = 0; n < Model.PlacedAds.Count; n++)
@@ -273,10 +288,9 @@
                                         {
 
 
-
                                             if (Model.PlacedAds[n].AdSize == "Full Page")
                                             {
-                                                <div id="@Model.PlacedAds[n].ID" class="draggable row">
+                                                <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                     <div class="col-md-12">
                                                         <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
                                                             <div>
@@ -289,11 +303,11 @@
                                             }
                                             else if (Model.PlacedAds[n].AdSize == "Full Page W’ Bleed")
                                             {
-                                                <div id="@Model.PlacedAds[n].ID" class="draggable row">
-                                                    <div class="col-md-12">
+                                                <div id="@Model.PlacedAds[n].ID"  class="draggable">
+                                                    <div class="col-md-12 fullsized">
                                                         <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
-                                                            <div class="">
-                                                                <img src="@Model.PlacedAds[n].Path" style="height: 286px;width: 146px;" />
+                                                            <div>
+                                                                <img  src="@Model.PlacedAds[n].Path" style="height: 294px;width: 316px;" />
                                                             </div>
                                                         </a>
                                                     </div>
@@ -304,7 +318,7 @@
                                             }
                                             else if (Model.PlacedAds[n].AdSize == "1/3 Page")
                                             {
-                                                <div id="@Model.PlacedAds[n].ID" class="draggable row">
+                                                <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                     <div class="col-md-12">
                                                         <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
                                                             <div class="">
@@ -316,10 +330,10 @@
                                             }
                                             else if (Model.PlacedAds[n].AdSize == "3/4 Page")
                                             {
-                                                <div id="@Model.PlacedAds[n].ID" class="draggable row">
-                                                    <div class="col-md-12">
+                                                <div id="@Model.PlacedAds[n].ID" class="draggable">
+                                                    <div style="float:left;" class="col-md-12">
                                                         <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
-                                                            <div class="">
+                                                            <div>
                                                                 <img class="Ad3by4" src="@Model.PlacedAds[n].Path" />
                                                             </div>
                                                         </a>
@@ -328,8 +342,8 @@
                                             }
                                             else if (Model.PlacedAds[n].AdSize == "1/8 Page")
                                             {
-                                                <div id="@Model.PlacedAds[n].ID" class="draggable row">
-                                                    <div class="col-md-12">
+                                                <div id="@Model.PlacedAds[n].ID" class="draggable">
+                                                    <div style="float:left;" class="col-md-6">
                                                         <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
                                                             <div class="">
                                                                 <img class="AD1by8" src="@Model.PlacedAds[n].Path" />

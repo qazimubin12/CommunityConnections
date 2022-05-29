@@ -15,5 +15,6 @@ namespace CommunityConnections.Entities
         public string AdSize { get; set; }
         public string Path { get; set; }
         public string AdStatus { get; set; }
+        public string Sort { get; set; }
     }
 }

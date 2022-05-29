@@ -80,6 +80,14 @@
     <Compile Include="Migrations\202205260339243_pagetwo.designer.cs">
       <DependentUpon>202205260339243_pagetwo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205291111455_sortingadded.cs" />
+    <Compile Include="Migrations\202205291111455_sortingadded.designer.cs">
+      <DependentUpon>202205291111455_sortingadded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205291117352_stringchanged.cs" />
+    <Compile Include="Migrations\202205291117352_stringchanged.designer.cs">
+      <DependentUpon>202205291117352_stringchanged.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -114,6 +122,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205260339243_pagetwo.resx">
       <DependentUpon>202205260339243_pagetwo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205291111455_sortingadded.resx">
+      <DependentUpon>202205291111455_sortingadded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205291117352_stringchanged.resx">
+      <DependentUpon>202205291117352_stringchanged.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

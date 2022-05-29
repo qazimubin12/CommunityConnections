@@ -55,6 +55,8 @@ namespace CommunityConnections.Controllers
                 
                 Ad.PageNo = AdPage;
                 Ad.AdStatus = "Placed";
+                string some =  DateTime.Now.ToString("ddMMyyyyhhmmss").ToString();
+                Ad.Sort = some;
                 AdsServices.Instance.UpdateAds(Ad);
                 if(Ad.AdSize == "Full Page W’ Bleed")
                 {
