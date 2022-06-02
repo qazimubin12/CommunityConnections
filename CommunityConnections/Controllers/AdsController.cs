@@ -32,6 +32,7 @@ namespace CommunityConnections.Controllers
             LayoutList.Add("1/2 Page");
             LayoutList.Add("1/3 Page");
             LayoutList.Add("1/4 Page");
+            LayoutList.Add("1/4 Page Vertical");
             LayoutList.Add("1/8 Page");
             LayoutList.Add("Full Spread");
             LayoutList.Add("3/4 Spread");
@@ -265,6 +266,8 @@ namespace CommunityConnections.Controllers
                 ad.Path = "Content/paths/" + model.Path;
                 ad.Name = model.Name;
                 ad.AdStatus = model.AdStatus;
+                ad.PageTwo = model.PageTwo;
+
                 AdsServices.Instance.UpdateAds(ad);
 
             }
@@ -274,6 +277,8 @@ namespace CommunityConnections.Controllers
                 ad.Layout = model.Layout;
                 ad.PageNo = model.PageNo;
                 ad.AdSize = model.AdSize;
+                ad.PageTwo = model.PageTwo;
+
                 ad.Path = "Content/paths/" + model.Path;
                 ad.Name = model.Name;
                 ad.AdStatus = model.AdStatus;

@@ -58,7 +58,7 @@ namespace CommunityConnections.Controllers
                 string some =  DateTime.Now.ToString("ddMMyyyyhhmmss").ToString();
                 Ad.Sort = some;
                 AdsServices.Instance.UpdateAds(Ad);
-                if(Ad.AdSize == "Full Page W’ Bleed")
+                if(Ad.AdSize == "Full Spread")
                 {
                     AdPage++;
                     Ad.PageTwo = AdPage;
