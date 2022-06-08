@@ -34,6 +34,16 @@ namespace CommunityConnections.Services
             }
         }
 
+
+        public void UpdateAdNewMethod(Ads ad, string Property, string value)
+        {
+            using (var context = new CCContext())
+            {
+                context.Entry(ad).Property(Property).CurrentValue = value;
+                context.SaveChanges();
+            }
+        }
+
         public List<Ads> GetAdss(string SearchTerm = "")
         {
             List<Ads> Adss = null;

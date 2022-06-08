@@ -1,10 +1,12 @@
 ﻿using CommunityConnections.Entities;
 using CommunityConnections.Services;
 using CommunityConnections.ViewModels;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -48,7 +50,7 @@ namespace CommunityConnections.Controllers
                 model.Name = ad.Name;
                 model.AdStatus = ad.AdStatus;
                 model.PageTwo = ad.PageTwo;
-                return PartialView("Action", model);
+                return View("Action", model);
 
             }
             else
@@ -155,102 +157,6 @@ namespace CommunityConnections.Controllers
 
 
 
-        //[HttpPost]
-        //public ActionResult Action(IEnumerable<HttpPostedFileBase> path,int ID, string AdSize,string Name, int PageNo,int PageTwo, string Layout)
-        //{
-
-        //    var supportedPicTypes = new[] { "jpg", "jpeg", "png" };
-        //    var supportedPdfTypes = new[] { "pdf", "doc", "docx" };
-        //    var PicFileSize = 200000000;
-        //    var PathSize = 100000000000;
-        //    if (ID != 0) //update record
-        //    {
-        //        var ad = AdsServices.Instance.GetAds(ID);
-
-        //        ad.ID = ID;
-        //        ad.Layout = Layout;
-        //        ad.PageNo = PageNo;
-        //        ad.AdSize = AdSize;
-        //        ad.PageTwo = PageTwo;
-        //        ad.Name = Name;
-        //        ad.AdStatus = "Not Placed";
-
-        //        if (path.Count() != 0)
-        //        {
-        //            if (path.ElementAt(0) != null)
-        //            {
-        //                if (path.ElementAt(0).ContentLength > (PathSize))
-        //                {
-        //                    ViewBag.Message = "File Size should be less than 10mb";
-        //                }
-        //                else if (!supportedPdfTypes.Contains(System.IO.Path.GetExtension(path.ElementAt(0).FileName).Substring(1)))
-        //                {
-        //                    ViewBag.Message = "File Extension is not valid";
-        //                }
-        //                else
-        //                {
-        //                    ViewBag.Message = "Record Already Exist!";
-
-        //                    string Upth = Path.Combine(Server.MapPath("~/paths"), Path.GetFileName(path.ElementAt(0).FileName));
-        //                    path.ElementAt(0).SaveAs(Upth);
-        //                }
-        //                string FilePath = path.ElementAt(0).FileName;
-        //                ad.Path = "~/paths/" + path.ElementAt(0).FileName;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            ad.Path = ad.Path;
-        //        }
-        //        AdsServices.Instance.UpdateAds(ad);
-
-        //    }
-        //    else
-        //    {
-        //        var ad = new Ads();
-        //        ad.Layout = Layout;
-        //        ad.PageNo = PageNo;
-        //        ad.AdSize = AdSize;
-        //        ad.PageTwo = PageTwo;
-
-        //        if (path.Count() != 0)
-        //        {
-        //            if (path.ElementAt(0) != null)
-        //            {
-        //                if (path.ElementAt(0).ContentLength > (PathSize))
-        //                {
-        //                    ViewBag.Message = "File Size should be less than 10mb";
-        //                }
-        //                else if (!supportedPdfTypes.Contains(System.IO.Path.GetExtension(path.ElementAt(0).FileName).Substring(1)))
-        //                {
-        //                    ViewBag.Message = "File Extension is not valid";
-        //                }
-        //                else
-        //                {
-        //                    ViewBag.Message = "Record Already Exist!";
-
-        //                    string Upth = Path.Combine(Server.MapPath("~/paths"), Path.GetFileName(path.ElementAt(0).FileName));
-        //                    path.ElementAt(0).SaveAs(Upth);
-        //                }
-
-        //                ad.Path = "~/paths/" + path.ElementAt(0).FileName;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            ad.Path = null;
-        //        }
-        //        ad.Name = Name;
-        //        ad.AdStatus = "Not Placed";
-
-        //        AdsServices.Instance.SaveAds(ad);
-        //    }
-
-        //        return RedirectToAction("Index", "Ads");
-
-
-        //}
-
         [HttpPost]
         public ActionResult Action(AdsActionViewModel model)
         {
@@ -291,6 +197,66 @@ namespace CommunityConnections.Controllers
 
         }
 
+
+        public ActionResult LoadAdSizes(int id)
+        {
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                var LayoutList = new List<Tuple<string,string>>();
+                Dictionary<string, string> mydict = new Dictionary<string, string>();
+                mydict.Add("Full Page W’ Bleed", "Full Page W’ Bleed");
+                mydict.Add("Full Page", "Full Page");
+                mydict.Add("3/4 Page", "3/4 Page");
+                mydict.Add("1/2 Page Vertical", "1/2 Page Vertical");
+                mydict.Add("1/2 Page", "1/2 Page");
+                mydict.Add("1/3 Page", "1/3 Page");
+                mydict.Add("1/4 Page", "1/4 Page");
+                mydict.Add("1/4 Page Vertical", "1/4 Page Vertical");
+                mydict.Add("1/8 Page", "1/8 Page");
+                mydict.Add("Full Spread", "Full Spread");
+                mydict.Add("3/4 Spread", "3/4 Spread");
+                
+                foreach (var item in mydict)
+                {
+                    sb.Append(string.Format("{0}':'{1}'", item.Key, item.Value));
+                }
+                return Content("{" + sb.ToString() + "}");
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+            //{ 'Full Page W’ Bleed':'Full Page W’ Bleed''Full Page':'Full Page''3/4 Page':'3/4 Page''1/2 Page Vertical':'1/2 Page Vertical''1/2 Page':'1/2 Page''1/3 Page':'1/3 Page''1/4 Page':'1/4 Page''1/4 Page Vertical':'1/4 Page Vertical''1/8 Page':'1/8 Page''Full Spread':'Full Spread''3/4 Spread':'3/4 Spread'}
+        }
+
+        [HttpPost]
+        public ActionResult NewAction(int id, string propertyname,string value)
+        {
+            var status = false;
+            var message = "";
+    
+            var Ad = AdsServices.Instance.GetAds(id);
+            
+
+            if (Ad != null)
+            {
+               
+                AdsServices.Instance.UpdateAdNewMethod(Ad, propertyname, value);
+                status = true;
+            }
+            else
+            {
+                message = "error!";
+            }
+
+
+            var response = new { value = value, status = status, message = message };
+            JObject o = JObject.FromObject(response);
+            return Content(o.ToString());
+        }
 
 
         [HttpGet]
