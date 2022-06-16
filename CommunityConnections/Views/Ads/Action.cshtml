@@ -127,38 +127,6 @@
         });
     });
 
-    @*$("#selectpath").change(function () {
-
-        var element = this;
-        var formData = new FormData();
-
-        var totalFiles = element.files.length;
-
-        for (var i = 0; i < totalFiles; i++) {
-            var file = element.files[i];
-            formData.append("Photo", file);
-        }
-
-        $.ajax({
-            type: 'POST',
-            url: '@Url.Action("UploadImage", "Shared")',
-            data: formData,
-            dataType: 'json',
-            contentType: false,
-            processData: false
-        })
-            .done(function (response) {
-
-                console.log(response);
-                if (response.Success) {
-                    $("#Path").val(response.Path);
-                }
-
-            })
-            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("FAIL");
-            })
-    });*@
 
 
     $("#actionButton").click(function () {
@@ -174,57 +142,7 @@
 		});
 	});
 
-    @*$("#actionButton").click(function () {
-        var formData = new FormData();
-        var path = document.getElementById("Path").files[0];
-        formData.append("path", path);
-
-        var ID = $('#ID').val().trim();
-        formData.append("ID", ID);
-
-        var c = document.getElementById("AdSize");
-        var AdSize = c.value;
-        formData.append("AdSize", AdSize);
-
-        var Name = $('#Name').val().trim();
-        formData.append("Name", Name);
-
-
-        var PageNo = $('#PageNo').val().trim();
-        formData.append("PageNo", PageNo);
-
-        var PageTwo = $('#PageTwo').val().trim();
-        formData.append("PageTwo", PageTwo);
-
-
-        var Layout = $('#Layout').val();
-        formData.append("Layout", Layout);
-
-
-
-
-
-
-
-
-
-
-
-
-        var url = '@Url.Action("Index", "Ads")';
-		$.ajax({
-			url: '@Url.Action("Action", "Ads")',
-            type: "post",
-            data: formData,
-            processData: false,
-            contentType: false
-		})
-            .done(function (response) {
-                window.location.href = url;
-
-		});
-
-    });*@
+   
 </script>
 
 
