@@ -1,0 +1,32 @@
+﻿@model CommunityConnections.ViewModels.MainScreenViewModel
+
+@{
+    ViewBag.Title = "_AdsSearchViewPartial";
+}
+
+
+<table id="launchPad" style="z-index:9;margin-top:5px; overflow:hidden;" class="table table-condensed table-hover table-responsive ">
+    <thead>
+        <tr>
+
+            <th>
+                Ad
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.NonPlacedAds)
+        {
+            <tr>
+
+                <td id="@item.ID" class="draggable">
+                    <div>
+                        <h4>@item.Name</h4>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

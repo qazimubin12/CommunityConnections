@@ -1978,6 +1978,7 @@
     <Content Include="Views\Ads\Action.cshtml" />
     <Content Include="Views\Customer\Action.cshtml" />
     <Content Include="Views\Section\Action.cshtml" />
+    <Content Include="Views\MainScreen\AdsSearchViewPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

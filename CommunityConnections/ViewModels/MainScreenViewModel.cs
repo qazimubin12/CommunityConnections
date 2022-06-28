@@ -25,6 +25,7 @@ namespace CommunityConnections.ViewModels
 
 
         public List<Ads> AdsonPage { get; set; }
+        public string SearchTerm { get; set; }
     }
 
 

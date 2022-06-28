@@ -53,10 +53,16 @@ namespace CommunityConnections.Controllers
                 section.ID = model.ID;
                 section.StartPage = model.StartPage;
                 section.EndPage = model.EndPage;
-                
                 section.SectionName = model.SectionName;
-          
-
+                if (model.Monday == true)
+                {
+                    int sum = 1;
+                    sum = section.EndPage - section.StartPage;
+                    var BeforeSection = SectionServices.Instance.GetSection(model.BeforeSection);
+                    BeforeSection.StartPage = BeforeSection.StartPage + sum;
+                    BeforeSection.EndPage = BeforeSection.EndPage + sum;
+                    SectionServices.Instance.UpdateSections(BeforeSection);
+                }
                 SectionServices.Instance.UpdateSections(section);
 
             }
@@ -66,7 +72,15 @@ namespace CommunityConnections.Controllers
                 section.StartPage = model.StartPage;
                 section.EndPage = model.EndPage;
                 section.SectionName = model.SectionName;
-
+                if(model.Monday == true)
+                {
+                    int sum = 1;
+                    sum = section.EndPage - section.StartPage;
+                    var BeforeSection = SectionServices.Instance.GetSection(model.BeforeSection);
+                    BeforeSection.StartPage = BeforeSection.StartPage + sum;
+                    BeforeSection.EndPage = BeforeSection.EndPage + sum;
+                    SectionServices.Instance.UpdateSections(BeforeSection);
+                }
                 SectionServices.Instance.SaveSections(section);
             }
 
@@ -94,7 +108,7 @@ namespace CommunityConnections.Controllers
                 SectionServices.Instance.DeleteSections(model.ID);
 
             }
-            return RedirectToAction("Index", "Sections");
+            return RedirectToAction("Index", "Section");
 
         }
     }

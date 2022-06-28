@@ -34,6 +34,15 @@ namespace CommunityConnections.Services
             }
         }
 
+        public Section GetSection(string Name)
+        {
+            using (var context = new CCContext())
+            {
+                return context.Sections.Where(x => x.SectionName == Name).FirstOrDefault();
+            }
+        }
+
+
         public List<Section> GetSectionss(string SearchTerm = "")
         {
             List<Section> Sectionss = null;

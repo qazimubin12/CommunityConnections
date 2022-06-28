@@ -104,6 +104,14 @@
     <Compile Include="Migrations\202206281240227_startandendpage.designer.cs">
       <DependentUpon>202206281240227_startandendpage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206281315175_inbetweenany.cs" />
+    <Compile Include="Migrations\202206281315175_inbetweenany.designer.cs">
+      <DependentUpon>202206281315175_inbetweenany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206281616408_removeaftersection.cs" />
+    <Compile Include="Migrations\202206281616408_removeaftersection.designer.cs">
+      <DependentUpon>202206281616408_removeaftersection.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -156,6 +164,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206281240227_startandendpage.resx">
       <DependentUpon>202206281240227_startandendpage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206281315175_inbetweenany.resx">
+      <DependentUpon>202206281315175_inbetweenany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206281616408_removeaftersection.resx">
+      <DependentUpon>202206281616408_removeaftersection.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

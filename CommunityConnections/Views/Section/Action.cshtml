@@ -49,9 +49,45 @@
                         @Html.EditorFor(model => model.EndPage, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.EndPage, "", new { @class = "text-danger" })
                     </div>
-
-                    
                 </div>
+
+                <div class="row">
+
+                    <div class="form-group col-md-3">
+                        <label>In between Any Section</label>
+                        <input onclick="HiddenFunction()" id="inBetweenAny" type="checkbox" name="InBetweenAny" />
+                    </div>
+
+                    <div hidden="hidden" id="sectionsInBetween">
+
+
+                        <div class="form-group">
+
+                            <input class="form-control" hidden type="text" id="Monday" name="Monday" />
+
+                            <label>Before Section</label>
+
+                            <select name="BeforeSection">
+                                @foreach (var item in Model.Sections)
+                                {
+                                    <option value="@item.SectionName">@item.SectionName</option>
+                                }
+                            </select>
+
+                         
+                        </div>
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+
+                
                 <br />
                 @if (Model.ID != 0)
                 {
@@ -79,7 +115,36 @@
             window.location.href = "@Url.Action("Index","Section")";
 
 		});
-	});
+     });
+
+
+    function HiddenFunction() {
+        // Get the checkbox
+        var checkBox = document.getElementById("inBetweenAny");
+        // Get the output text
+        var text = document.getElementById("Monday");
+
+
+        // If the checkbox is checked, display the output text
+        if (checkBox.checked == true) {
+
+            text.innerHTML = "true";
+            $('#Monday').attr('value', 'true');
+            $('#sectionsInBetween').removeAttr('hidden', 'hidden');
+
+        } else {
+            text.innerHTML = "false";
+            $('#Monday').attr('value', 'false');
+            $('#sectionsInBetween').attr('hidden', 'hidden');
+
+
+
+        }
+    }
+
+
+
+
 </script>
 
   

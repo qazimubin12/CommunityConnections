@@ -179,32 +179,40 @@
 
     <div class="row">
         <div class="col-md-3 table-responsive">
+            <form>
+                <div class="input-group">
+                    <input style=" height: 116px; font-size: 116px; " type="text" name="searchterm" class="form-control" placeholder="Search." value="@Model.SearchTerm">
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <br />
+                        <button style="font-size: 40px;" class="btn btn-outline-primary" type="submit"><i class="mdi mdi-account-search"></i> Search</button>
 
-            <table id="launchPad" style="z-index:9;margin-top:5px; overflow:hidden;" class="table table-condensed table-hover table-responsive ">
-                <thead>
+                </div>
+            </form>
+        <table id="launchPad" style="z-index:9;margin-top:5px; overflow:hidden;" class="table table-condensed table-hover table-responsive ">
+            <thead>
+                <tr>
+
+                    <th>
+                        Ad
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.NonPlacedAds)
+                {
                     <tr>
 
-                        <th>
-                            Ad
-                        </th>
-
+                        <td id="@item.ID" class="draggable">
+                            <div>
+                                <h4>@item.Name</h4>
+                            </div>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.NonPlacedAds)
-                    {
-                        <tr>
-
-                            <td id="@item.ID" class="draggable">
-                                <div>
-                                    <h4>@item.Name</h4>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-
+                }
+            </tbody>
+        </table>
         </div>
 
 

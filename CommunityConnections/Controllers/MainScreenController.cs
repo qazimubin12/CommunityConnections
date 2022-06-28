@@ -27,16 +27,16 @@ namespace CommunityConnections.Controllers
         //    return View(model);
         //}
 
-        public ActionResult Index(MainScreenViewModel model)
+        public ActionResult Index(string SearchTerm)
         {
-            model.Ads = AdsServices.Instance.GetNotPlacedAdss();
+            MainScreenViewModel model = new MainScreenViewModel();
 
             int Pages = 0;
             model.Sections = SectionServices.Instance.GetSectionss();
           
             model.NoOfPages = Pages;
             model.PlacedAds = AdsServices.Instance.GetPlacedAdss();
-            model.NonPlacedAds = AdsServices.Instance.GetNotPlacedAdss();
+            model.NonPlacedAds = AdsServices.Instance.GetNotPlacedAdss(SearchTerm);
             return View(model);
         }
 
@@ -90,6 +90,10 @@ namespace CommunityConnections.Controllers
             
 
         }
+
+
+
+
 
         [HttpPost]
         public ActionResult UndoPlacing(int DataID)
