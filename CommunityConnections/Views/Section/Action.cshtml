@@ -1,0 +1,103 @@
+﻿@model CommunityConnections.ViewModels.SectionActionViewModel
+
+@{
+    ViewBag.Title = "Action";
+}
+
+
+@if (Model != null)
+{
+
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">
+                @if (Model.ID != 0)
+                {
+                    <span>Edit Section</span>
+                }
+                else
+                {
+                    <span>Save Section</span>
+                }
+            </h2>
+            <hr />
+
+
+
+
+            <form id="actionForm">
+                <div class="row">
+
+                    <input type="hidden" id="ID" name="ID" value="@Model.ID" />
+
+
+                    <div class="form-group col-md-4">
+                        @Html.LabelFor(model => model.SectionName, htmlAttributes: new { @class = "control-label col-md-12" })
+
+                        @Html.EditorFor(model => model.SectionName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SectionName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(model => model.NoOfPages, htmlAttributes: new { @class = "control-label col-md-12" })
+                        @Html.EditorFor(model => model.NoOfPages, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NoOfPages, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(model => model.After, htmlAttributes: new { @class = "control-label col-md-12" })
+
+                        <select class="form-control">
+                            @foreach (var item in Model.Sections)
+                            {
+                                if (Model.ID != 0)
+                                {
+                                    if (item.SectionName == Model.SectionName)
+                                    {
+                                        <option selected value="@item.SectionName">@item.SectionName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.SectionName">@item.SectionName</option>
+
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="@item.SectionName">@item.SectionName</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <br />
+                @if (Model.ID != 0)
+                {
+                    <button id="actionButton" type="button" class="btn btn-outline-primary"><i class="fas fa-save mr-1"></i> UPDATE</button>
+                }
+                else
+                {
+                    <button id="actionButton" type="button" class="btn btn-outline-primary "><i class="fas fa-save mr-1"></i> SAVE</button>
+                }
+                <a href="@Url.Action("Index","Section")" class="btn btn-outline-danger"> CANCEL</a>
+            </form>
+
+        </div>
+    </div>
+}
+<script>
+     $("#actionButton").click(function () {
+		$.ajax({
+			url: '@Url.Action("Action", "Section")',
+			type: "post",
+			data: $("#actionForm").serialize()
+		})
+		.done(function () {
+
+            window.location.href = "@Url.Action("Index","Section")";
+
+		});
+	});
+</script>
+
+  

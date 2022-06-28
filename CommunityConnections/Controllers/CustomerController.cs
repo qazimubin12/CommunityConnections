@@ -50,7 +50,7 @@ namespace CommunityConnections.Controllers
                 model.State = customer.State;
                 model.Title = customer.Title;
 
-                return View("Action", model);
+                return PartialView("Action", model);
 
             }
             else

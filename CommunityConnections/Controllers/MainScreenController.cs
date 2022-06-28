@@ -21,6 +21,16 @@ namespace CommunityConnections.Controllers
             return View(model);
         }
 
+        public ActionResult Index2(MainScreenViewModel model)
+        {
+            model.Ads = AdsServices.Instance.GetNotPlacedAdss();
+
+            model.Pages = PagesServices.Instance.GetPages();
+            model.PlacedAds = AdsServices.Instance.GetPlacedAdss();
+            model.NonPlacedAds = AdsServices.Instance.GetNotPlacedAdss();
+            return View(model);
+        }
+
 
         [HttpPost]
         public ActionResult PlaceAd(int AdID, int AdPage)

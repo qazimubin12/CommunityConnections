@@ -150,6 +150,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainScreenController.cs" />
+    <Compile Include="Controllers\SectionController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -158,6 +159,7 @@
     <Compile Include="ViewModels\AdsViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\MainScreenViewModel.cs" />
+    <Compile Include="ViewModels\SectionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -1960,18 +1962,26 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Ads\Index.cshtml" />
     <Content Include="Views\Ads\Delete.cshtml" />
-    <Content Include="Views\Ads\Action.cshtml" />
     <Content Include="Views\Ads\_Listing.cshtml" />
     <Content Include="Views\Ads\Import.cshtml" />
     <Content Include="Views\MainScreen\Index.cshtml" />
     <Content Include="Views\MainScreen\SelectLayout.cshtml" />
     <Content Include="Views\MainScreen\ViewAd.cshtml" />
     <Content Include="Views\MainScreen\AdsView.cshtml" />
+    <Content Include="Views\MainScreen\Index2.cshtml" />
+    <Content Include="Views\Section\Index.cshtml" />
+    <Content Include="Views\Section\Delete.cshtml" />
+    <Content Include="Views\Section\_Listing.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Delete.cshtml" />
+    <Content Include="Views\Customer\_Listing.cshtml" />
+    <Content Include="Views\Ads\Action.cshtml" />
+    <Content Include="Views\Customer\Action.cshtml" />
+    <Content Include="Views\Section\Action.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Customer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

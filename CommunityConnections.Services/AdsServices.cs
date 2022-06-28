@@ -26,14 +26,7 @@ namespace CommunityConnections.Services
         }
         #endregion
 
-            public Ads GetAds(int ID)
-            {
-                using (var context = new CCContext())
-                {
-                    return context.Ads.Find(ID);
-                }
-            }
-
+           
 
         public void UpdateAdNewMethod(Ads ad, string Property, string value)
         {
@@ -41,6 +34,13 @@ namespace CommunityConnections.Services
             {
                 context.Entry(ad).Property(Property).CurrentValue = value;
                 context.SaveChanges();
+            }
+        }
+        public Ads GetAds(int ID)
+        {
+            using (var context = new CCContext())
+            {
+                return context.Ads.Find(ID);
             }
         }
 

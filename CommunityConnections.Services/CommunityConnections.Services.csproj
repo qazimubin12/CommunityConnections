@@ -55,6 +55,7 @@
     <Compile Include="CustomerServices.cs" />
     <Compile Include="PagesServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SectionServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
