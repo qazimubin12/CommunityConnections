@@ -45,7 +45,7 @@ namespace CommunityConnections.Services
                 }
                 else
                 {
-                    Sectionss = context.Sections.ToList();
+                    Sectionss = context.Sections.OrderBy(x=>x.SectionName).ToList();
                 }
             }
             return Sectionss;

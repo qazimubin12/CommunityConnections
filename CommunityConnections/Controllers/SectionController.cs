@@ -29,8 +29,8 @@ namespace CommunityConnections.Controllers
             {
                 var section = SectionServices.Instance.GetSections(ID);
                 model.ID = section.ID;
-                model.NoOfPages = section.NoOfPages;
-                model.After = section.After;
+                model.StartPage = section.StartPage;
+                model.EndPage = section.EndPage;
                 model.SectionName = section.SectionName;
                 return PartialView("Action", model);
 
@@ -51,17 +51,9 @@ namespace CommunityConnections.Controllers
                 var section = SectionServices.Instance.GetSections(model.ID);
 
                 section.ID = model.ID;
-                section.NoOfPages = model.NoOfPages;
-                if(model.After == null || model.After == "")
-                {
-                    section.After = "First Section";
-
-                }
-                else
-                {
-                    section.After = model.After;
-
-                }
+                section.StartPage = model.StartPage;
+                section.EndPage = model.EndPage;
+                
                 section.SectionName = model.SectionName;
           
 
@@ -71,8 +63,8 @@ namespace CommunityConnections.Controllers
             else
             {
                 var section = new Section();
-                section.NoOfPages = model.NoOfPages;
-                section.After = model.After;
+                section.StartPage = model.StartPage;
+                section.EndPage = model.EndPage;
                 section.SectionName = model.SectionName;
 
                 SectionServices.Instance.SaveSections(section);
@@ -99,8 +91,7 @@ namespace CommunityConnections.Controllers
 
             if (model.ID != 0) //we are trying to delete a record
             {
-                var Section = SectionServices.Instance.GetSections(model.ID);
-                SectionServices.Instance.DeleteSections(Section.ID);
+                SectionServices.Instance.DeleteSections(model.ID);
 
             }
             return RedirectToAction("Index", "Sections");

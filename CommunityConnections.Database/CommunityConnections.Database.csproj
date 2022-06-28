@@ -96,6 +96,14 @@
     <Compile Include="Migrations\202206270951480_section.designer.cs">
       <DependentUpon>202206270951480_section.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206281213020_pagesremoved.cs" />
+    <Compile Include="Migrations\202206281213020_pagesremoved.designer.cs">
+      <DependentUpon>202206281213020_pagesremoved.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206281240227_startandendpage.cs" />
+    <Compile Include="Migrations\202206281240227_startandendpage.designer.cs">
+      <DependentUpon>202206281240227_startandendpage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -142,6 +150,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206270951480_section.resx">
       <DependentUpon>202206270951480_section.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206281213020_pagesremoved.resx">
+      <DependentUpon>202206281213020_pagesremoved.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206281240227_startandendpage.resx">
+      <DependentUpon>202206281240227_startandendpage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

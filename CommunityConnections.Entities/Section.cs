@@ -9,7 +9,7 @@ namespace CommunityConnections.Entities
     public class Section:BaseEntity
     {
         public string SectionName { get; set; }
-        public int NoOfPages { get; set; }
-        public string After { get; set; }
+        public int StartPage { get; set; }
+        public int EndPage { get; set; }
     }
 }

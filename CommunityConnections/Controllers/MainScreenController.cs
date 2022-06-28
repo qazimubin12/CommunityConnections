@@ -11,21 +11,30 @@ namespace CommunityConnections.Controllers
     public class MainScreenController : Controller
     {
         // GET: MainScreen
+        //public ActionResult Index(MainScreenViewModel model)
+        //{
+        //    model.Ads = AdsServices.Instance.GetNotPlacedAdss();
+        //    int Pages = 0;
+        //    model.Pages = PagesServices.Instance.GetPages();
+        //    model.Sections = SectionServices.Instance.GetSectionss();
+        //    foreach (var item in model.Sections)
+        //    {
+        //        Pages += item.NoOfPages;
+        //    }
+        //    model.NoOfPages = Pages;
+        //    model.PlacedAds = AdsServices.Instance.GetPlacedAdss();
+        //    model.NonPlacedAds = AdsServices.Instance.GetNotPlacedAdss();
+        //    return View(model);
+        //}
+
         public ActionResult Index(MainScreenViewModel model)
         {
             model.Ads = AdsServices.Instance.GetNotPlacedAdss();
 
-            model.Pages = PagesServices.Instance.GetPages();
-            model.PlacedAds = AdsServices.Instance.GetPlacedAdss();
-            model.NonPlacedAds = AdsServices.Instance.GetNotPlacedAdss();
-            return View(model);
-        }
-
-        public ActionResult Index2(MainScreenViewModel model)
-        {
-            model.Ads = AdsServices.Instance.GetNotPlacedAdss();
-
-            model.Pages = PagesServices.Instance.GetPages();
+            int Pages = 0;
+            model.Sections = SectionServices.Instance.GetSectionss();
+          
+            model.NoOfPages = Pages;
             model.PlacedAds = AdsServices.Instance.GetPlacedAdss();
             model.NonPlacedAds = AdsServices.Instance.GetNotPlacedAdss();
             return View(model);
