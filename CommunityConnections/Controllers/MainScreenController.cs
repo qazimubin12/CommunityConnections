@@ -67,7 +67,17 @@ namespace CommunityConnections.Controllers
                     fullpagecheck = false;
                 }
             }
-
+            if(Ad.AdSize == "Full Page" || Ad.AdSize == "Full Page W’ Bleed")
+            {
+                if(AdsonPage.Count > 0)
+                {
+                    fullpagecheck = true;
+                }
+                else
+                {
+                    fullpagecheck = false;
+                }
+            }
           
             if (fullpagecheck == false)
             {
@@ -86,6 +96,8 @@ namespace CommunityConnections.Controllers
                 }
 
             }
+
+            
             return RedirectToAction("Index", "MainScreen");
             
 

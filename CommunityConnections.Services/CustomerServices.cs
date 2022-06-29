@@ -43,7 +43,8 @@ namespace CommunityConnections.Services
             {
                 if (!string.IsNullOrEmpty(SearchTerm))
                 {
-                    Customers = context.Customers.Where(x => x.FirstName == SearchTerm || x.LastName == SearchTerm || x.MiddleName == SearchTerm).ToList();
+                    Customers = context.Customers.Where(x => x.FirstName != null && x.FirstName.ToLower()
+                     .Contains(SearchTerm.ToLower())).ToList();
                 }
                 else
                 {

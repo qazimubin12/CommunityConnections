@@ -28,14 +28,7 @@ namespace CommunityConnections.Services
 
            
 
-        public void UpdateAdNewMethod(Ads ad, string Property, string value)
-        {
-            using (var context = new CCContext())
-            {
-                context.Entry(ad).Property(Property).CurrentValue = value;
-                context.SaveChanges();
-            }
-        }
+    
         public Ads GetAds(int ID)
         {
             using (var context = new CCContext())
@@ -51,7 +44,8 @@ namespace CommunityConnections.Services
             {
                 if (!string.IsNullOrEmpty(SearchTerm))
                 {
-                    Adss = context.Ads.Where(x=>x.Name == SearchTerm).ToList();
+                    Adss = context.Ads.Where(x => x.Name != null && x.Name.ToLower()
+                    .Contains(SearchTerm.ToLower())).ToList();
                 }
                 else
                 {
@@ -71,7 +65,8 @@ namespace CommunityConnections.Services
             {
                 if (!string.IsNullOrEmpty(SearchTerm))
                 {
-                    Adss = context.Ads.Where(x => x.AdStatus == "Not Placed" && x.Name == SearchTerm).ToList();
+                    Adss = context.Ads.Where(x => x.AdStatus == "Not Placed" && x.Name != null && x.Name.ToLower()
+                                       .Contains(SearchTerm.ToLower())).ToList();
                 }
                 else
                 {

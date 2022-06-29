@@ -48,7 +48,8 @@ grid.Column(header: "Path", format:@<text><div class="edit" data-id="@item.ID" d
 grid.Column(header: "PageNo", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="PageNo">@item.PageNo</div></text>),
 grid.Column(header: "Layout", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="Layout">@item.Layout</div></text>),
 grid.Column(header: "AdStatus", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="AdStatus">@item.AdStatus</div></text>),
-grid.Column(header: "Action", format: @<a class="btn btn-primary" href="@Url.Action("Action","Ads",new {ID = item.ID })">EDIT</a>)
+grid.Column(header: "Action", format: @<a class="btn btn-primary" href="@Url.Action("Action","Ads",new {ID = item.ID })">EDIT</a>),
+grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("Delete","Ads",new {ID = item.ID })">DELETE</a>)
 
 )
 )
@@ -109,7 +110,19 @@ grid.Column(header: "Action", format: @<a class="btn btn-primary" href="@Url.Act
             height: 'none',
             type: 'select',
             submit: 'Ok',
-            data: { 'Full Page': 'Full Page', '3/4 Page': '3/4 Page', '1/2 Page Vertical': '1/2 Page Vertical', '1/2 Page': '1/2 Page', '1/3 Page': '1/3 Page', '1/4 Page': '1/4 Page', '1/4 Page Vertical': '1/4 Page Vertical', '1/8 Page': '1/8 Page', 'Full Spread': 'Full Spread', '3/4 Spread': '3/4 Spread'},
+            data: {
+                'Full Page': 'Full Page',
+                '3/4 Page': '3/4 Page',
+                '1/2 Page Vertical': '1/2 Page Vertical',
+                '1/2 Page': '1/2 Page',
+                '1/3 Page': '1/3 Page',
+                '1/4 Page': '1/4 Page',
+                '1/4 Page Vertical': '1/4 Page Vertical',
+                '1/8 Page': '1/8 Page',
+                'Full Spread': 'Full Spread',
+                '3/4 Spread': '3/4 Spread',
+                'Full Page W’ Bleed': 'Full Page W’ Bleed'
+            },
             
             onsubmit: function (settings, original) {
                 oldValue = original.revert;

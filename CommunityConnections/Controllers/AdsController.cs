@@ -169,7 +169,17 @@ namespace CommunityConnections.Controllers
                 ad.Layout = model.Layout;
                 ad.PageNo = model.PageNo;
                 ad.AdSize = model.AdSize;
-                ad.Path = "Content/paths/" + model.Path;
+                if (model.Path.Contains("Content/paths/"))
+                {
+                    ad.Path = model.Path;
+
+                }
+                else
+                {
+                    ad.Path = "Content/paths/" + model.Path;
+
+
+                }
                 ad.Name = model.Name;
                 ad.AdStatus = model.AdStatus;
                 ad.PageTwo = model.PageTwo;
@@ -243,8 +253,35 @@ namespace CommunityConnections.Controllers
 
             if (Ad != null)
             {
-               
-                AdsServices.Instance.UpdateAdNewMethod(Ad, propertyname, value);
+                if(propertyname == "PageNo")
+                {
+                    Ad.PageNo = int.Parse(value);
+                }
+                if(propertyname == "Layout")
+                {
+                    Ad.Layout = value;
+                }
+
+                if (propertyname == "AdSize")
+                {
+                    Ad.AdSize = value;
+                }
+                if (propertyname == "Path")
+                {
+                    Ad.Path = value;
+                }
+
+                if (propertyname == "Name")
+                {
+                    Ad.Name = value;
+                }
+
+                if (propertyname == "PageTwo")
+                {
+                    Ad.PageTwo = int.Parse(value);
+                }
+
+                AdsServices.Instance.UpdateAds(Ad);
                 status = true;
             }
             else
