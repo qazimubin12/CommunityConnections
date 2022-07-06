@@ -19,8 +19,64 @@ namespace CommunityConnections.Controllers
         {
             AdsListingViewModel model = new AdsListingViewModel();
             model.Ads = AdsServices.Instance.GetAdss(SearchTerm);
+            model.Customers = CustomerServices.Instance.GetCustomers();
+
             return View(model);
         }
+
+        public ActionResult GetCustomers()
+        {
+            AdsListingViewModel model = new AdsListingViewModel();
+
+
+
+            StringBuilder sb = new StringBuilder();
+            model.Customers = CustomerServices.Instance.GetCustomers();
+            int Count = 0;
+            foreach (var item in model.Customers)
+            {
+                Count++;
+                string name = item.FirstName + " " + item.MiddleName + " " + item.LastName;
+                //sb.Append(string.Format("'{0}':'{1}',", item.ID, item.RoleName));
+                //\"Capacity\":32,
+                if (model.Customers.Count == Count)
+                {
+                    sb.Append(string.Format("\"{0}\":\"{1}\"", name, name));
+
+                }
+                else
+                {
+                    sb.Append(string.Format("\"{0}\":\"{1}\",", name, name));
+                }
+
+
+            }
+   
+
+            return Content("{" + sb.ToString() + "}");
+        }
+
+
+        //[HttpGet]
+        //public JsonResult Customers()
+        //{
+
+        //    List<Tuple<string, string>> CustomerList = new List<Tuple<string, string>>();
+
+        //    // add an item
+
+
+        //    //List<string> CustomerList = new List<string>();
+        //    var List = CustomerServices.Instance.GetCustomers();
+        //    foreach (var item in List)
+        //    {
+        //        string name = item.FirstName + " " + item.MiddleName + " " + item.LastName;
+        //        CustomerList.Add(new Tuple<string, string>(name, name));
+
+        //    }
+        //    return Json(CustomerList, JsonRequestBehavior.AllowGet);
+        //}
+
 
         [HttpGet]
         public ActionResult Action(int ID = 0)
@@ -280,6 +336,58 @@ namespace CommunityConnections.Controllers
                 {
                     Ad.PageTwo = int.Parse(value);
                 }
+
+                //         public string Book { get; set; }
+                //public string Repeat { get; set; }
+                //public string Customer { get; set; }
+                //public int ChoosePage { get; set; }
+                //public string AddGraphics { get; set; }
+                //public string CustomSpecification { get; set; }
+                //public float Discount { get; set; }
+                //public string TotalPrice { get; set; }
+
+                if (propertyname == "Book")
+                {
+                    Ad.Book = value;
+                }
+
+                if (propertyname == "Delux")
+                {
+                    Ad.Delux = value;
+                }
+                if (propertyname == "Repeat")
+                {
+                    Ad.Repeat = value;
+                }
+                if(propertyname == "Customer")
+                {
+                    Ad.Customer = value;
+                }
+                if (propertyname == "AdStatus")
+                {
+                    Ad.AdStatus = value;
+                }
+                if (propertyname == "ChoosePage")
+                {
+                    Ad.ChoosePage = int.Parse(value);
+                }
+                if (propertyname == "AddGraphics")
+                {
+                    Ad.AddGraphics = value;
+                }
+                if (propertyname == "CustomSpecification")
+                {
+                    Ad.CustomSpecification = value;
+                }
+                if (propertyname == "Discount")
+                {
+                    Ad.Discount = float.Parse(value);
+                }
+                if (propertyname == "Total")
+                {
+                    Ad.Total = float.Parse(value);
+                }
+                
 
                 AdsServices.Instance.UpdateAds(Ad);
                 status = true;

@@ -51,6 +51,38 @@
                     </div>
                 </div>
 
+
+                <div class="form-group">
+                    <label>Move Forward</label>
+
+                    <select name="MoveForward">
+                        @if (Model.MoveForward != "")
+                        {
+                            if (Model.MoveForward == "Yes")
+                            {
+                                <option selected value="Yes">Yes</option>
+                                <option value="No">No</option>
+
+                            }
+                            else
+                            {
+                                <option value="Yes">Yes</option>
+
+                                <option selected value="No">No</option>
+
+                            }
+                        }
+                        else
+                        {
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        }
+
+                    </select>
+
+
+                </div>
+
                 <div class="row">
 
                     <div class="form-group col-md-3">
@@ -74,7 +106,7 @@
                                 }
                             </select>
 
-                         
+
                         </div>
 
 
@@ -87,7 +119,7 @@
                     </div>
                 </div>
 
-                
+
                 <br />
                 @if (Model.ID != 0)
                 {

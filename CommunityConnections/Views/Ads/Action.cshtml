@@ -76,12 +76,104 @@
                         <div class="form-group col-md-5">
                             <label>Path</label>
                             <div class="custom-file">
-                                <input type="file"/>
+                                <input type="file" />
                                 <input hidden value="@Model.Path" name="Path" id="Path" type="text" />
                                 <input hidden class="form-control" value="Not Placed" name="AdStatus" id="AdStatus" />
 
                             </div>
                         </div>
+
+                        <div class="form-group col-md-5">
+                            <label class="col-sm-12">Book Name</label>
+                            <input required class="form-control" id="Book" value="@Model.Book" name="Book" placeholder="Enter Book Name">
+
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label class="col-sm-12">Repeat</label>
+                            <input required class="form-control" id="PageTwo" value="@Model.Repeat" name="Repeat" placeholder="Enter Yes or No for Repeat">
+
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label class="col-sm-12">Select Customer</label>
+                            <select name="Customer" id="Customer" class="form-control">
+                                @foreach (var item in Model.Customers)
+                                {
+                                    string CustomerName = item.FirstName + " " + item.MiddleName + " " + item.LastName;
+                                    if (Model.Customer == CustomerName)
+                                    {
+                                        <option selected value="@CustomerName">@CustomerName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@CustomerName">@CustomerName</option>
+                                    }
+
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label class="col-sm-12">Choose Page</label>
+                            <input required class="form-control" id="ChoosePage" value="@Model.ChoosePage" name="ChoosePage" placeholder="Choose Page">
+
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label class="col-sm-12">Ad Graphics</label>
+                            <input required class="form-control" id="AddGraphics" value="@Model.AddGraphics" name="AddGraphics" placeholder="Enter Graphics">
+
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label class="col-sm-12">Delux</label>
+                            <select name="Customer" id="Customer" class="form-control">
+
+                                @if (Model != null)
+                                {
+                                    if (Model.Delux == "Yes")
+                                    {
+                                        <option selected value="Yes">Yes</option>
+                                        <option value="No">No</option>
+
+                                    }
+                                    else
+                                    {
+                                        <option value="Yes">Yes</option>
+                                        <option selected value="No">No</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                }
+                            </select>
+                        </div>
+
+
+                        <div class="form-group col-md-5">
+                            <label class="col-sm-12">Custom Specification</label>
+                            <input required class="form-control" id="CustomSpecification" value="@Model.CustomSpecification" name="CustomSpecification" placeholder="Custom Specification">
+
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label class="col-sm-12">Discount</label>
+                            <input required class="form-control" id="Discount" value="@Model.Discount" name="Discount" placeholder="Enter Discount">
+
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label class="col-sm-12">Total</label>
+                            <input required class="form-control" id="Total" value="@Model.Total" name="Total" placeholder="Enter Total">
+
+                        </div>
+
+
+
+
 
 
 

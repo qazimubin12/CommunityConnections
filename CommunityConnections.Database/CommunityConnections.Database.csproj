@@ -112,6 +112,22 @@
     <Compile Include="Migrations\202206281616408_removeaftersection.designer.cs">
       <DependentUpon>202206281616408_removeaftersection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206301723532_adddetails.cs" />
+    <Compile Include="Migrations\202206301723532_adddetails.designer.cs">
+      <DependentUpon>202206301723532_adddetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207010701577_totoal.cs" />
+    <Compile Include="Migrations\202207010701577_totoal.designer.cs">
+      <DependentUpon>202207010701577_totoal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207050702063_moveforwardcheck.cs" />
+    <Compile Include="Migrations\202207050702063_moveforwardcheck.designer.cs">
+      <DependentUpon>202207050702063_moveforwardcheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207060924146_deluxadd.cs" />
+    <Compile Include="Migrations\202207060924146_deluxadd.designer.cs">
+      <DependentUpon>202207060924146_deluxadd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -170,6 +186,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206281616408_removeaftersection.resx">
       <DependentUpon>202206281616408_removeaftersection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206301723532_adddetails.resx">
+      <DependentUpon>202206301723532_adddetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207010701577_totoal.resx">
+      <DependentUpon>202207010701577_totoal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207050702063_moveforwardcheck.resx">
+      <DependentUpon>202207050702063_moveforwardcheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207060924146_deluxadd.resx">
+      <DependentUpon>202207060924146_deluxadd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

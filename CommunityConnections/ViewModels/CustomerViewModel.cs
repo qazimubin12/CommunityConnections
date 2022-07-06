@@ -37,4 +37,16 @@ namespace CommunityConnections.ViewModels
         public string PopupMessage { get; set; }
         public string CustomPricing { get; set; }
     }
+
+
+
+    public class CustomerBreakDownViewModel
+    {
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+
+        public string FullName { get; set; }
+    }
+
 }

@@ -22,5 +22,6 @@ namespace CommunityConnections.ViewModels
 
         public bool Monday { get; set; }
         public string BeforeSection { get; set; }
+        public string MoveForward { get; set; }
     }
 }

@@ -50,11 +50,32 @@ namespace CommunityConnections.Services
             {
                 if (!string.IsNullOrEmpty(SearchTerm))
                 {
-                    Sectionss = context.Sections.Where(x => x.SectionName == SearchTerm).ToList();
+                    Sectionss = context.Sections.Where(x => x.SectionName != null && x.SectionName.ToLower()
+                    .Contains(SearchTerm.ToLower())).ToList();
                 }
+
                 else
                 {
                     Sectionss = context.Sections.OrderBy(x=>x.SectionName).ToList();
+                }
+            }
+            return Sectionss;
+        }
+
+        public List<Section> GetNotTrailingSections(string SearchTerm = "")
+        {
+            List<Section> Sectionss = null;
+            using (var context = new CCContext())
+            {
+                if (!string.IsNullOrEmpty(SearchTerm))
+                {
+                    Sectionss = context.Sections.Where(x => x.MoveForward == "Yes" && x.SectionName != null && x.SectionName.ToLower()
+                    .Contains(SearchTerm.ToLower())).ToList();
+                }
+
+                else
+                {
+                    Sectionss = context.Sections.OrderBy(x => x.SectionName).ToList();
                 }
             }
             return Sectionss;

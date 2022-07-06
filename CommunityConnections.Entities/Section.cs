@@ -13,5 +13,6 @@ namespace CommunityConnections.Entities
         public int EndPage { get; set; }
         public bool InBetweenAny { get; set; }
         public string BeforeSection { get; set; }
+        public string MoveForward { get; set; }
     }
 }

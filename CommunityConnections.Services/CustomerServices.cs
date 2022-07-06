@@ -55,6 +55,20 @@ namespace CommunityConnections.Services
         }
 
 
+
+        public List<Customer> GetNewCustomers()
+        {
+            List<Customer> Customers = null;
+            using (var context = new CCContext())
+            {
+               
+                    Customers = context.Customers.Select(a=> new Customer {FirstName= a.FirstName,MiddleName = a.MiddleName,LastName = a.LastName }).ToList();
+                
+            }
+            return Customers;
+        }
+
+
         public void SaveCustomer(Customer Customer)
         {
             using (var context = new CCContext())

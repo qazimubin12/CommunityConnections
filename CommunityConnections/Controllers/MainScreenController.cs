@@ -32,7 +32,7 @@ namespace CommunityConnections.Controllers
             MainScreenViewModel model = new MainScreenViewModel();
 
             int Pages = 0;
-            model.Sections = SectionServices.Instance.GetSectionss();
+            model.Sections = SectionServices.Instance.GetNotTrailingSections();
           
             model.NoOfPages = Pages;
             model.PlacedAds = AdsServices.Instance.GetPlacedAdss();
@@ -47,27 +47,34 @@ namespace CommunityConnections.Controllers
             var Ad = AdsServices.Instance.GetAds(AdID);
             var AdsonPage = AdsServices.Instance.AdsonPage(AdPage);
             bool fullpagecheck = false;
+            bool EvenPageNumberForSpreadAd = false;
+            int NumberofAdsOnPage = AdsonPage.Count;
+
+
+
+
+            #region CheckForFullSpreadAndBleedADs
             foreach (var item in AdsonPage)
             {
               
-                if(item.AdStatus == "Placed" && Ad.AdSize == "Full Page" )
+                if(item.AdStatus == "Placed" )
                 {
-                  
+                    if (Ad.AdSize == "Full Spread" || Ad.AdSize == "Full Page" || Ad.AdSize == "Full Page W’ Bleed")
+                    {
                         fullpagecheck = true;
                         break;
+                    }
                     
                 }
-                if (item.AdStatus == "Placed" &&  item.AdSize == "Full Page W’ Bleed")
-                {
-                    fullpagecheck = true;
-                    break;
-                }
+                
                 else
                 {
                     fullpagecheck = false;
                 }
-            }
-            if(Ad.AdSize == "Full Page" || Ad.AdSize == "Full Page W’ Bleed")
+            } //when any ad is present on page
+
+
+            if(Ad.AdSize == "Full Page" || Ad.AdSize == "Full Page W’ Bleed" || Ad.AdStatus == "Full Spread")
             {
                 if(AdsonPage.Count > 0)
                 {
@@ -79,7 +86,45 @@ namespace CommunityConnections.Controllers
                 }
             }
           
-            if (fullpagecheck == false)
+            if(Ad.AdSize == "3/4 Spread" || Ad.AdSize == "Full Spread")
+            {
+
+                if (AdPage % 2 == 0)
+                {
+                    EvenPageNumberForSpreadAd = true;
+                }
+                else
+                {
+                    EvenPageNumberForSpreadAd = false;
+                }
+
+                if(EvenPageNumberForSpreadAd == false)
+                {
+                    AdPage++;
+                    var AdsonPageforSpreadAd = AdsServices.Instance.AdsonPage(AdPage);
+                    foreach (var item in AdsonPageforSpreadAd)
+                    {
+
+                        if (item.AdStatus == "Placed")
+                        {
+                            if (Ad.AdSize == "Full Spread" || Ad.AdSize == "Full Page" || Ad.AdSize == "Full Page W’ Bleed")
+                            {
+                                fullpagecheck = true;
+                                break;
+                            }
+
+                        }
+
+                        else
+                        {
+                            fullpagecheck = false;
+                        }
+                    } //when any ad is present on page after the page is present
+
+
+                }
+            }
+            if (fullpagecheck == false && EvenPageNumberForSpreadAd == false)
             {
                 
                 Ad.PageNo = AdPage;
@@ -96,8 +141,22 @@ namespace CommunityConnections.Controllers
                 }
 
             }
+            #endregion
 
-            
+
+            #region CheckForAdsOnPage
+            foreach (var item in AdsonPage)
+            {
+               
+                
+
+            }
+
+
+            #endregion
+
+
+
             return RedirectToAction("Index", "MainScreen");
             
 

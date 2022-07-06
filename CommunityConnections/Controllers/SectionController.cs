@@ -32,6 +32,8 @@ namespace CommunityConnections.Controllers
                 model.StartPage = section.StartPage;
                 model.EndPage = section.EndPage;
                 model.SectionName = section.SectionName;
+                model.MoveForward = section.MoveForward;
+
                 return PartialView("Action", model);
 
             }
@@ -54,15 +56,19 @@ namespace CommunityConnections.Controllers
                 section.StartPage = model.StartPage;
                 section.EndPage = model.EndPage;
                 section.SectionName = model.SectionName;
-                if (model.Monday == true)
+                if (model.MoveForward == "Yes")
                 {
-                    int sum = 1;
-                    sum = section.EndPage - section.StartPage;
-                    var BeforeSection = SectionServices.Instance.GetSection(model.BeforeSection);
-                    BeforeSection.StartPage = BeforeSection.StartPage + sum;
-                    BeforeSection.EndPage = BeforeSection.EndPage + sum;
-                    SectionServices.Instance.UpdateSections(BeforeSection);
+                    if (model.Monday == true)
+                    {
+                        int sum = 1;
+                        sum = section.EndPage - section.StartPage;
+                        var BeforeSection = SectionServices.Instance.GetSection(model.BeforeSection);
+                        BeforeSection.StartPage = BeforeSection.StartPage + sum + 1;
+                        BeforeSection.EndPage = BeforeSection.EndPage + sum;
+                        SectionServices.Instance.UpdateSections(BeforeSection);
+                    }
                 }
+                section.MoveForward = model.MoveForward;
                 SectionServices.Instance.UpdateSections(section);
 
             }
@@ -72,15 +78,19 @@ namespace CommunityConnections.Controllers
                 section.StartPage = model.StartPage;
                 section.EndPage = model.EndPage;
                 section.SectionName = model.SectionName;
-                if(model.Monday == true)
+                if (model.MoveForward == "Yes")
                 {
-                    int sum = 1;
-                    sum = section.EndPage - section.StartPage;
-                    var BeforeSection = SectionServices.Instance.GetSection(model.BeforeSection);
-                    BeforeSection.StartPage = BeforeSection.StartPage + sum;
-                    BeforeSection.EndPage = BeforeSection.EndPage + sum;
-                    SectionServices.Instance.UpdateSections(BeforeSection);
+                    if (model.Monday == true)
+                    {
+                        int sum = 1;
+                        sum = section.EndPage - section.StartPage;
+                        var BeforeSection = SectionServices.Instance.GetSection(model.BeforeSection);
+                        BeforeSection.StartPage = BeforeSection.StartPage + sum + 1;
+                        BeforeSection.EndPage = BeforeSection.EndPage + sum;
+                        SectionServices.Instance.UpdateSections(BeforeSection);
+                    }
                 }
+                section.MoveForward = model.MoveForward;
                 SectionServices.Instance.SaveSections(section);
             }
 

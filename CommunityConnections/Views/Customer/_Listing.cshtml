@@ -3,6 +3,11 @@
     ViewBag.Title = "_Listing";
 }
 
+<style>
+    td{
+        cursor:pointer;
+    }
+</style>
 <div class="row">
 
     <div class="col-lg-12 grid-margin stretch-card">
@@ -47,26 +52,26 @@
                             @foreach (var item in Model.Customers)
                             {
                             <tr>
-                                <td>@item.FirstName </td>
-                                <td>@item.MiddleName</td>
-                                <td>@item.LastName</td>
-                                <td>@item.Compnay</td>
-                                <td>@item.Title</td>
-                                <td>@item.Address</td>
-                                <td>@item.City</td>
-                                <td>@item.State</td>
-                                <td>@item.Country</td>
-                                <td>@item.AreaCode</td>
-                                <td>@item.Phone</td>
-                                <td>@item.OtherPhone</td>
-                                <td>@item.Email</td>
-                                <td>@item.Fax</td>
-                                <td>@item.BillingEmail</td>
-                                <td>@item.PaymentMethod</td>
-                                <td>@item.CustomerBalance</td>
-                                <td>@item.Notes</td>
-                                <td>@item.PopupMessage</td>
-                                <td>@item.CustomPricing</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.FirstName </td>
+                                <td data-id="@item.ID" class="btnEdit">@item.MiddleName</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.LastName</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.Compnay</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.Title</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.Address</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.City</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.State</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.Country</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.AreaCode</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.Phone</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.OtherPhone</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.Email</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.Fax</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.BillingEmail</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.PaymentMethod</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.CustomerBalance</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.Notes</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.PopupMessage</td>
+                                <td data-id="@item.ID" class="btnEdit">@item.CustomPricing</td>
                                 <td>
                                     <button data-id="@item.ID" type="button" class="btnEdit btn btn-info btn-icon-text"><i class="mdi mdi-pencil"></i> EDIT</button>
                                     <a href="@Url.Action("Delete", "Customer", new { ID = item.ID })" class="data-btn btn btn-danger btn-icon-text"><i class="mdi mdi-delete"></i>DELETE</a>
