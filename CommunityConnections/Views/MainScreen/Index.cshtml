@@ -35,6 +35,10 @@
 </head>
 <style>
 
+  /*  body {
+       
+    }*/
+
     body {
         background-color: #CCC6C6;
     }
@@ -43,6 +47,7 @@
         background-color: #CCC6C6;
     }
 
+    
     .draggable {
         word-wrap: break-word;
     }
@@ -122,42 +127,42 @@
     }
 
     .Ad3by4 {
-        margin-top: 50px;
+        margin-top: 20px;
         margin-left: 50px;
         height: 7in;
         width: 5.5in;
     }
 
     .AD1by8 {
-        margin-top: 50px;
+        margin-top: 20px;
         margin-left: 50px;
         height: 2.25in;
         width: 2.6in;
     }
 
     .Ad1By4Horizontal {
-        margin-top: 50px;
+        margin-top: 20px;
         margin-left: 50px;
         height: 2.25in;
         width: 5.5in;
     }
 
     .Ad1By4Vertical {
-        margin-top: 50px;
+        margin-top: 20px;
         margin-left: 50px;
         height: 4.75in;
         width: 2.6in;
     }
 
     .AdHalfPageVertical {
-        margin-top: 50px;
+        margin-top: 20px;
         margin-left: 50px;
         height: 9.7in;
         width: 2.6in;
     }
 
     .AdHalfPageHorizontal {
-        margin-top: 50px;
+        margin-top: 20px;
         margin-left: 50px;
         height: 4.75in;
         width: 5.5in;
@@ -196,6 +201,8 @@
             <div class="col-md-4">
                 <a style="font-size: 50px;" class="btn btn-block btn-info" href="@Url.Action("Index","Customer")">Back To Customer</a>
             </div>
+
+            <h1 style="font-size:50px;">@ViewBag.Invalid</h1>
         </div>
 
     </div>
@@ -257,20 +264,26 @@
                                 if (counter % 2 == 0)
                                 {
                                     <td style="padding-right: 15px;" id="@counter">
+
+
+
                                         <div class="btn-group-justified" role="group" aria-label="Basic example">
                                             <button data-id="@counter" onclick="" type="button" class="btnSearchAdsInPage btn btn-warning btn-sm"><i class="ti-search btn-icon-append"></i></button>
-                                            <button data-id="@counter" onclick="" type="button" class="btnCustomerView btn btn-warning btn-sm"><i class="mdi mdi-account-circle"></i></button>
                                         </div>
+
+
+
                                         <div id="@counter" class="droppable pages">
                                             @{newcounter++;
                                             }
+
+
                                             @for (int n = 0; n < Model.PlacedAds.Count; n++)
                                             {
 
                                                 { anothercount = n; }
                                                 if (Model.PlacedAds[n].PageNo == i || Model.PlacedAds[n].PageTwo == i)
                                                 {
-
 
 
                                                     if (Model.PlacedAds[n].AdSize == "Full Page")
@@ -390,19 +403,6 @@
                                                         </div>
                                                     }
 
-                                                    @*else if (Model.PlacedAds[n].AdSize == "Full Spread")
-                                            {
-                                                <div id="@Model.PlacedAds[n].ID" class="draggable">
-                                                    <div style="float:left;" class="col-md-6">
-                                                        <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
-                                                            <div class="">
-                                                                <img class="fullbleed" src="@Model.PlacedAds[n].Path" />
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            }*@
-
                                                 }
 
                                             }
@@ -415,8 +415,14 @@
                                             @*counter*@
 
                                         </div>
-
-                                        <h4 style="margin-left:70px;">@count.ToString()</h4>
+                                        @foreach (var item2 in Model.PlacedAds)
+                                        {
+                                            if (item2.AdSize != "Full Page W’ Bleed")
+                                            {
+                                                <h4 style="margin-left:70px;">@count.ToString()</h4>
+                                                break;
+                                            }
+                                        }
 
 
 
@@ -427,13 +433,15 @@
                                     <td id="@counter">
                                         <div class="btn-group-justified" role="group" aria-label="Basic example">
                                             <button data-id="@counter" onclick="" type="button" class="btnSearchAdsInPage btn btn-warning btn-sm"><i class="ti-search btn-icon-append"></i></button>
-                                            <button data-id="@counter" onclick="" type="button" class="btnCustomerView btn btn-warning btn-sm"><i class="mdi mdi-account-circle"></i></button>
                                         </div>
+
+
                                         <div id="@counter" class="droppable pages">
                                             @{newcounter++;
                                             }
                                             @for (int n = 0; n < Model.PlacedAds.Count; n++)
                                             {
+
                                                 { anothercount = n; }
 
                                                 if (Model.PlacedAds[n].PageNo == i)
@@ -577,8 +585,14 @@
 
                                         </div>
 
-                                        <h4 style="margin-left:70px;">@count.ToString()</h4>
-
+                                        @foreach (var item2 in Model.PlacedAds)
+                                        {
+                                            if (item2.AdSize != "Full Page W’ Bleed")
+                                            {
+                                                <h4 style="margin-left:70px;">@count.ToString()</h4>
+                                                break;
+                                            }
+                                        }
 
 
                                     </td>
@@ -593,16 +607,7 @@
                         }
                     }
 
-                    @*@for (int i = 1; i <= Model.NoOfPages; i++)
-            {
-
-
-
-
-
-
-
-            }*@
+                    
                 </tr>
 
             </table>
@@ -636,6 +641,17 @@
     </div>
 
 
+    <div id="CustomerViewModal" class="modal">
+
+        <!-- Modal content -->
+        @{
+            if (Model.Ad != null)
+            {
+                Html.RenderPartial("CustomerView", Model);
+            }
+        }
+    </div>
+   
 
 
 
@@ -739,18 +755,8 @@
 
         var modal = document.getElementById("myModal");
         var adsViewModal = document.getElementById("AdsViewModal");
-
-        // Get the button that opens the modal
-
-        // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
 
-        // When the user clicks on the button, open the modal
-
-
-
-
-        // When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
@@ -763,6 +769,27 @@
         function ViewAdd(ID) {
             window.location.href = "/MainScreen/ViewAd?ID=" + ID + "";
         };
+
+
+     
+
+        @*$(".btnCustomerView").click(function () {
+            $.ajax({
+                url: '@Url.Action("CustomerView", "MainScreen")',
+                type: "GET",
+                data: { AdID: $(this).attr("data-id") }
+            })
+                .done(function (oData) {
+                    customerViewModal.style.display = "block";
+
+                    $("#CustomerViewModal").html(oData);
+                })
+                .error(function (error) {
+                    alert(error);
+                })
+        });*@
+
+
 
 
 

@@ -26,5 +26,6 @@ namespace CommunityConnections.Entities
         public float Discount { get; set; }
         public float Total { get; set; }
         public string Delux { get; set; }
+        public string Status { get; set; }
     }
 }

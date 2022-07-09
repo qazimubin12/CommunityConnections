@@ -51,6 +51,7 @@ grid.Column(header: "PageNo", format:@<text><div class="edit" data-id="@item.ID"
 grid.Column(header: "Layout", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="Layout">@item.Layout</div></text>),
 grid.Column(header: "Book", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="Book">@item.Book</div></text>),
 grid.Column(header: "Customer", format:@<text><div class="editCustomerSelect" data-id="@item.ID" data-propertyname="Customer">@item.Customer</div></text>),
+grid.Column(header: "Status", format:@<text><div class="editStatusSelect" data-id="@item.ID" data-propertyname="Status">@item.Status</div></text>),
 grid.Column(header: "Repeat", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="Repeat">@item.Repeat</div></text>),
 grid.Column(header: "ChoosePage", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="ChoosePage">@item.ChoosePage</div></text>),
 grid.Column(header: "AddGraphics", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="AddGraphics">@item.AddGraphics</div></text>),
@@ -112,13 +113,6 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
         })
 
 
-        @*$.ajax({
-                url: '@Url.Content("~/Ads/Customers")',
-                success: function (data) {
-
-                }
-            });*@
-
 
         $('.editSelect').editable('@Url.Action("NewAction","Ads")', {
             cssclass: 'jeditForm',
@@ -164,17 +158,13 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
             $('select', this).addClass('form-control pull-left w200');
             $('button', this).addClass('btn btn-sm btn-success margin10');
         });
-  
+
 
         $('.editCustomerSelect').click(function () {
             $('select', this).addClass('form-control pull-left w500');
             $('button', this).addClass('btn btn-sm btn-success margin10');
 
         });
-
-
-
-   
         $('.editCustomerSelect').editable('@Url.Action("NewAction","Ads")', {
 
             cssclass: 'jeditForm',
@@ -184,8 +174,8 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
             type: 'select',
             submit: 'Ok',
             loadurl: '/Ads/GetCustomers',
-                
-            
+
+
             onsubmit: function (settings, original) {
                 oldValue = original.revert;
             },
@@ -204,14 +194,53 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
                     $(this).text(oldValue);
                 }
             },
-            
 
+
+        });
+
+
+
+        $('.editStatusSelect').editable('@Url.Action("NewAction","Ads")', {
+            cssclass: 'jeditForm',
+            tooltip: 'click to edit me...',
+            width: 'none',
+            height: 'none',
+            type: 'select',
+            submit: 'Ok',
+            data: {
+                'Running': 'Running',
+                'Email': 'Email',
+                'Call': 'Call'
+            },
+
+            onsubmit: function (settings, original) {
+                oldValue = original.revert;
+            },
+            submitdata: function () {
+                return {
+                    id: $(this).data('id'),
+                    PropertyName: $(this).data('propertyname')
+                }
+            },
+            callback: function (value, settings) {
+                var jsonData = $.parseJSON(value);
+                if (jsonData.status) {
+                    $(this).text(jsonData.value);
+                }
+                else {
+                    $(this).text(oldValue);
+                }
+            }
+        })
+        $('.editStatusSelect').click(function () {
+            $('select', this).addClass('form-control pull-left w200');
+            $('button', this).addClass('btn btn-sm btn-success margin10');
         });
     });
 
-          
-          
-       
+
+
+
 
 
 

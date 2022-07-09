@@ -60,6 +60,41 @@ namespace CommunityConnections.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult View(int ID = 0)
+        {
+            CustomerActionViewModel model = new CustomerActionViewModel();
+
+           
+                var customer = CustomerServices.Instance.GetCustomer(ID);
+                model.ID = customer.ID;
+                model.FirstName = customer.FirstName;
+                model.MiddleName = customer.MiddleName;
+                model.LastName = customer.LastName;
+                model.Notes = customer.Notes;
+                model.Phone = customer.Phone;
+                model.OtherPhone = customer.OtherPhone;
+                model.Email = customer.Email;
+                model.Compnay = customer.Compnay;
+                model.BillingEmail = customer.BillingEmail;
+                model.Address = customer.Address;
+                model.AreaCode = customer.AreaCode;
+                model.City = customer.City;
+                model.Country = customer.Country;
+                model.CustomerBalance = customer.CustomerBalance;
+                model.CustomPricing = customer.CustomPricing;
+                model.Fax = customer.Fax;
+                model.PaymentMethod = customer.PaymentMethod;
+                model.PopupMessage = customer.PopupMessage;
+                model.State = customer.State;
+                model.Title = customer.Title;
+
+                return View("View", model);
+
+         
+        }
+
+
 
         [HttpPost]
         public ActionResult Action(CustomerActionViewModel model)
@@ -74,6 +109,7 @@ namespace CommunityConnections.Controllers
                 customer.FirstName = model.FirstName;
                 customer.MiddleName = model.MiddleName;
                 customer.LastName = model.LastName;
+                customer.FullName = customer.FirstName + " " + customer.MiddleName + " " + customer.LastName;
                 customer.Notes = model.Notes;
                 customer.Phone = model.Phone;
                 customer.OtherPhone = model.OtherPhone;
@@ -101,6 +137,8 @@ namespace CommunityConnections.Controllers
                 customer.FirstName = model.FirstName;
                 customer.MiddleName = model.MiddleName;
                 customer.LastName = model.LastName;
+                customer.FullName = customer.FirstName + " " + customer.MiddleName + " " + customer.LastName;
+
                 customer.Notes = model.Notes;
                 customer.Phone = model.Phone;
                 customer.OtherPhone = model.OtherPhone;

@@ -115,6 +115,25 @@
                         </div>
 
                         <div class="form-group col-md-5">
+                            <label class="col-sm-12">Select Status</label>
+                            <select name="Status" id="Status" class="form-control">
+                                @foreach (var item in Model.StatusList)
+                                {
+                                    string Status = item;
+                                    if (Model.Status == Status)
+                                    {
+                                        <option selected value="@Status">@Status</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item">@item</option>
+                                    }
+
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-5">
                             <label class="col-sm-12">Choose Page</label>
                             <input required class="form-control" id="ChoosePage" value="@Model.ChoosePage" name="ChoosePage" placeholder="Choose Page">
 

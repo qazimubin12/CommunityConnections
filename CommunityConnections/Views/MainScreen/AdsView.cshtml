@@ -3,7 +3,16 @@
     ViewBag.Title = "AdsView";
 }
 
-<div id="actionContainer" class="card">
+<style>
+    .AdsButton {
+        font-size:50px;
+    }
+    .thClass{
+        font-size:50px;
+    }
+</style>
+
+<div style="margin-top: 32em; width: fit-content; margin-left: 500px;" id="actionContainer" class="card">
     <div class="card-body">
 
         <div class="row">
@@ -11,16 +20,69 @@
 
                 <table class="table table-condensed">
 
-                    @foreach (var item in Model.AdsonPage)
+                    @foreach (var item in Model.MyAdsView)
                     {
-                        <tr>
-                            <td>
-                                <a href="@item.Path" class="btn btn-primary">
-                                    @item.Name
-                                </a>
-                            </td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span class="thClass">Ad</span>
+                                </th>
+                                <th>
+                                    <span class="thClass">Customer</span>
+                                </th>
+                                <th>
+                                    <span class="thClass">Status</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
+
+                            <tr>
+                                <td>
+                                    <a href="@item.Ads.Path" class="AdsButton btn btn-primary">
+                                        @item.Ads.Name
+                                    </a>
+                                </td>
+                                <td>
+                                    <button onclick="ViewCustomer(@item.Customer.ID)" class="AdsButton btn btn-primary">
+                                        @item.Customer.FullName
+                                    </button>
+                                </td>
+                                <td>
+
+                                    @using (Html.BeginForm("UpdateStatus", "MainScreen", FormMethod.Post))
+                                    {
+                                        <input type="hidden" name="PageID" value="@Model.SelectedPage" />
+                                        <input type="hidden" name="ID" value="@item.Ads.ID" />
+                                        <select name="Status" onclick="" class="AdsButton">
+                                            @foreach (var item2 in Model.StatusList)
+                                            {
+
+                                                string Status = item2;
+                                                if (item.Ads.Status == Status)
+                                                {
+                                                    <option selected value="@Status">@Status</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item2">@item2</option>
+                                                }
+                                            }
+
+                                        </select>
+                                        <button class="AdsButton btn btn-primary" type="submit">UPDATE STATUS</button>
+                                    }
+
+                                </td>
+
+                                @*<td>
+                                    <span onclick="" class="AdsButton">
+                                        @item.Ads.CustomSpecification
+                                    </span>
+                                </td>*@
+                            </tr>
+                        </tbody>
                     }
                 </table>
             </div>
@@ -30,3 +92,9 @@
 </div>
 
 
+
+<script>
+    function ViewCustomer(ID) {
+        window.location.href = "/Customer/View?ID=" + ID + "";
+    };
+</script>

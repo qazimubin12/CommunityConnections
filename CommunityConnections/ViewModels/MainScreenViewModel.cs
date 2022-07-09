@@ -9,7 +9,8 @@ namespace CommunityConnections.ViewModels
     public class MainScreenViewModel
     {
         public List<Ads> Ads { get; set; }
-
+        public List<string> StatusList { get; set; }
+        public int SelectedPage { get; set; }
         public List<Ads> PlacedAds { get; set; }
 
         public List<Ads> NonPlacedAds { get; set; }
@@ -26,6 +27,11 @@ namespace CommunityConnections.ViewModels
 
         public List<Ads> AdsonPage { get; set; }
         public string SearchTerm { get; set; }
+
+
+        public int AdID { get; set; }
+        public Customer Customer { get; set; }
+        public List<MyAdViewList> MyAdsView { get; set; }
     }
 
 
@@ -35,5 +41,11 @@ namespace CommunityConnections.ViewModels
     {
         public Ads Ads { get; set; }
         public List<int> Pages{ get; set; }
+    }
+
+    public class MyAdViewList 
+    {
+        public Ads Ads { get; set; }
+        public Customer Customer { get; set; }
     }
 }

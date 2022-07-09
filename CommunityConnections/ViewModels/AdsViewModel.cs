@@ -17,6 +17,7 @@ namespace CommunityConnections.ViewModels
     public class AdsActionViewModel
     {
         public int ID { get; set; }
+        public string Status { get; set; }
         public int PageNo { get; set; }
         public string Name { get; set; }
         public string Layout { get; set; }
@@ -35,6 +36,7 @@ namespace CommunityConnections.ViewModels
         public float Total { get; set; }
         public string Delux { get; set; }
         public List<Customer> Customers { get; set; }
+        public List<string> StatusList { get; set; }
     }
 
 

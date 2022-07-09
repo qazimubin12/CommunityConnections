@@ -35,6 +35,7 @@ namespace CommunityConnections.Services
             }
         }
 
+        
 
         public List<Customer> GetCustomers(string SearchTerm = "")
         {
@@ -52,6 +53,18 @@ namespace CommunityConnections.Services
                 }
             }
             return Customers;
+        }
+
+        public Customer GetCustomersViaName(string SearchTerm)
+        {
+            Customer Customer = null;
+            using (var context = new CCContext())
+            {
+                
+                    Customer = context.Customers.Where(x => x.FullName == SearchTerm).FirstOrDefault();
+               
+            }
+            return Customer;
         }
 
 

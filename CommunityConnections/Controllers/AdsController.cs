@@ -37,8 +37,7 @@ namespace CommunityConnections.Controllers
             {
                 Count++;
                 string name = item.FirstName + " " + item.MiddleName + " " + item.LastName;
-                //sb.Append(string.Format("'{0}':'{1}',", item.ID, item.RoleName));
-                //\"Capacity\":32,
+               
                 if (model.Customers.Count == Count)
                 {
                     sb.Append(string.Format("\"{0}\":\"{1}\"", name, name));
@@ -57,25 +56,7 @@ namespace CommunityConnections.Controllers
         }
 
 
-        //[HttpGet]
-        //public JsonResult Customers()
-        //{
-
-        //    List<Tuple<string, string>> CustomerList = new List<Tuple<string, string>>();
-
-        //    // add an item
-
-
-        //    //List<string> CustomerList = new List<string>();
-        //    var List = CustomerServices.Instance.GetCustomers();
-        //    foreach (var item in List)
-        //    {
-        //        string name = item.FirstName + " " + item.MiddleName + " " + item.LastName;
-        //        CustomerList.Add(new Tuple<string, string>(name, name));
-
-        //    }
-        //    return Json(CustomerList, JsonRequestBehavior.AllowGet);
-        //}
+      
 
 
         [HttpGet]
@@ -94,6 +75,15 @@ namespace CommunityConnections.Controllers
             LayoutList.Add("1/8 Page");
             LayoutList.Add("Full Spread");
             LayoutList.Add("3/4 Spread");
+
+            var StatusList = new List<string>();
+            StatusList.Add("Running");
+            StatusList.Add("Email");
+            StatusList.Add("Call");
+            model.StatusList = StatusList;
+
+
+
             model.Layouts = LayoutList; 
             if (ID != 0)
             {
@@ -106,6 +96,7 @@ namespace CommunityConnections.Controllers
                 model.Name = ad.Name;
                 model.AdStatus = ad.AdStatus;
                 model.PageTwo = ad.PageTwo;
+                model.Status = ad.Status;
                 return View("Action", model);
 
             }
@@ -225,6 +216,7 @@ namespace CommunityConnections.Controllers
                 ad.Layout = model.Layout;
                 ad.PageNo = model.PageNo;
                 ad.AdSize = model.AdSize;
+                ad.Status = model.Status;
                 if (model.Path.Contains("Content/paths/"))
                 {
                     ad.Path = model.Path;
@@ -250,6 +242,7 @@ namespace CommunityConnections.Controllers
                 ad.PageNo = model.PageNo;
                 ad.AdSize = model.AdSize;
                 ad.PageTwo = model.PageTwo;
+                ad.Status = model.Status;
 
                 ad.Path = "Content/paths/" + model.Path;
                 ad.Name = model.Name;
@@ -337,14 +330,13 @@ namespace CommunityConnections.Controllers
                     Ad.PageTwo = int.Parse(value);
                 }
 
-                //         public string Book { get; set; }
-                //public string Repeat { get; set; }
-                //public string Customer { get; set; }
-                //public int ChoosePage { get; set; }
-                //public string AddGraphics { get; set; }
-                //public string CustomSpecification { get; set; }
-                //public float Discount { get; set; }
-                //public string TotalPrice { get; set; }
+
+                if (propertyname == "Status")
+                {
+                    Ad.Status = value;
+                }
+
+           
 
                 if (propertyname == "Book")
                 {

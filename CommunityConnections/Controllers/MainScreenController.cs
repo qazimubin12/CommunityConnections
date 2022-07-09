@@ -10,22 +10,7 @@ namespace CommunityConnections.Controllers
 {
     public class MainScreenController : Controller
     {
-        // GET: MainScreen
-        //public ActionResult Index(MainScreenViewModel model)
-        //{
-        //    model.Ads = AdsServices.Instance.GetNotPlacedAdss();
-        //    int Pages = 0;
-        //    model.Pages = PagesServices.Instance.GetPages();
-        //    model.Sections = SectionServices.Instance.GetSectionss();
-        //    foreach (var item in model.Sections)
-        //    {
-        //        Pages += item.NoOfPages;
-        //    }
-        //    model.NoOfPages = Pages;
-        //    model.PlacedAds = AdsServices.Instance.GetPlacedAdss();
-        //    model.NonPlacedAds = AdsServices.Instance.GetNotPlacedAdss();
-        //    return View(model);
-        //}
+        
 
         public ActionResult Index(string SearchTerm)
         {
@@ -40,20 +25,68 @@ namespace CommunityConnections.Controllers
             return View(model);
         }
 
+        public ActionResult Index2(string SearchTerm)
+        {
+            MainScreenViewModel model = new MainScreenViewModel();
+
+            int Pages = 0;
+            model.Sections = SectionServices.Instance.GetNotTrailingSections();
+
+            model.NoOfPages = Pages;
+            model.PlacedAds = AdsServices.Instance.GetPlacedAdss();
+            model.NonPlacedAds = AdsServices.Instance.GetNotPlacedAdss(SearchTerm);
+            return View(model);
+        }
+
 
         [HttpPost]
         public ActionResult PlaceAd(int AdID, int AdPage)
         {
             var Ad = AdsServices.Instance.GetAds(AdID);
+
+
+            //When Spread Ad Get to Even Number Page
+            if (Ad.AdSize == "3/4 Spread" || Ad.AdSize == "Full Spread")
+            {
+                if(AdPage % 2 == 0)
+                {
+                    AdPage--;
+                }
+            }
+
+
             var AdsonPage = AdsServices.Instance.AdsonPage(AdPage);
+            var AdsOnPageTwo = AdsServices.Instance.AdsOnPageTwo(AdPage);
             bool fullpagecheck = false;
             bool EvenPageNumberForSpreadAd = false;
-            int NumberofAdsOnPage = AdsonPage.Count;
-
+            int AdPageTwo = 0;
 
 
 
             #region CheckForFullSpreadAndBleedADs
+
+            foreach (var item in AdsOnPageTwo)
+            {
+
+                if (item.AdStatus == "Placed")
+                {
+                    if (item.AdSize == "Full Spread" || item.AdSize == "Full Page" || item.AdSize == "Full Page W’ Bleed")
+                    {
+                        fullpagecheck = true;
+                        ViewBag.Invalid = "Invalid Position";
+
+                        break;
+                    }
+
+                }
+
+                else
+                {
+                    fullpagecheck = false;
+                }
+            } //when any ad is present on page
+
+
             foreach (var item in AdsonPage)
             {
               
@@ -74,11 +107,13 @@ namespace CommunityConnections.Controllers
             } //when any ad is present on page
 
 
-            if(Ad.AdSize == "Full Page" || Ad.AdSize == "Full Page W’ Bleed" || Ad.AdStatus == "Full Spread")
+            if(Ad.AdSize == "Full Page" || Ad.AdSize == "Full Page W’ Bleed" || Ad.AdSize == "Full Spread")
             {
                 if(AdsonPage.Count > 0)
                 {
                     fullpagecheck = true;
+                    ViewBag.Invalid = "Invalid Position";
+
                 }
                 else
                 {
@@ -92,6 +127,8 @@ namespace CommunityConnections.Controllers
                 if (AdPage % 2 == 0)
                 {
                     EvenPageNumberForSpreadAd = true;
+                    ViewBag.Invalid = "Invalid Position";
+
                 }
                 else
                 {
@@ -100,8 +137,9 @@ namespace CommunityConnections.Controllers
 
                 if(EvenPageNumberForSpreadAd == false)
                 {
-                    AdPage++;
-                    var AdsonPageforSpreadAd = AdsServices.Instance.AdsonPage(AdPage);
+                     AdPageTwo = AdPage;
+                    AdPageTwo++;
+                    var AdsonPageforSpreadAd = AdsServices.Instance.AdsonPage(AdPageTwo);
                     foreach (var item in AdsonPageforSpreadAd)
                     {
 
@@ -110,6 +148,7 @@ namespace CommunityConnections.Controllers
                             if (Ad.AdSize == "Full Spread" || Ad.AdSize == "Full Page" || Ad.AdSize == "Full Page W’ Bleed")
                             {
                                 fullpagecheck = true;
+                                ViewBag.Invalid = "Invalid Position";
                                 break;
                             }
 
@@ -135,7 +174,7 @@ namespace CommunityConnections.Controllers
                 if(Ad.AdSize == "Full Spread")
                 {
                     AdPage++;
-                    Ad.PageTwo = AdPage;
+                    Ad.PageTwo = AdPageTwo;
                     AdsServices.Instance.UpdateAds(Ad);
 
                 }
@@ -154,7 +193,6 @@ namespace CommunityConnections.Controllers
 
 
             #endregion
-
 
 
             return RedirectToAction("Index", "MainScreen");
@@ -244,8 +282,42 @@ namespace CommunityConnections.Controllers
         {
             MainScreenViewModel model = new MainScreenViewModel();
             model.AdsonPage = AdsServices.Instance.AdsonPage(ID);
+            model.SelectedPage = ID;
+            var StatusList = new List<string>();
+            StatusList.Add("Running");
+            StatusList.Add("Email");
+            StatusList.Add("Call");
+            model.StatusList = StatusList;
+
+            var List = new List<MyAdViewList>();
+            foreach (var item in model.AdsonPage)
+            {
+               
+                var Customer = CustomerServices.Instance.GetCustomersViaName(item.Customer);
+                List.Add(new MyAdViewList { Ads = item, Customer = Customer });
+            }
+            model.MyAdsView = List;
+
+
             return PartialView(model);
         }
-        
+
+
+
+        [HttpPost]
+        public ActionResult UpdateStatus(int PageID,int ID, string Status)
+        {
+
+            var Ad = AdsServices.Instance.GetAds(ID);
+            Ad.Status = Status;
+            AdsServices.Instance.UpdateAds(Ad);
+
+
+            return RedirectToAction("Index", "MainScreen");
+        }
+
+
+
+
     }
 }

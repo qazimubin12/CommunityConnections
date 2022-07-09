@@ -121,6 +121,14 @@ namespace CommunityConnections.Services
             }
         }
 
+        public List<Ads> AdsOnPageTwo(int PageTwo)
+        {
+            using (var context = new CCContext())
+            {
+                return context.Ads.Where(x => x.PageTwo == PageTwo && x.AdStatus == "Placed").ToList();
+            }
+        }
+
         public void DeleteAds(int ID)
         {
             using (var context = new CCContext())

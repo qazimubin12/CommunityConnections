@@ -128,6 +128,14 @@
     <Compile Include="Migrations\202207060924146_deluxadd.designer.cs">
       <DependentUpon>202207060924146_deluxadd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207070652500_customerfullname.cs" />
+    <Compile Include="Migrations\202207070652500_customerfullname.designer.cs">
+      <DependentUpon>202207070652500_customerfullname.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207081454355_addstatus.cs" />
+    <Compile Include="Migrations\202207081454355_addstatus.designer.cs">
+      <DependentUpon>202207081454355_addstatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -198,6 +206,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207060924146_deluxadd.resx">
       <DependentUpon>202207060924146_deluxadd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207070652500_customerfullname.resx">
+      <DependentUpon>202207070652500_customerfullname.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207081454355_addstatus.resx">
+      <DependentUpon>202207081454355_addstatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
