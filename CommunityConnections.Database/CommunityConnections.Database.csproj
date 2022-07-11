@@ -136,6 +136,10 @@
     <Compile Include="Migrations\202207081454355_addstatus.designer.cs">
       <DependentUpon>202207081454355_addstatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207110544486_cards.cs" />
+    <Compile Include="Migrations\202207110544486_cards.designer.cs">
+      <DependentUpon>202207110544486_cards.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -212,6 +216,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207081454355_addstatus.resx">
       <DependentUpon>202207081454355_addstatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207110544486_cards.resx">
+      <DependentUpon>202207110544486_cards.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

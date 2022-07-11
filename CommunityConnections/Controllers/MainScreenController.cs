@@ -318,6 +318,15 @@ namespace CommunityConnections.Controllers
 
 
 
+        [HttpGet]
+        public JsonResult GetAdStatus(int ID)
+        {
+            var AD = AdsServices.Instance.GetAds(ID);
+            string status = AD.Status;
+            return Json(status,JsonRequestBehavior.AllowGet);
+        }
+
+
 
     }
 }

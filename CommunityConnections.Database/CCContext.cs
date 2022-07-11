@@ -18,6 +18,7 @@ namespace CommunityConnections.Database
         public DbSet<Ads> Ads { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Section> Sections { get; set; }
+        public DbSet<Card> Cards { get; set; }
     }
 
 }
