@@ -67,9 +67,21 @@ namespace CommunityConnections.Services
             return Card;
         }
 
+        public List<Card> GetListOfCardsViaName(string SearchTerm)
+        {
+            var Cards = new List<Card>();
+            using (var context = new CCContext())
+            {
+
+                 Cards = context.Cards.Where(x => x.Customer == SearchTerm).ToList();
+
+            }
+            return Cards;
+        }
 
 
-        
+
+
 
         public void SaveCard(Card Card)
         {

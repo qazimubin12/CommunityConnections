@@ -33,9 +33,43 @@ namespace CommunityConnections.ViewModels
         public string BillingEmail { get; set; }
         public string PaymentMethod { get; set; }
         public float CustomerBalance { get; set; }
-        public string Notes { get; set; }
         public string PopupMessage { get; set; }
-        public string CustomPricing { get; set; }
+        public string Notes { get; set; }
+
+        public List<Card> Cards { get; set; }
+        public List<CustomPricings> CustomPricings { get; set; }
+
+        /// <summary>
+        /// //////////// Modal Added
+        /// </summary>
+        public List<Customer> Customers { get; set; }
+        public int CPID { get; set; }/// <summary>
+        /// name in the view
+        /// </summary>
+        public string Customer { get; set; }
+        public string AdSize { get; set; }
+        public float Price { get; set; }
+        public string CustomNotes { get; set; }
+        public List<string> AdSizes { get; set; }
+
+
+        public int CardID { get; set; }/// <summary>
+        /// name ad in the view
+        /// </summary>
+        public string CardCustomer { get; set; }/// <summary>
+        /// name add in the view
+        /// </summary>
+        public string CardName { get; set; }
+        public string CardNumber { get; set; }
+        public DateTime ExpirationDate { get; set; }
+        public string SecurityCode { get; set; }
+        public string CardAddress { get; set; }/// <summary>
+        /// name add in the view
+        /// </summary>
+        public string ZipCode { get; set; }
+
+
+
     }
 
 

@@ -140,6 +140,18 @@
     <Compile Include="Migrations\202207110544486_cards.designer.cs">
       <DependentUpon>202207110544486_cards.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207120424237_carddatatypechanged.cs" />
+    <Compile Include="Migrations\202207120424237_carddatatypechanged.designer.cs">
+      <DependentUpon>202207120424237_carddatatypechanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207120608324_custompricing.cs" />
+    <Compile Include="Migrations\202207120608324_custompricing.designer.cs">
+      <DependentUpon>202207120608324_custompricing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207120614019_somethingfixed.cs" />
+    <Compile Include="Migrations\202207120614019_somethingfixed.designer.cs">
+      <DependentUpon>202207120614019_somethingfixed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -219,6 +231,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207110544486_cards.resx">
       <DependentUpon>202207110544486_cards.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207120424237_carddatatypechanged.resx">
+      <DependentUpon>202207120424237_carddatatypechanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207120608324_custompricing.resx">
+      <DependentUpon>202207120608324_custompricing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207120614019_somethingfixed.resx">
+      <DependentUpon>202207120614019_somethingfixed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

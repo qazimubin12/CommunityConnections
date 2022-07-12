@@ -39,7 +39,6 @@
                                 <th>Customer Balance</th>
                                 <th>Notes</th>
                                 <th>Popup Message</th>
-                                <th>Custom Pricing</th>
 
 
 
@@ -71,7 +70,6 @@
                                 <td data-id="@item.ID" class="btnEdit">@item.CustomerBalance</td>
                                 <td data-id="@item.ID" class="btnEdit">@item.Notes</td>
                                 <td data-id="@item.ID" class="btnEdit">@item.PopupMessage</td>
-                                <td data-id="@item.ID" class="btnEdit">@item.CustomPricing</td>
                                 <td>
                                     <button data-id="@item.ID" type="button" class="btnEdit btn btn-info btn-icon-text"><i class="mdi mdi-pencil"></i> EDIT</button>
                                     <a href="@Url.Action("Delete", "Customer", new { ID = item.ID })" class="data-btn btn btn-danger btn-icon-text"><i class="mdi mdi-delete"></i>DELETE</a>
@@ -99,13 +97,11 @@
         $.ajax({
             url: '@Url.Action("Action", "Customer")',
             type: "GET",
-            data: {ID: $(this).attr("data-id") }
+            data: { ID: $(this).attr("data-id") }
         })
             .done(function (oData) {
                 $("#actionContainer").html(oData);
-            })
-            .error(function (error) {
-                alert(error);
-            })
-    })
+            });
+           
+    });
 </script>

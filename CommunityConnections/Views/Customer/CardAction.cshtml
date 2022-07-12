@@ -1,0 +1,122 @@
+﻿@model CommunityConnections.ViewModels.CustomerActionViewModel
+
+@if (Model != null)
+{
+    <div id="carriermodal" class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">
+                @if (Model.ID != null && Model.ID != 0)
+                {
+                    <span>Edit Cards</span>
+                }
+                else
+                {
+                    <span>Create Cards</span>
+                }
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="CardactionForm">
+                <input type="hidden" name="ID" value="@Model.CardID" />
+
+                <div class="form-group">
+                    <select class="form-control" name="CardCustomer">
+                        @if (Model.Customers != null)
+                        {
+                            foreach (var item in Model.Customers)
+                            {
+                                if (Model.ID != 0)
+                                {
+                                    if (Model.CardCustomer == item.FullName)
+                                    {
+                                        <option selected value="@item.FullName">@item.FullName</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="@item.FullName">@item.FullName</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Card Name</label>
+                    <input class="form-control" name="CardName" placeholder="Enter Card Name." value="@Model.CardName">
+                </div>
+
+
+                <div class="form-group">
+                    <label>Card Number</label>
+                    <input class="form-control" name="CardNumber" placeholder="Enter Card Number." value="@Model.CardNumber">
+                </div>
+
+                <div class="form-group">
+                    <label>Expiration Date</label>
+                    @if (Model.ID != 0)
+                    {
+                        @Html.TextBox("ExpirationDate", Model.ExpirationDate, "{0:yyyy-MM-dd}", new { @style = "width:100%", @id = "ExpirationDate", @class = "form-control", type = "date" })
+                    }
+                    else
+                    {
+                        @Html.TextBox("ExpirationDate", DateTime.Now, "{0:yyyy-MM-dd}", new { @style = "width:100%", @id = "ExpirationDate", @class = "form-control", type = "date" })
+
+                    }
+                </div>
+
+                <div class="form-group">
+                    <label>Security Code</label>
+                    <input class="form-control" name="SecurityCode" placeholder="Enter SecurityCode." value="@Model.SecurityCode">
+                </div>
+
+
+                <div class="form-group">
+                    <label>Address</label>
+                    <input class="form-control" name="CardAddress" placeholder="Enter Address." value="@Model.CardAddress">
+                </div>
+
+                <div class="form-group">
+                    <label>Zip Code</label>
+                    <input class="form-control" name="ZipCode" placeholder="Enter Zip Code." value="@Model.ZipCode">
+                </div>
+
+
+
+            </form>
+
+            <div class="errorDiv">
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            @if (Model.ID != 0)
+            {
+                <button id="CardactionButton" type="button" class="btn btn-primary"><i class="fas fa-save mr-1"></i> Update</button>
+            }
+            else
+            {
+                <button id="CardactionButton" type="button" class="btn btn-primary"><i class="fas fa-save mr-1"></i> Save</button>
+            }
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times mr-1"></i> Close</button>
+        </div>
+    </div>
+}
+
+<script>
+    $("#CardactionButton").click(function () {
+        debugger
+        $.ajax({
+            url: '@Url.Action("CardAction", "Customer")',
+            type: "post",
+            data: $("#CardactionForm").serialize()
+        })
+            .done(function () {
+                location.reload();
+            });
+	});
+</script>

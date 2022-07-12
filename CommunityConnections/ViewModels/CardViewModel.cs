@@ -18,9 +18,10 @@ namespace CommunityConnections.ViewModels
         public string Customer { get; set; }
         public string CardName { get; set; }
         public string CardNumber { get; set; }
-        public string ExpirationDate { get; set; }
+        public DateTime ExpirationDate { get; set; }
         public string SecurityCode { get; set; }
         public string Address { get; set; }
         public string ZipCode { get; set; }
+        public List<Customer> Customers { get; set; }
     }
 }

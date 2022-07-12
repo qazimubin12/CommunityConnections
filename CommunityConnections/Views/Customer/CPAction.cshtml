@@ -1,0 +1,117 @@
+﻿@model CommunityConnections.ViewModels.CustomerActionViewModel
+
+@if (Model != null)
+{
+    <div id="carriermodal" class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">
+                @if (Model.ID != null && Model.ID != 0)
+                {
+                    <span>Edit Custom Pricing</span>
+                }
+                else
+                {
+                    <span>Create Custom Pricing</span>
+                }
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="CPactionForm">
+                <input type="hidden" name="ID" value="@Model.CPID" />
+
+                <div class="form-group">
+                    <label>Select Customer</label>
+                    <select class="form-control" name="Customer">
+                        @if (Model.Customers != null)
+                        {
+                            foreach (var item in Model.Customers)
+                            {
+                                if (Model.CPID != 0)
+                                {
+                                    if (Model.Customer == item.FullName)
+                                    {
+                                        <option selected value="@item.FullName">@item.FullName</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="@item.FullName">@item.FullName</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Select AdSize</label>
+                    <select class="form-control" name="AdSize">
+                        @if (Model.AdSizes != null)
+                        {
+                            foreach (var item in Model.AdSizes)
+                            {
+                                if (Model.ID != 0)
+                                {
+                                    if (Model.AdSize == item)
+                                    {
+                                        <option selected value="@item">@item</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="@item">@item</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Price</label>
+                    <input class="form-control" name="Price" placeholder="Enter Price." value="@Model.Price">
+                </div>
+
+
+                <div class="form-group">
+                    <label>Custom Notes</label>
+                    <input class="form-control" name="CustomNotes" placeholder="Enter CustomNotes." value="@Model.CustomNotes">
+                </div>
+
+
+
+            </form>
+
+            <div class="errorDiv">
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            @if (Model.ID != 0)
+            {
+                <button id="CPactionButton" type="button" class="btn btn-primary"><i class="fas fa-save mr-1"></i> Update</button>
+            }
+            else
+            {
+                <button id="CPactionButton" type="button" class="btn btn-primary"><i class="fas fa-save mr-1"></i> Save</button>
+            }
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times mr-1"></i> Close</button>
+        </div>
+    </div>
+}
+
+<script>
+    $("#CPactionButton").click(function () {
+        $.ajax({
+            url: '@Url.Action("Action", "CustomPricings")',
+            type: "post",
+            data: $("#CPactionForm").serialize()
+        })
+            .done(function () {
+                location.reload();
+            });
+	});
+</script>

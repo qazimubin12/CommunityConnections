@@ -61,7 +61,7 @@
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     }
 
-    .card img {
+    .card <img {
         width: 65%;
         border-radius: 50%;
         margin: 0 auto;
@@ -203,6 +203,7 @@
                 <a style="font-size: 50px;" class="btn btn-block btn-info" href="@Url.Action("Index","Customer")">Back To Customer</a>
             </div>
 
+         
         </div>
 
     </div>
@@ -269,7 +270,7 @@
 
                                         <div class="btn-group-justified" role="group" aria-label="Basic example">
                                             <button style="padding:0px;" hidden="hidden" data-id="@counter" onclick="" type="button" class="btnSearchAdsInPage btn btn-warning btn-sm"><i class="ti-search btn-icon-append"></i></button>
-                                            <span hidden="hidden" style="padding:0px; font-size:30px;"  onclick="" type="button" data-item="@counter" class="StatusButton btn btn-warning btn-sm"></span>
+                                            <span hidden="hidden" style="padding:0px; font-size:30px;" onclick="" type="button" data-item="@counter" class="StatusButton btn btn-warning btn-sm"></span>
                                         </div>
 
 
@@ -286,15 +287,15 @@
                                                 if (Model.PlacedAds[n].PageNo == i || Model.PlacedAds[n].PageTwo == i)
                                                 {
 
-                                                    
+
                                                     if (Model.PlacedAds[n].AdSize == "Full Page")
                                                     {
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div class="col-md-12">
-                                                                @*<a onclick="ViewAdd(@Model.PlacedAds[n].ID)">*@
+                                                                @*<a>*@
                                                                 <a>
                                                                     <div>
-                                                                        <img onmouseout="RemoveToggle(@counter)" onmouseover="ShowToggle(@Model.PlacedAds[n].ID,@counter)" class="fullpageAD" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID,@counter)" class="fullpageAD" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -306,9 +307,9 @@
                                                     {
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div class="col-md-12">
-                                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                                <a>
                                                                     <div class="">
-                                                                        <img class="Ad1by3" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID)" class="Ad1by3" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -318,9 +319,9 @@
                                                     {
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div class="col-md-12">
-                                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                                <a>
                                                                     <div class="">
-                                                                        <img class="Ad3by4" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID)" class="Ad3by4" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -330,9 +331,9 @@
                                                     {
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div class="col-md-12">
-                                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                                <a>
                                                                     <div>
-                                                                        <img class="fullsized" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID)" class="fullsized" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -346,9 +347,9 @@
                                                     {
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div class="col-md-12">
-                                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                                <a>
                                                                     <div class="">
-                                                                        <img class="Ad1By4Vertical" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID)" class="Ad1By4Vertical" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -358,9 +359,9 @@
                                                     {
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div class="col-md-12">
-                                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                                <a>
                                                                     <div class="">
-                                                                        <img class="Ad1By4Horizontal" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID)" class="Ad1By4Horizontal" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -370,9 +371,9 @@
                                                     {
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div class="col-md-12">
-                                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                                <a>
                                                                     <div class="">
-                                                                        <img class="AdHalfPageVertical" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID)" class="AdHalfPageVertical" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -382,9 +383,9 @@
                                                     {
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div class="col-md-12">
-                                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                                <a>
                                                                     <div class="">
-                                                                        <img class="AdHalfPageHorizontal" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID)" class="AdHalfPageHorizontal" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -396,9 +397,9 @@
 
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div class="col-md-6">
-                                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                                <a>
                                                                     <div class="">
-                                                                        <img class="AD1by8" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID)" class="AD1by8" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -432,11 +433,13 @@
                                 }
                                 else
                                 {
-                                    <td id="@counter">
+                                    <td style="padding-right: 15px;" id="@counter">
+
+
+
                                         <div class="btn-group-justified" role="group" aria-label="Basic example">
                                             <button style="padding:0px;" hidden="hidden" data-id="@counter" onclick="" type="button" class="btnSearchAdsInPage btn btn-warning btn-sm"><i class="ti-search btn-icon-append"></i></button>
-                                            <span hidden="hidden" style="padding: 0px; font-size: 30px;" onclick="" type="button" data-item="@counter" class="StatusButton btn btn-warning btn-sm"></span>
-
+                                            <span hidden="hidden" style="padding:0px; font-size:30px;" onclick="" type="button" data-item="@counter" class="StatusButton btn btn-warning btn-sm"></span>
                                         </div>
 
 
@@ -450,16 +453,16 @@
 
                                                 if (Model.PlacedAds[n].PageNo == i)
                                                 {
-                                                    
+
 
                                                     if (Model.PlacedAds[n].AdSize == "Full Page")
                                                     {
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div class="col-md-12">
                                                                 <a>
-                                                                @*<a onclick="ViewAdd(@Model.PlacedAds[n].ID)">*@
+                                                                    @*<a>*@
                                                                     <div>
-                                                                        <img onmouseout="RemoveToggle(@counter)" onmouseover="ShowToggle(@Model.PlacedAds[n].ID)" class="fullpageAD" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID)" onclick="ShowToggle(@Model.PlacedAds[n].ID)" class="fullpageAD" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -470,9 +473,9 @@
                                                     {
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div class="col-md-12">
-                                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                                <a>
                                                                     <div>
-                                                                        <img class="fullsized" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID)" class="fullsized" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -485,9 +488,9 @@
                                                     {
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div class="col-md-12">
-                                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                                <a>
                                                                     <div class="">
-                                                                        <img class="Ad1by3" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID)" class="Ad1by3" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -497,9 +500,9 @@
                                                     {
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div class="col-md-12">
-                                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                                <a>
                                                                     <div class="">
-                                                                        <img class="Ad1By4Vertical" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID)" class="Ad1By4Vertical" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -509,9 +512,9 @@
                                                     {
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div class="col-md-12">
-                                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                                <a>
                                                                     <div class="">
-                                                                        <img class="Ad1By4Horizontal" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID)" class="Ad1By4Horizontal" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -521,9 +524,9 @@
                                                     {
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div class="col-md-12">
-                                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                                <a>
                                                                     <div class="">
-                                                                        <img class="AdHalfPageVertical" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID)" class="AdHalfPageVertical" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -533,9 +536,9 @@
                                                     {
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div class="col-md-12">
-                                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                                <a>
                                                                     <div class="">
-                                                                        <img class="AdHalfPageHorizontal" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID)" class="AdHalfPageHorizontal" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -545,9 +548,9 @@
                                                     {
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div style="float:left;" class="col-md-12">
-                                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                                <a>
                                                                     <div>
-                                                                        <img class="Ad3by4" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID)" class="Ad3by4" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -557,9 +560,9 @@
                                                     {
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div style="float:left;" class="col-md-6">
-                                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                                <a>
                                                                     <div class="">
-                                                                        <img class="AD1by8" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID)" class="AD1by8" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -569,9 +572,9 @@
                                                     {
                                                         <div id="@Model.PlacedAds[n].ID" class="draggable">
                                                             <div style="float:left;" class="col-md-6">
-                                                                <a onclick="ViewAdd(@Model.PlacedAds[n].ID)">
+                                                                <a>
                                                                     <div class="">
-                                                                        <img class="fullbleed" src="@Model.PlacedAds[n].Path" />
+                                                                        <img onclick="ShowToggle(@Model.PlacedAds[n].ID)" class="fullbleed" src="@Model.PlacedAds[n].Path" />
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -662,7 +665,6 @@
 
 
     <script>
-
 
 
 
@@ -791,30 +793,26 @@
                     var element = $(`.StatusButton[data-item=${Counter}]`);
                     var element2 = $(`.btnSearchAdsInPage[data-id=${Counter}]`);
 
-                    element.removeAttr('hidden');
-                    element2.removeAttr('hidden');
+
+                    if (element.is(":visible")) {
+                    
+
+                        element.attr('hidden', "hidden");
+                        element2.attr('hidden', "hidden");
+                    }
+                    else {
+                        element.removeAttr('hidden');
+                        element2.removeAttr('hidden');
+                    }
                     element.html(myData);
                 });
-                //.error(function (error) {
-                //    alert(error);
-                //})
+            
         };
 
 
 
 
-        function RemoveToggle(Counter) {
-
-            var element = $(`.StatusButton[data-item=${Counter}]`);
-            element.attr('hidden',"hidden");
-
-            element.html("");
-
-            var element2 = $(`.btnSearchAdsInPage[data-id=${Counter}]`);
-            element2.attr('hidden',"hidden");
-
-
-        };
+       
 
     </script>
 

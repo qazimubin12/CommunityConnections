@@ -23,11 +23,11 @@ namespace CommunityConnections.Entities
         public string OtherPhone { get; set; }
         public string Email { get; set; }
         public string Fax { get; set; }
+        public string PopupMessage { get; set; }
         public string BillingEmail { get; set; }
         public string PaymentMethod { get; set; }
         public float CustomerBalance { get; set; }
         public string Notes { get; set; }
-        public string PopupMessage { get; set; }
-        public string CustomPricing { get; set; }
+
     }
 }
