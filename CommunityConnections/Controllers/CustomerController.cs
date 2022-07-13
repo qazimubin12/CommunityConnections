@@ -1,11 +1,8 @@
 ﻿using CommunityConnections.Entities;
 using CommunityConnections.Services;
 using CommunityConnections.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CommunityConnections.Controllers
@@ -36,6 +33,8 @@ namespace CommunityConnections.Controllers
                 var customer = CustomerServices.Instance.GetCustomer(ID);
                 model.Cards = CardServices.Instance.GetListOfCardsViaName(customer.FullName);
                 model.CustomPricings = CPServices.Instance.GetCustomPricingsViaName(customer.FullName);
+                model.Ads = AdsServices.Instance.GetAdssViaName(customer.FullName);
+
                 model.ID = customer.ID;
                 model.FirstName = customer.FirstName;
                 model.MiddleName = customer.MiddleName;
@@ -56,7 +55,6 @@ namespace CommunityConnections.Controllers
                 model.PopupMessage = customer.PopupMessage;
                 model.State = customer.State;
                 model.Title = customer.Title;
-
 
 
 
@@ -68,7 +66,8 @@ namespace CommunityConnections.Controllers
             {
                 model.Cards = null;
                 model.CustomPricings = null;
-                return View("Action", model);
+                model.Ads = null;
+                return PartialView("Action", model);
             }
         }
 
@@ -78,32 +77,32 @@ namespace CommunityConnections.Controllers
         {
             CustomerActionViewModel model = new CustomerActionViewModel();
 
-           
-                var customer = CustomerServices.Instance.GetCustomer(ID);
-                model.ID = customer.ID;
-                model.FirstName = customer.FirstName;
-                model.MiddleName = customer.MiddleName;
-                model.LastName = customer.LastName;
-                model.Notes = customer.Notes;
-                model.Phone = customer.Phone;
-                model.OtherPhone = customer.OtherPhone;
-                model.Email = customer.Email;
-                model.Compnay = customer.Compnay;
-                model.BillingEmail = customer.BillingEmail;
-                model.Address = customer.Address;
-                model.AreaCode = customer.AreaCode;
-                model.City = customer.City;
-                model.Country = customer.Country;
-                model.CustomerBalance = customer.CustomerBalance;
-                model.Fax = customer.Fax;
-                model.PaymentMethod = customer.PaymentMethod;
-                model.PopupMessage = customer.PopupMessage;
-                model.State = customer.State;
-                model.Title = customer.Title;
 
-                return View("View", model);
+            var customer = CustomerServices.Instance.GetCustomer(ID);
+            model.ID = customer.ID;
+            model.FirstName = customer.FirstName;
+            model.MiddleName = customer.MiddleName;
+            model.LastName = customer.LastName;
+            model.Notes = customer.Notes;
+            model.Phone = customer.Phone;
+            model.OtherPhone = customer.OtherPhone;
+            model.Email = customer.Email;
+            model.Compnay = customer.Compnay;
+            model.BillingEmail = customer.BillingEmail;
+            model.Address = customer.Address;
+            model.AreaCode = customer.AreaCode;
+            model.City = customer.City;
+            model.Country = customer.Country;
+            model.CustomerBalance = customer.CustomerBalance;
+            model.Fax = customer.Fax;
+            model.PaymentMethod = customer.PaymentMethod;
+            model.PopupMessage = customer.PopupMessage;
+            model.State = customer.State;
+            model.Title = customer.Title;
 
-         
+            return View("View", model);
+
+
         }
         [HttpPost]
         public ActionResult Action(CustomerActionViewModel model)
@@ -136,9 +135,19 @@ namespace CommunityConnections.Controllers
                 customer.State = model.State;
                 customer.Title = model.Title;
 
-                var Card = CardServices.Instance.GetCardsViaName(customer.FullName);
-                Card.Customer = customer.FullName;
-                CardServices.Instance.UpdateCard(Card);
+                var Cards = CardServices.Instance.GetListOfCardsViaName(customer.FullName);
+                foreach (var item in Cards)
+                {
+                    item.Customer = customer.FullName;
+                    CardServices.Instance.UpdateCard(item);
+
+                }
+                var CP = CPServices.Instance.GetListOfCustomPricingsViaName(customer.FullName);
+                foreach (var item in CP)
+                {
+                    item.Customer = customer.FullName;
+                    CPServices.Instance.UpdateCustomPricings(item);
+                }
                 CustomerServices.Instance.UpdateCustomer(customer);
 
             }
@@ -149,7 +158,6 @@ namespace CommunityConnections.Controllers
                 customer.MiddleName = model.MiddleName;
                 customer.LastName = model.LastName;
                 customer.FullName = customer.FirstName + " " + customer.MiddleName + " " + customer.LastName;
-
                 customer.Notes = model.Notes;
                 customer.Phone = model.Phone;
                 customer.OtherPhone = model.OtherPhone;
@@ -267,7 +275,7 @@ namespace CommunityConnections.Controllers
                 CardServices.Instance.SaveCard(Card);
             }
 
-            return RedirectToAction("Index","Customer");
+            return RedirectToAction("Index", "Customer");
 
 
         }
@@ -338,15 +346,15 @@ namespace CommunityConnections.Controllers
                 model.Customer = CP.Customer;
                 model.AdSize = CP.AdSize;
                 model.CustomNotes = CP.CustomNotes;
+                model.Price = CP.Price;
 
 
-
-                return PartialView("Action", model);
+                return PartialView("CPAction", model);
 
             }
             else
             {
-                return PartialView("Action", model);
+                return PartialView("CPAction", model);
             }
         }
 
@@ -364,7 +372,7 @@ namespace CommunityConnections.Controllers
                 CP.Customer = model.Customer;
                 CP.AdSize = model.AdSize;
                 CP.CustomNotes = model.CustomNotes;
-
+                CP.Price = model.Price;
                 CPServices.Instance.UpdateCustomPricings(CP);
 
             }
@@ -375,6 +383,7 @@ namespace CommunityConnections.Controllers
                 CP.Customer = model.Customer;
                 CP.AdSize = model.AdSize;
                 CP.CustomNotes = model.CustomNotes;
+                CP.Price = model.Price;
                 CPServices.Instance.SaveCustomPricings(CP);
             }
 

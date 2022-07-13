@@ -38,6 +38,7 @@ namespace CommunityConnections.ViewModels
 
         public List<Card> Cards { get; set; }
         public List<CustomPricings> CustomPricings { get; set; }
+        public List<Ads> Ads { get; set; }
 
         /// <summary>
         /// //////////// Modal Added

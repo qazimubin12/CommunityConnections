@@ -84,7 +84,8 @@ namespace CommunityConnections.Controllers
 
 
 
-            model.Layouts = LayoutList; 
+            model.Layouts = LayoutList;
+            model.Customers = CustomerServices.Instance.GetCustomers();
             if (ID != 0)
             {
                 var ad = AdsServices.Instance.GetAds(ID);

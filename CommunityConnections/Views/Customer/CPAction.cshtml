@@ -106,7 +106,7 @@
 <script>
     $("#CPactionButton").click(function () {
         $.ajax({
-            url: '@Url.Action("Action", "CustomPricings")',
+            url: '@Url.Action("CPAction", "Customer")',
             type: "post",
             data: $("#CPactionForm").serialize()
         })
