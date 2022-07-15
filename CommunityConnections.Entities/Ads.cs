@@ -9,6 +9,7 @@ namespace CommunityConnections.Entities
     public class Ads:BaseEntity
     {
         public string Name { get; set; }
+        public DateTime AdDate { get; set; }
         public int PageNo { get; set; }
         public int PageTwo { get; set; }
         public string Layout { get; set; }
@@ -25,7 +26,7 @@ namespace CommunityConnections.Entities
         public string CustomSpecification { get; set; }
         public float Discount { get; set; }
         public float Total { get; set; }
-        public string Delux { get; set; }
         public string Status { get; set; }
+        public bool Deluxe { get; set; }
     }
 }

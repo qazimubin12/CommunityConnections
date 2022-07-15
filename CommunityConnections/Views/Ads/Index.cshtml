@@ -3,6 +3,10 @@
     ViewBag.Title = "Index";
     WebGrid grid = new WebGrid(Model.Ads, rowsPerPage: 20);
 }
+<style>
+
+
+</style>
 <div class="card">
     <div class="card-body">
         <h2>Ads</h2>
@@ -69,7 +73,7 @@ grid.Column(header: "Status", format:@<text><div class="editStatusSelect" data-i
 grid.Column(header: "Repeat", format:@<text><div data-id="@item.ID" data-propertyname="Repeat">@item.Repeat</div></text>),
 grid.Column(header: "ChoosePage", format:@<text><div data-id="@item.ID" data-propertyname="ChoosePage">@item.ChoosePage</div></text>),
 grid.Column(header: "AddGraphics", format:@<text><div data-id="@item.ID" data-propertyname="AddGraphics">@item.AddGraphics</div></text>),
-grid.Column(header: "Delux", format:@<text><div data-id="@item.ID" data-propertyname="Delux">@item.Delux</div></text>),
+grid.Column(header: "Deluxe", format:@<text><div data-id="@item.ID" data-propertyname="Deluxe">@item.Deluxe</div></text>),
 grid.Column(header: "CustomSpecification", format:@<text><div data-id="@item.ID" data-propertyname="CustomSpecification">@item.CustomSpecification</div></text>),
 grid.Column(header: "Discount", format:@<text><div data-id="@item.ID" data-propertyname="Discount">@item.Discount</div></text>),
 grid.Column(header: "Total", format:@<text><div data-id="@item.ID" data-propertyname="Total">@item.Total</div></text>),

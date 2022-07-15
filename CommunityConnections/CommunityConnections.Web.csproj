@@ -1964,7 +1964,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Ads\Index.cshtml" />
     <Content Include="Views\Ads\Delete.cshtml" />
-    <Content Include="Views\Ads\_Listing.cshtml" />
     <Content Include="Views\Ads\Import.cshtml" />
     <Content Include="Views\MainScreen\Index.cshtml" />
     <Content Include="Views\MainScreen\SelectLayout.cshtml" />
@@ -1977,7 +1976,6 @@
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Customer\Delete.cshtml" />
     <Content Include="Views\Customer\_Listing.cshtml" />
-    <Content Include="Views\Ads\Action.cshtml" />
     <Content Include="Views\Customer\Action.cshtml" />
     <Content Include="Views\Section\Action.cshtml" />
     <Content Include="Views\MainScreen\AdsSearchViewPartial.cshtml" />
@@ -1987,8 +1985,8 @@
     <Content Include="Views\Customer\_CardDelete.cshtml" />
     <Content Include="Views\Customer\_CPDelete.cshtml" />
     <Content Include="Views\Customer\CPAction.cshtml" />
-    <Content Include="Views\Ads\Index - Copy.cshtml" />
     <Content Include="Views\Ads\ActionPartial.cshtml" />
+    <Content Include="Views\Ads\MainScreenPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

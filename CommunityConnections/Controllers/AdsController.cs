@@ -74,7 +74,19 @@ namespace CommunityConnections.Controllers
             StatusList.Add("Call");
             model.StatusList = StatusList;
             #endregion
-            model.MyAd = Ad;
+
+
+            model.ID = Ad.ID;
+            model.PageNo = Ad.PageNo;
+            model.Layout = Ad.Layout;
+            model.AdSize = Ad.AdSize;
+            model.Path = Ad.Path;
+            model.Name = Ad.Name;
+            model.AdStatus = Ad.AdStatus;
+            model.PageTwo = Ad.PageTwo;
+            model.Status = Ad.Status;
+
+
             return PartialView(model);
         }
 
@@ -110,13 +122,25 @@ namespace CommunityConnections.Controllers
         }
 
 
-      
+
+        public ActionResult GetAdsOnPage(int PageNo)
+        {
+
+            AdsListingViewModel model = new AdsListingViewModel();
+            var AdsOnPage = AdsServices.Instance.AdsonPage(PageNo);
+            model.AdsOnPage = AdsOnPage;
+
+            return PartialView("MainScreenPartial",model);
+        }
+
+
+
 
 
         [HttpGet]
         public ActionResult Action(int ID = 0)
         {
-            AdsActionViewModel model = new AdsActionViewModel();
+            AdsListingViewModel model = new AdsListingViewModel();
             var LayoutList = new List<string>();
             LayoutList.Add("Full Page W’ Bleed");
             LayoutList.Add("Full Page");
@@ -138,7 +162,7 @@ namespace CommunityConnections.Controllers
 
 
 
-            model.Layouts = LayoutList;
+            
             model.Customers = CustomerServices.Instance.GetCustomers();
             if (ID != 0)
             {
@@ -263,45 +287,45 @@ namespace CommunityConnections.Controllers
         public ActionResult Action(AdsListingViewModel model)
         {
 
-            if (model.MyAd.ID != 0) //update record
+            if (model.ID != 0) //update record
             {
-                var ad = AdsServices.Instance.GetAds(model.MyAd.ID);
+                var ad = AdsServices.Instance.GetAds(model.ID);
 
-                ad.ID = model.MyAd.ID;
-                ad.Layout = model.MyAd.Layout;
-                ad.PageNo = model.MyAd.PageNo;
-                ad.AdSize = model.MyAd.AdSize;
-                ad.Status = model.MyAd.Status;
-                if (model.MyAd.Path.Contains("Content/paths/"))
+                ad.ID = model.ID;
+                ad.Layout = model.Layout;
+                ad.PageNo = model.PageNo;
+                ad.AdSize = model.AdSize;
+                ad.Status = model.Status;
+                if (model.Path.Contains("Content/paths/"))
                 {
-                    ad.Path = model.MyAd.Path;
+                    ad.Path = model.Path;
 
                 }
                 else
                 {
-                    ad.Path = "Content/paths/" + model.MyAd.Path;
+                    ad.Path = "Content/paths/" + model.Path;
 
 
                 }
-                ad.Name = model.MyAd.Name;
-                ad.AdStatus = model.MyAd.AdStatus;
-                ad.PageTwo = model.MyAd.PageTwo;
-
+                ad.Name = model.Name;
+                ad.AdStatus = model.AdStatus;
+                ad.PageTwo = model.PageTwo;
+               
                 AdsServices.Instance.UpdateAds(ad);
 
             }
             else
             {
                 var ad = new Ads();
-                ad.Layout = model.MyAd.Layout;
-                ad.PageNo = model.MyAd.PageNo;
-                ad.AdSize = model.MyAd.AdSize;
-                ad.PageTwo= model.MyAd.PageTwo;
-                ad.Status = model.MyAd.Status;
+                ad.Layout = model.Layout;
+                ad.PageNo = model.PageNo;
+                ad.AdSize = model.AdSize;
+                ad.PageTwo= model.PageTwo;
+                ad.Status = model.Status;
 
-                ad.Path = "Content/paths/" + model.MyAd.Path;
-                ad.Name = model.MyAd.Name;
-                ad.AdStatus = model.MyAd.AdStatus;
+                ad.Path = "Content/paths/" + model.Path;
+                ad.Name = model.Name;
+                ad.AdStatus = model.AdStatus;
 
                 AdsServices.Instance.SaveAds(ad);
             }
@@ -398,9 +422,9 @@ namespace CommunityConnections.Controllers
                     Ad.Book = value;
                 }
 
-                if (propertyname == "Delux")
+                if (propertyname == "Deluxe")
                 {
-                    Ad.Delux = value;
+                    Ad.Deluxe = bool.Parse(value);
                 }
                 if (propertyname == "Repeat")
                 {
@@ -454,14 +478,14 @@ namespace CommunityConnections.Controllers
         [HttpGet]
         public ActionResult Delete(int ID)
         {
-            AdsActionViewModel model = new AdsActionViewModel();
+            AdsListingViewModel model = new AdsListingViewModel();
             var ad = AdsServices.Instance.GetAds(ID);
             model.ID = ad.ID;
             return View("Delete", model);
         }
 
         [HttpPost]
-        public ActionResult Delete(AdsActionViewModel model)
+        public ActionResult Delete(AdsListingViewModel model)
         {
 
             if (model.ID != 0) //we are trying to delete a record

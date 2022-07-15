@@ -152,6 +152,14 @@
     <Compile Include="Migrations\202207120614019_somethingfixed.designer.cs">
       <DependentUpon>202207120614019_somethingfixed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207151149231_dateadded.cs" />
+    <Compile Include="Migrations\202207151149231_dateadded.designer.cs">
+      <DependentUpon>202207151149231_dateadded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207151227268_deluxe.cs" />
+    <Compile Include="Migrations\202207151227268_deluxe.designer.cs">
+      <DependentUpon>202207151227268_deluxe.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -240,6 +248,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207120614019_somethingfixed.resx">
       <DependentUpon>202207120614019_somethingfixed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207151149231_dateadded.resx">
+      <DependentUpon>202207151149231_dateadded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207151227268_deluxe.resx">
+      <DependentUpon>202207151227268_deluxe.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
