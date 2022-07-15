@@ -1987,6 +1987,8 @@
     <Content Include="Views\Customer\_CardDelete.cshtml" />
     <Content Include="Views\Customer\_CPDelete.cshtml" />
     <Content Include="Views\Customer\CPAction.cshtml" />
+    <Content Include="Views\Ads\Index - Copy.cshtml" />
+    <Content Include="Views\Ads\ActionPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

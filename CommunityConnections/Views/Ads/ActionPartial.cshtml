@@ -1,0 +1,395 @@
+﻿@model CommunityConnections.ViewModels.AdsListingViewModel
+@{
+    ViewBag.Title = "Index";
+}
+@if (Model.MyAd != null)
+{
+
+
+
+
+
+    <form id="actionForm">
+        <div class="row">
+
+            <input type="hidden" id="ID" name="ID" value="@Model.MyAd.ID" />
+
+            <div class="form-row col-md-12">
+                <div class="form-group col-md-4">
+                    <label class="col-sm-12">Ad Size</label>
+                    <select name="AdSize" id="AdSize" class="form-control">
+                        @foreach (var item in Model.Layouts)
+                        {
+                            if (Model.MyAd.AdSize == item)
+                            {
+                                <option selected value="@item">@item</option>
+                            }
+                            else
+                            {
+                                <option value="@item">@item</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label class="col-sm-12">Name</label>
+                    <input required class="form-control" id="Name" value="@Model.MyAd.Name" name="Name" placeholder="Enter Add Name">
+
+                </div>
+
+
+                <div class="form-group col-md-4">
+                    <label class="col-sm-12">Layout</label>
+                    <input required class="form-control" id="Layout" value="@Model.MyAd.Layout" name="Layout" placeholder="Enter Layout">
+
+                </div>
+            </div>
+
+            <div class="form-row col-md-12">
+                <div class="form-group col-md-3">
+                    <label class="col-sm-12">Page No</label>
+                    <input required class="form-control" id="PageNo" value="@Model.MyAd.PageNo" name="PageNo" placeholder="Enter Page Number">
+
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Page No 2 (for Spread Ads)</label>
+                    <input required class="form-control" id="PageTwo" value="@Model.MyAd.PageTwo" name="PageTwo" placeholder="Enter Number in Case of Full Page WBleed">
+
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label>Path</label>
+                    <div class="custom-file">
+                        <input type="file" />
+                        <input hidden value="@Model.MyAd.Path" name="Path" id="Path" type="text" />
+                        <input hidden class="form-control" value="Not Placed" name="AdStatus" id="AdStatus" />
+
+                    </div>
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Book Name</label>
+                    <input required class="form-control" id="Book" value="@Model.MyAd.Book" name="Book" placeholder="Enter Book Name">
+
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Repeat</label>
+                    <input required class="form-control" id="PageTwo" value="@Model.MyAd.Repeat" name="Repeat" placeholder="Enter Yes or No for Repeat">
+
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Select Customer</label>
+                    <select name="Customer" id="Customer" class="form-control">
+                        @foreach (var item in Model.Customers)
+                        {
+                            string CustomerName = item.FirstName + " " + item.MiddleName + " " + item.LastName;
+                            if (Model.MyAd.Customer == CustomerName)
+                            {
+                                <option selected value="@CustomerName">@CustomerName</option>
+                            }
+                            else
+                            {
+                                <option value="@CustomerName">@CustomerName</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Select Status</label>
+                    <select name="Status" id="Status" class="form-control">
+                        @foreach (var item in Model.StatusList)
+                        {
+                            string Status = item;
+                            if (Model.MyAd.Status == Status)
+                            {
+                                <option selected value="@Status">@Status</option>
+                            }
+                            else
+                            {
+                                <option value="@item">@item</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Choose Page</label>
+                    <input required class="form-control" id="ChoosePage" value="@Model.MyAd.ChoosePage" name="ChoosePage" placeholder="Choose Page">
+
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Ad Graphics</label>
+                    <input required class="form-control" id="AddGraphics" value="@Model.MyAd.AddGraphics" name="AddGraphics" placeholder="Enter Graphics">
+
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Delux</label>
+                    <select name="Customer" id="Customer" class="form-control">
+
+                        @if (Model != null)
+                        {
+                            if (Model.MyAd.Delux == "Yes")
+                            {
+                                <option selected value="Yes">Yes</option>
+                                <option value="No">No</option>
+
+                            }
+                            else
+                            {
+                                <option value="Yes">Yes</option>
+                                <option selected value="No">No</option>
+                            }
+                        }
+                        else
+                        {
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        }
+                    </select>
+                </div>
+
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Custom Specification</label>
+                    <input required class="form-control" id="CustomSpecification" value="@Model.MyAd.CustomSpecification" name="CustomSpecification" placeholder="Custom Specification">
+
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Discount</label>
+                    <input required class="form-control" id="Discount" value="@Model.MyAd.Discount" name="Discount" placeholder="Enter Discount">
+
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Total</label>
+                    <input required class="form-control" id="Total" value="@Model.MyAd.Total" name="Total" placeholder="Enter Total">
+
+                </div>
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+        <br />
+        @if (Model.MyAd.ID != 0)
+        {
+            <button id="actionButton" type="button" class="btn btn-outline-primary"><i class="fas fa-save mr-1"></i> UPDATE</button>
+        }
+        else
+        {
+            <button id="actionButton" type="button" class="btn btn-outline-primary "><i class="fas fa-save mr-1"></i> SAVE</button>
+        }
+        <a href="@Url.Action("Index","Ads")" class="btn btn-outline-danger"> CANCEL</a>
+    </form>
+
+
+    <div class="errorDiv">
+
+    </div>
+
+}
+else
+{
+    <form id="actionForm">
+        <div class="row">
+
+            <input type="hidden" id="ID" name="ID"  />
+
+            <div class="form-row col-md-12">
+                <div class="form-group col-md-4">
+                    <label class="col-sm-12">Ad Size</label>
+                    <select name="AdSize" id="AdSize" class="form-control">
+                        @foreach (var item in Model.Layouts)
+                        {
+                         
+                                <option value="@item">@item</option>
+                            
+
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label class="col-sm-12">Name</label>
+                    <input required class="form-control" id="Name"  name="Name" placeholder="Enter Add Name">
+
+                </div>
+
+
+                <div class="form-group col-md-4">
+                    <label class="col-sm-12">Layout</label>
+                    <input required class="form-control" id="Layout"  name="Layout" placeholder="Enter Layout">
+
+                </div>
+            </div>
+
+            <div class="form-row col-md-12">
+                <div class="form-group col-md-3">
+                    <label class="col-sm-12">Page No</label>
+                    <input required class="form-control" id="PageNo" name="PageNo" placeholder="Enter Page Number">
+
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Page No 2 (for Spread Ads)</label>
+                    <input required class="form-control" id="PageTwo"  name="PageTwo" placeholder="Enter Number in Case of Full Page WBleed">
+
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label>Path</label>
+                    <div class="custom-file">
+                        <input type="file" />
+                        <input hidden name="Path" id="Path" type="text" />
+                        <input hidden class="form-control" value="Not Placed" name="AdStatus" id="AdStatus" />
+
+                    </div>
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Book Name</label>
+                    <input required class="form-control" id="Book" name="Book" placeholder="Enter Book Name">
+
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Repeat</label>
+                    <input required class="form-control" id="PageTwo" name="Repeat" placeholder="Enter Yes or No for Repeat">
+
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Select Customer</label>
+                    <select name="Customer" id="Customer" class="form-control">
+                        @foreach (var item in Model.Customers)
+                        {
+                            string CustomerName = item.FirstName + " " + item.MiddleName + " " + item.LastName;
+                            
+                                <option value="@CustomerName">@CustomerName</option>
+                            
+
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Select Status</label>
+                    <select name="Status" id="Status" class="form-control">
+                        @foreach (var item in Model.StatusList)
+                        {
+
+                                <option value="@item">@item</option>
+                            
+
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Choose Page</label>
+                    <input required class="form-control" id="ChoosePage"  name="ChoosePage" placeholder="Choose Page">
+
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Ad Graphics</label>
+                    <input required class="form-control" id="AddGraphics"  name="AddGraphics" placeholder="Enter Graphics">
+
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Delux</label>
+                    <select name="Customer" id="Customer" class="form-control">
+
+                        
+                            
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        
+                    </select>
+                </div>
+
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Custom Specification</label>
+                    <input required class="form-control" id="CustomSpecification"  name="CustomSpecification" placeholder="Custom Specification">
+
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Discount</label>
+                    <input required class="form-control" id="Discount" name="Discount" placeholder="Enter Discount">
+
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="col-sm-12">Total</label>
+                    <input required class="form-control" id="Total"  name="Total" placeholder="Enter Total">
+
+                </div>
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+        <br />
+       
+            <button id="actionButton" type="button" class="btn btn-outline-primary "><i class="fas fa-save mr-1"></i> SAVE</button>
+        
+        <a href="@Url.Action("Index","Ads")" class="btn btn-outline-danger"> CANCEL</a>
+    </form>
+}
+<script>
+
+    $(document).ready(function () {
+        $('input[type="file"]').change(function (e) {
+
+            var filename = e.target.files[0].name;
+
+            var path = document.getElementById("Path");
+
+            path.value = filename;
+
+        });
+    });
+
+
+
+    $("#actionButton").click(function () {
+		$.ajax({
+			url: '@Url.Action("Action", "Ads")',
+			type: "post",
+			data: $("#actionForm").serialize()
+		})
+		.done(function () {
+
+            window.location.href = "@Url.Action("Index","Ads")";
+
+		});
+	});
+
+
+</script>

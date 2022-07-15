@@ -13,6 +13,10 @@ namespace CommunityConnections.ViewModels
         public List<Customer> Customers { get; set; }
         public List<MyListViewModel> MyListViewModel { get; set; }
         public string SearchTerm { get; set; }
+        public List<string> Layouts { get; set; }
+        public List<string> StatusList { get; set; }
+        public Ads MyAd { get; set; }
+
     }
     public class AdsActionViewModel
     {

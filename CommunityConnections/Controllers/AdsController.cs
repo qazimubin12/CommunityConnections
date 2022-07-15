@@ -15,13 +15,67 @@ namespace CommunityConnections.Controllers
     public class AdsController : Controller
     {
         // GET: Ads
-        public ActionResult Index(string SearchTerm)
+        public ActionResult Index(string SearchTerm ="")
         {
             AdsListingViewModel model = new AdsListingViewModel();
             model.Ads = AdsServices.Instance.GetAdss(SearchTerm);
             model.Customers = CustomerServices.Instance.GetCustomers();
-
+            #region AdSizesList
+            var LayoutList = new List<string>();
+            LayoutList.Add("Full Page W’ Bleed");
+            LayoutList.Add("Full Page");
+            LayoutList.Add("3/4 Page");
+            LayoutList.Add("1/2 Page Vertical");
+            LayoutList.Add("1/2 Page");
+            LayoutList.Add("1/3 Page");
+            LayoutList.Add("1/4 Page");
+            LayoutList.Add("1/4 Page Vertical");
+            LayoutList.Add("1/8 Page");
+            LayoutList.Add("Full Spread");
+            LayoutList.Add("3/4 Spread");
+            model.Layouts = LayoutList;
+            #endregion
+            #region StatusList
+            var StatusList = new List<string>();
+            StatusList.Add("Running");
+            StatusList.Add("Email");
+            StatusList.Add("Call");
+            model.StatusList = StatusList;
+            #endregion
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult ActionPartial(int ID = 0)
+        {
+            AdsListingViewModel model = new AdsListingViewModel();
+            model.Ads = AdsServices.Instance.GetAdss();
+            model.Customers = CustomerServices.Instance.GetCustomers();
+            var Ad = AdsServices.Instance.GetAds(ID);
+            #region AdSizesList
+            var LayoutList = new List<string>();
+            LayoutList.Add("Full Page W’ Bleed");
+            LayoutList.Add("Full Page");
+            LayoutList.Add("3/4 Page");
+            LayoutList.Add("1/2 Page Vertical");
+            LayoutList.Add("1/2 Page");
+            LayoutList.Add("1/3 Page");
+            LayoutList.Add("1/4 Page");
+            LayoutList.Add("1/4 Page Vertical");
+            LayoutList.Add("1/8 Page");
+            LayoutList.Add("Full Spread");
+            LayoutList.Add("3/4 Spread");
+            model.Layouts = LayoutList;
+            #endregion
+            #region StatusList
+            var StatusList = new List<string>();
+            StatusList.Add("Running");
+            StatusList.Add("Email");
+            StatusList.Add("Call");
+            model.StatusList = StatusList;
+            #endregion
+            model.MyAd = Ad;
+            return PartialView(model);
         }
 
         public ActionResult GetCustomers()
@@ -206,32 +260,32 @@ namespace CommunityConnections.Controllers
 
 
         [HttpPost]
-        public ActionResult Action(AdsActionViewModel model)
+        public ActionResult Action(AdsListingViewModel model)
         {
 
-            if (model.ID != 0) //update record
+            if (model.MyAd.ID != 0) //update record
             {
-                var ad = AdsServices.Instance.GetAds(model.ID);
+                var ad = AdsServices.Instance.GetAds(model.MyAd.ID);
 
-                ad.ID = model.ID;
-                ad.Layout = model.Layout;
-                ad.PageNo = model.PageNo;
-                ad.AdSize = model.AdSize;
-                ad.Status = model.Status;
-                if (model.Path.Contains("Content/paths/"))
+                ad.ID = model.MyAd.ID;
+                ad.Layout = model.MyAd.Layout;
+                ad.PageNo = model.MyAd.PageNo;
+                ad.AdSize = model.MyAd.AdSize;
+                ad.Status = model.MyAd.Status;
+                if (model.MyAd.Path.Contains("Content/paths/"))
                 {
-                    ad.Path = model.Path;
+                    ad.Path = model.MyAd.Path;
 
                 }
                 else
                 {
-                    ad.Path = "Content/paths/" + model.Path;
+                    ad.Path = "Content/paths/" + model.MyAd.Path;
 
 
                 }
-                ad.Name = model.Name;
-                ad.AdStatus = model.AdStatus;
-                ad.PageTwo = model.PageTwo;
+                ad.Name = model.MyAd.Name;
+                ad.AdStatus = model.MyAd.AdStatus;
+                ad.PageTwo = model.MyAd.PageTwo;
 
                 AdsServices.Instance.UpdateAds(ad);
 
@@ -239,15 +293,15 @@ namespace CommunityConnections.Controllers
             else
             {
                 var ad = new Ads();
-                ad.Layout = model.Layout;
-                ad.PageNo = model.PageNo;
-                ad.AdSize = model.AdSize;
-                ad.PageTwo = model.PageTwo;
-                ad.Status = model.Status;
+                ad.Layout = model.MyAd.Layout;
+                ad.PageNo = model.MyAd.PageNo;
+                ad.AdSize = model.MyAd.AdSize;
+                ad.PageTwo= model.MyAd.PageTwo;
+                ad.Status = model.MyAd.Status;
 
-                ad.Path = "Content/paths/" + model.Path;
-                ad.Name = model.Name;
-                ad.AdStatus = model.AdStatus;
+                ad.Path = "Content/paths/" + model.MyAd.Path;
+                ad.Name = model.MyAd.Name;
+                ad.AdStatus = model.MyAd.AdStatus;
 
                 AdsServices.Instance.SaveAds(ad);
             }

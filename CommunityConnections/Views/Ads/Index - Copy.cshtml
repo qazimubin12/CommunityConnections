@@ -1,7 +1,7 @@
 ﻿@model CommunityConnections.ViewModels.AdsListingViewModel
 @{
     ViewBag.Title = "Index";
-    WebGrid grid = new WebGrid(Model.Ads, rowsPerPage: 20);
+    WebGrid grid = new WebGrid(Model.Ads, rowsPerPage:20);
 }
 <div class="card">
     <div class="card-body">
@@ -10,47 +10,33 @@
         <hr />
 
 
+        <div class="row mb-3">
+            
+            <div class="col col-lg-12">
+                <form>
+                    <div class="input-group">
+                        <input type="text" name="searchterm" class="form-control" placeholder="Search." value="@Model.SearchTerm">
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
 
-        <form>
-            <div class="input-group">
-                <input type="text" name="searchterm" class="form-control" placeholder="Search." value="@Model.SearchTerm">
-                @Html.ValidationSummary("", new { @class = "text-danger" })
 
 
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="submit"><i class="mdi mdi-account-search"></i> Search</button>
+                            <a class="btn btn-outline-success" href="@Url.Action("Action","Ads")"><i class="mdi mdi-account-plus"></i>Add New</a>
+                            <a class="btn btn-outline-success" href="@Url.Action("Import","Ads")"><i class="mdi mdi-account-plus"></i>Import</a>
 
-                <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="submit"><i class="mdi mdi-account-search"></i> Search</button>
-                    <a class="btn btn-outline-success" href="@Url.Action("Action", "Ads")"><i class="mdi mdi-account-plus"></i>Add New</a>
-                    <a class="btn btn-outline-success" href="@Url.Action("Import", "Ads")"><i class="mdi mdi-account-plus"></i>Import</a>
+                        </div>
+                    </div>
 
-                </div>
+                </form>
             </div>
-
-        </form>
-    </div>
-</div>
-<br />
-<div class="row">
-    <div class="card col-md-5">
-
-        <div id="actionContainer">
-            <div class="card-body">
-                <h2 class="card-title">Ad Save/Update</h2>
-
-                @{
-                    Html.RenderPartial("ActionPartial", Model);
-                }
-            </div>
-
-
         </div>
-    </div>
-
-    <div style="margin-left:30px;" class="card col-md-6">
-        <div class="card-body">
-            <h2 class="card-title">All Ads</h2>
-            <div class="col-md-12">
+        <div id="actionContainer">
+            <div class="row">
                 <div class="col col-lg-12">
+                    @*@{
+            Html.RenderPartial("_Listing", Model);
+        }*@
 
 
                     @grid.GetHtml(
@@ -58,23 +44,23 @@
                             columns: grid.Columns(
 
 grid.Column(header: "ID", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="ID">@item.ID</div></text>),
-grid.Column(header: "Name", format:@<text><div data-id="@item.ID" data-propertyname="Name">@item.Name</div></text>),
-grid.Column(header: "Ad Size", format:@<text><div data-id="@item.ID" data-propertyname="AdSize">@item.AdSize</div></text>),
-grid.Column(header: "Path", format:@<text><div data-id="@item.ID" data-propertyname="Path">@item.Path</div></text>),
-grid.Column(header: "PageNo", format:@<text><div data-id="@item.ID" data-propertyname="PageNo">@item.PageNo</div></text>),
-grid.Column(header: "Layout", format:@<text><div data-id="@item.ID" data-propertyname="Layout">@item.Layout</div></text>),
-grid.Column(header: "Book", format:@<text><div data-id="@item.ID" data-propertyname="Book">@item.Book</div></text>),
-grid.Column(header: "Customer", format:@<text><div data-id="@item.ID" data-propertyname="Customer">@item.Customer</div></text>),
+grid.Column(header: "Name", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="Name">@item.Name</div></text>),
+grid.Column(header: "Ad Size", format:@<text><div class="editSelect" data-id="@item.ID" data-propertyname="AdSize">@item.AdSize</div></text>),
+grid.Column(header: "Path", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="Path">@item.Path</div></text>),
+grid.Column(header: "PageNo", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="PageNo">@item.PageNo</div></text>),
+grid.Column(header: "Layout", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="Layout">@item.Layout</div></text>),
+grid.Column(header: "Book", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="Book">@item.Book</div></text>),
+grid.Column(header: "Customer", format:@<text><div class="editCustomerSelect" data-id="@item.ID" data-propertyname="Customer">@item.Customer</div></text>),
 grid.Column(header: "Status", format:@<text><div class="editStatusSelect" data-id="@item.ID" data-propertyname="Status">@item.Status</div></text>),
-grid.Column(header: "Repeat", format:@<text><div data-id="@item.ID" data-propertyname="Repeat">@item.Repeat</div></text>),
-grid.Column(header: "ChoosePage", format:@<text><div data-id="@item.ID" data-propertyname="ChoosePage">@item.ChoosePage</div></text>),
-grid.Column(header: "AddGraphics", format:@<text><div data-id="@item.ID" data-propertyname="AddGraphics">@item.AddGraphics</div></text>),
-grid.Column(header: "Delux", format:@<text><div data-id="@item.ID" data-propertyname="Delux">@item.Delux</div></text>),
-grid.Column(header: "CustomSpecification", format:@<text><div data-id="@item.ID" data-propertyname="CustomSpecification">@item.CustomSpecification</div></text>),
-grid.Column(header: "Discount", format:@<text><div data-id="@item.ID" data-propertyname="Discount">@item.Discount</div></text>),
-grid.Column(header: "Total", format:@<text><div data-id="@item.ID" data-propertyname="Total">@item.Total</div></text>),
+grid.Column(header: "Repeat", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="Repeat">@item.Repeat</div></text>),
+grid.Column(header: "ChoosePage", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="ChoosePage">@item.ChoosePage</div></text>),
+grid.Column(header: "AddGraphics", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="AddGraphics">@item.AddGraphics</div></text>),
+grid.Column(header: "Delux", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="Delux">@item.Delux</div></text>),
+grid.Column(header: "CustomSpecification", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="CustomSpecification">@item.CustomSpecification</div></text>),
+grid.Column(header: "Discount", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="Discount">@item.Discount</div></text>),
+grid.Column(header: "Total", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="Total">@item.Total</div></text>),
 grid.Column(header: "AdStatus", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="AdStatus">@item.AdStatus</div></text>),
-grid.Column(header: "Action", format: @<button data-id="@item.ID" class="EditBtn btn btn-primary">EDIT</button>),
+grid.Column(header: "Action", format: @<a class="btn btn-primary" href="@Url.Action("Action","Ads",new {ID = item.ID })">EDIT</a>),
 grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("Delete","Ads",new {ID = item.ID })">DELETE</a>)
 )
 )
@@ -87,13 +73,13 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
         </div>
     </div>
 </div>
-<style>
-    .w100 {
-        width: 100px;
-    }
 
-    .margin10 {
-        margin-left: 10px;
+<style>
+    .w100{
+        width:100px;
+    }
+    .margin10{
+        margin-left:10px;
     }
 </style>
 
@@ -128,7 +114,7 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
 
 
 
-        @*$('.editSelect').editable('@Url.Action("NewAction","Ads")', {
+        $('.editSelect').editable('@Url.Action("NewAction","Ads")', {
             cssclass: 'jeditForm',
             tooltip: 'click to edit me...',
             width: 'none',
@@ -210,7 +196,7 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
             },
 
 
-        });*@
+        });
 
 
 
@@ -254,17 +240,7 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
 
 
 
-    $(".EditBtn").click(function () {
-		$.ajax({
-			url: '@Url.Action("ActionPartial", "Ads")',
-			type: "get",
-            data: { ID: $(this).attr("data-id") }
 
-		})
-		 .done(function (oData) {
-             $("#actionForm").html(oData);
-            })
-     });
 
 
 
