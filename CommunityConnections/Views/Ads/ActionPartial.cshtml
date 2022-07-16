@@ -319,7 +319,7 @@ else
                         <label class="col-md-12">Enter Page for View</label>
                         <input id="PageNoViewer" type="text" placeholder="Enter Page No" class="form-control col-md-9" />
                         <br />
-                        <button id="btnViewPageAds" class="btn btn-outline-primary">View Page Ads</button>
+                        <button id="btnViewPageAds" type="button" class="btn btn-outline-primary">View Page Ads</button>
                     </div>
                 </div>
 
@@ -465,18 +465,18 @@ else
 
     $("#btnViewPageAds").click(function () {
         var page = document.getElementById("PageNoViewer");
-		$.ajax({
-			url: '@Url.Action("GetAdsOnPage", "Ads")',
-			type: "post",
+        var pageNo = page.value;
+        
+        $.ajax({
+            url: '@Url.Action("GetAdsOnPage", "Ads")',
+            type: "get",
             data: {
-                PageNo = page.innerHTML;
+                PageNo: pageNo
             }
-		})
-		.done(function () {
-
-            window.location.href = "@Url.Action("Index","Ads")";
-
-		});
+        })
+            .done(function (data) {
+                $("#MainScreenContainer").html(data);
+            });
 	});
 
 

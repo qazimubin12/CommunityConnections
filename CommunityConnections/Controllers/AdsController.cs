@@ -75,18 +75,18 @@ namespace CommunityConnections.Controllers
             model.StatusList = StatusList;
             #endregion
 
-
-            model.ID = Ad.ID;
-            model.PageNo = Ad.PageNo;
-            model.Layout = Ad.Layout;
-            model.AdSize = Ad.AdSize;
-            model.Path = Ad.Path;
-            model.Name = Ad.Name;
-            model.AdStatus = Ad.AdStatus;
-            model.PageTwo = Ad.PageTwo;
-            model.Status = Ad.Status;
-
-
+            if (ID != 0)
+            {
+                model.ID = Ad.ID;
+                model.PageNo = Ad.PageNo;
+                model.Layout = Ad.Layout;
+                model.AdSize = Ad.AdSize;
+                model.Path = Ad.Path;
+                model.Name = Ad.Name;
+                model.AdStatus = Ad.AdStatus;
+                model.PageTwo = Ad.PageTwo;
+                model.Status = Ad.Status;
+            }
             return PartialView(model);
         }
 
@@ -128,8 +128,30 @@ namespace CommunityConnections.Controllers
 
             AdsListingViewModel model = new AdsListingViewModel();
             var AdsOnPage = AdsServices.Instance.AdsonPage(PageNo);
-            model.AdsOnPage = AdsOnPage;
+            List<Ads> TotalAdsOnPageOne = new List<Ads>();
+            List<Ads> TotalAdsOnPageTwo = new List<Ads>();
 
+            foreach (var item in AdsOnPage)
+            {
+                TotalAdsOnPageOne.Add(item);
+            }
+            model.PageOne = PageNo;
+            if(PageNo % 2 == 0)
+            {
+                --PageNo;
+            }
+            else
+            {
+                PageNo++;
+            }
+            model.Page_Two = PageNo;
+            var AdsOnPagetwo = AdsServices.Instance.AdsonPage(PageNo);
+            foreach (var item in AdsOnPagetwo)
+            {
+                TotalAdsOnPageTwo.Add(item);
+            }
+            model.AdsOnPageOne = TotalAdsOnPageOne;
+            model.AdsOnPageTwo = TotalAdsOnPageTwo;
             return PartialView("MainScreenPartial",model);
         }
 

@@ -12,7 +12,8 @@ namespace CommunityConnections.ViewModels
         public List<Ads> Ads { get; set; }
         public List<Customer> Customers { get; set; }
         public List<MyListViewModel> MyListViewModel { get; set; }
-        public List<Ads> AdsOnPage { get; set; }
+        public List<Ads> AdsOnPageOne { get; set; }
+        public List<Ads> AdsOnPageTwo { get; set; }
         public string SearchTerm { get; set; }
         public List<string> Layouts { get; set; }
         public List<string> StatusList { get; set; }
@@ -36,6 +37,9 @@ namespace CommunityConnections.ViewModels
         public float Total { get; set; }
         public string Deluxe { get; set; }
 
+
+        public int PageOne { get; set; }
+        public int Page_Two { get; set; }
     }
     public class AdsActionViewModel
     {
