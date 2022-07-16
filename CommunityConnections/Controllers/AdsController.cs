@@ -138,7 +138,7 @@ namespace CommunityConnections.Controllers
             model.PageOne = PageNo;
             if(PageNo % 2 == 0)
             {
-                --PageNo;
+                PageNo++;
             }
             else
             {

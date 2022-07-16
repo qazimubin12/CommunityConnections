@@ -136,7 +136,7 @@ namespace CommunityConnections.Services
         {
             using(var context = new CCContext())
             {
-                return context.Ads.Where(x => x.PageNo == Page && x.AdStatus == "Placed").ToList();
+                return context.Ads.Where(x => x.PageNo == Page && x.AdStatus == "Placed").OrderBy(x => x.Sort).ToList();
             }
         }
 
@@ -144,7 +144,7 @@ namespace CommunityConnections.Services
         {
             using (var context = new CCContext())
             {
-                return context.Ads.Where(x => x.PageTwo == PageTwo && x.AdStatus == "Placed").ToList();
+                return context.Ads.Where(x => x.PageTwo == PageTwo && x.AdStatus == "Placed").OrderBy(x => x.Sort).ToList();
             }
         }
 

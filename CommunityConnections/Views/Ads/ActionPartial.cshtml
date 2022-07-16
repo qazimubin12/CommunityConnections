@@ -11,7 +11,6 @@
 
 
 
-    <form id="actionForm">
         <div class="row">
 
             <input type="hidden" id="ID" name="ID" value="@Model.ID" />
@@ -19,85 +18,43 @@
             <div class="form-row col-md-12">
 
                 <div class="form-group col-md-4">
-                    @if (Model.ID == 0)
-                    {
-                        @Html.TextBox("AdDate", DateTime.Now, "{0:yyyy-MM-dd}", new { @style = "width:100%", @id = "AdDate", @class = "form-control", type = "date" })
+                    <label class="col-md-12">
+                        Ad Date
+                    </label>
+                    @Html.TextBox("AdDate", Model.AdDate, "{0:yyyy-MM-dd}", new { @style = "width:100%", @id = "AdDate", @class = "form-control", type = "date" })
+                </div>
 
-                    }
-                    else
-                    {
-                        @Html.TextBox("AdDate", Model.AdDate, "{0:yyyy-MM-dd}", new { @style = "width:100%", @id = "AdDate", @class = "form-control", type = "date" })
-
-                    }
-                </div> 
                 <div class="form-group col-md-4">
-                    <label class="col-sm-12">Ad Size</label>
-                    <select name="AdSize" id="AdSize" class="form-control">
-                        @foreach (var item in Model.Layouts)
+                    <label class="col-sm-12">Book No</label>
+                    <input required class="form-control" id="Book" value="@Model.Book" name="Book" placeholder="Enter Book Name">
+
+                </div>
+
+
+                <div class="form-group col-md-4">
+                    <label class="col-sm-12">Steady/Repeat</label>
+                    <select name="Repeat" class="form-control">
+                        @if (Model.Repeat == "Steady")
                         {
-                            if (Model.AdSize == item)
-                            {
-                                <option selected value="@item">@item</option>
-                            }
-                            else
-                            {
-                                <option value="@item">@item</option>
-                            }
-
+                            <option selected value="Steady">Steady</option>
+                            <option value="Repeat">Repeat</option>
                         }
+                        else
+                        {
+                            <option value="Steady">Steady</option>
+                            <option selected value="Repeat">Repeat</option>
+                        }
+
+
                     </select>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label class="col-sm-12">Name</label>
-                    <input required class="form-control" id="Name" value="@Model.Name" name="Name" placeholder="Enter Add Name">
-
-                </div>
-
-
-                <div class="form-group col-md-4">
-                    <label class="col-sm-12">Layout</label>
-                    <input required class="form-control" id="Layout" value="@Model.Layout" name="Layout" placeholder="Enter Layout">
 
                 </div>
             </div>
 
             <div class="form-row col-md-12">
-                <div class="form-group col-md-3">
-                    <label class="col-sm-12">Page No</label>
-                    <input required class="form-control" id="PageNo" value="@Model.PageNo" name="PageNo" placeholder="Enter Page Number">
 
-                </div>
 
-                <div class="form-group col-md-5">
-                    <label class="col-sm-12">Page No 2 (for Spread Ads)</label>
-                    <input required class="form-control" id="PageTwo" value="@Model.PageTwo" name="PageTwo" placeholder="Enter Number in Case of Full Page WBleed">
-
-                </div>
-
-                <div class="form-group col-md-5">
-                    <label>Path</label>
-                    <div class="custom-file">
-                        <input type="file" />
-                        <input  value="@Model.Path" name="Path" id="Path" type="text" />
-                        <input hidden class="form-control" value="Not Placed" name="AdStatus" id="AdStatus" />
-
-                    </div>
-                </div>
-
-                <div class="form-group col-md-5">
-                    <label class="col-sm-12">Book Name</label>
-                    <input required class="form-control" id="Book" value="@Model.Book" name="Book" placeholder="Enter Book Name">
-
-                </div>
-
-                <div class="form-group col-md-5">
-                    <label class="col-sm-12">Repeat</label>
-                    <input required class="form-control" id="PageTwo" value="@Model.Repeat" name="Repeat" placeholder="Enter Yes or No for Repeat">
-
-                </div>
-
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-7">
                     <label class="col-sm-12">Select Customer</label>
                     <select name="Customer" id="Customer" class="form-control">
                         @foreach (var item in Model.Customers)
@@ -116,6 +73,133 @@
                     </select>
                 </div>
 
+                <div class="form-group col-md-3">
+                    <a style="margin-top:29px;" href="@Url.Action("Action","Customer")" class="btn btn-primary">Add New</a>
+                </div>
+
+                <div class="form-group col-md-2">
+
+                    <a style="margin-top: 29px;margin-left: -19px;" href="@Url.Action("Index","Customer")" class="btn btn-primary">Customers</a>
+
+                </div>
+            </div>
+
+            <div class="form-row col-md-12">
+
+                <div class="form-group col-md-4">
+                    <label class="col-sm-12">Ad Size</label>
+                    <select name="AdSize" id="AdSize" class="form-control">
+                        @foreach (var item in Model.Layouts)
+                        {
+                            if (Model.AdSize == item)
+                            {
+                                <option selected value="@item">@item</option>
+                            }
+                            else
+                            {
+                                <option value="@item">@item</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+
+                <div id="deluxeDiv" class="form-group col-md-2">
+                    <label class="col-sm-12">Deluxe</label>
+
+                    @if (Model.Deluxe != null)
+                    {
+                    if (Model.Deluxe.ToString() == "on")
+                    {
+                        <input type="checkbox" checked name="Dexluxe" id="Deluxe" class="form-control" />
+
+
+                        }
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="Dexluxe" id="Deluxe" class="form-control" />
+
+                    }
+
+                </div>
+
+
+                <div class="form-group col-md-6">
+                    <label>Path</label>
+                    <div class="custom-file">
+                        <input disabled class="form-control col-md-12" value="@Model.Path" name="Path" id="Path" type="text" />
+                        <input hidden class="form-control" value="Not Placed" name="AdStatus" id="AdStatus" />
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <div class="form-row col-md-5">
+
+                <div class="form-group ">
+                    <label class="col-md-12">Enter Page for View</label>
+                    <input id="PageNoViewer" type="text" name="PageNo" value="@Model.PageNo" placeholder="Enter Page No" class="form-control" />
+                    <br />
+                    <button id="btnViewPageAds" type="button" class="btn btn-outline-primary">View Page Ads</button>
+                </div>
+            </div>
+
+            @{
+                Html.RenderPartial("MainScreenPartial", Model);
+            }
+
+            <div class="form-row col-md-12">
+
+                <div class="form-group col-md-12">
+                    <label class="col-sm-12">Ad Description</label>
+                    <input value="@Model.Name" class="form-control" id="Name" name="Name" placeholder="Enter Ad  Description">
+
+                </div>
+
+            </div>
+
+            <div class="form-row col-md-12">
+
+                <div class="form-group col-md-12">
+                    <label class="col-sm-12">Custom Specification</label>
+                    <input class="form-control" id="CustomSpecification" value="@Model.CustomSpecification" name="CustomSpecification" placeholder="Custom Specification">
+                </div>
+
+            </div>
+
+            <div class="form-row col-md-12">
+
+                <div class="form-group col-md-4">
+                    <label class="col-sm-12">Ad Graphics</label>
+                    <input required class="form-control" value="@Model.AddGraphics" id="AddGraphics" name="AddGraphics" placeholder="Enter Graphics">
+
+                </div>
+
+
+
+                <div class="form-group col-md-4">
+                    <label class="col-sm-12">Discount</label>
+                    <input required class="form-control" value="@Model.Discount" id="Discount" name="Discount" placeholder="Enter Discount">
+
+                </div>
+
+
+                <div class="form-group col-md-4">
+                    <label class="col-sm-12">Custom Price</label>
+                    <input required class="form-control" id="CustomPrice" name="CustomPrice" placeholder="Enter Custom Price">
+
+                </div>
+            </div>
+
+
+            <div class="form-row col-md-12">
                 <div class="form-group col-md-5">
                     <label class="col-sm-12">Select Status</label>
                     <select name="Status" id="Status" class="form-control">
@@ -131,92 +215,33 @@
                                 <option value="@item">@item</option>
                             }
 
+
                         }
                     </select>
                 </div>
 
-                <div class="form-group col-md-5">
-                    <label class="col-sm-12">Choose Page</label>
-                    <input required class="form-control" id="ChoosePage" value="@Model.ChoosePage" name="ChoosePage" placeholder="Choose Page">
-
-                </div>
-
-                <div class="form-group col-md-5">
-                    <label class="col-sm-12">Ad Graphics</label>
-                    <input required class="form-control" id="AddGraphics" value="@Model.AddGraphics" name="AddGraphics" placeholder="Enter Graphics">
-
-                </div>
-
-                <div class="form-group col-md-2">
-                    <label class="col-sm-12">Deluxe</label>
-
-
-                    @if (Model != null)
-                    {
-
-                        if (Model.Deluxe != null)
-                        {
-                            if (Model.Deluxe.ToString() == "on")
-                            {
-                            <input type="checkbox" checked name="Dexluxe" id="Deluxe" class="form-control" />
-
-
-                            }
-                            else
-                            {
-                            <input type="checkbox" name="Dexluxe" id="Deluxe" class="form-control" />
-
-                            }
-                        }
-                    }
-                    else
-                    {
-                        <input type="checkbox" name="Dexluxe" id="Deluxe" class="form-control" />
-
-                    }
-                    
-                </div>
-
-
-                <div class="form-group col-md-5">
-                    <label class="col-sm-12">Custom Specification</label>
-                    <input required class="form-control" id="CustomSpecification" value="@Model.CustomSpecification" name="CustomSpecification" placeholder="Custom Specification">
-
-                </div>
-
-                <div class="form-group col-md-5">
-                    <label class="col-sm-12">Discount</label>
-                    <input required class="form-control" id="Discount" value="@Model.Discount" name="Discount" placeholder="Enter Discount">
-
-                </div>
 
                 <div class="form-group col-md-5">
                     <label class="col-sm-12">Total</label>
-                    <input required class="form-control" id="Total" value="@Model.Total" name="Total" placeholder="Enter Total">
+                    <input value="@Model.Total" class="form-control" id="Total" name="Total" placeholder="Enter Total">
 
                 </div>
 
 
-
-
-
-
-
-
-
             </div>
+
+
+
+
+
+
+
+
+
+
         </div>
         <br />
-        @if (Model.ID != 0)
-        {
-            <button id="actionButton" type="button" class="btn btn-outline-primary"><i class="fas fa-save mr-1"></i> UPDATE</button>
-        }
-        else
-        {
-            <button id="actionButton" type="button" class="btn btn-outline-primary "><i class="fas fa-save mr-1"></i> SAVE</button>
-        }
-        <a href="@Url.Action("Index","Ads")" class="btn btn-outline-danger"> CANCEL</a>
-    </form>
+     
 
 
     <div class="errorDiv">
@@ -226,7 +251,6 @@
 }
 else
 {
-    <form id="actionForm">
         <div class="row">
 
             <input type="hidden" id="ID" name="ID" />
@@ -252,10 +276,8 @@ else
                 <div class="form-group col-md-4">
                     <label class="col-sm-12">Steady/Repeat</label>
                     <select name="Repeat" class="form-control">
-                        <option>
-                            Steady
-                        </option>
-                        <option>Repeat</option>
+                        <option value="Steady">Steady</option>
+                        <option value="Repeat">Repeat</option>
                     </select>
 
                 </div>
@@ -264,7 +286,7 @@ else
 
             <div class="form-row col-md-12">
 
-                <div class="form-group col-md-9">
+                <div class="form-group col-md-7">
                     <label class="col-sm-12">Select Customer</label>
                     <select name="Customer" id="Customer" class="form-control">
                         @foreach (var item in Model.Customers)
@@ -277,9 +299,15 @@ else
                         }
                     </select>
                 </div>
+
+
                 <div class="form-group col-md-3">
-                    <label style="color:white;" class="col-sm-12">add New</label>
-                    <a href="@Url.Action("Action","Customer")" class="btn btn-primary">Add New</a>
+                    <a style="margin-top:29px;" href="@Url.Action("Action","Customer")" class="btn btn-primary">Add New</a>
+                </div>
+
+                <div class="form-group col-md-2">
+
+                    <a style="margin-top: 29px;margin-left: -19px;" href="@Url.Action("Index","Customer")" class="btn btn-primary">Customers</a>
 
                 </div>
 
@@ -297,7 +325,7 @@ else
                     </select>
                 </div>
 
-                <div class="form-group col-md-2">
+                <div id="deluxeDiv" class="form-group col-md-2">
                     <label class="col-sm-12">Deluxe</label>
                     <input type="checkbox" name="Deluxe" id="Deluxe" class="form-control" />
 
@@ -313,15 +341,15 @@ else
                 </div>
             </div>
 
-                <div class="form-row">
+            <div class="form-row col-md-5">
 
-                    <div class="form-group col-md-12">
-                        <label class="col-md-12">Enter Page for View</label>
-                        <input id="PageNoViewer" type="text" placeholder="Enter Page No" class="form-control col-md-9" />
-                        <br />
-                        <button id="btnViewPageAds" type="button" class="btn btn-outline-primary">View Page Ads</button>
-                    </div>
+                <div class="form-group ">
+                    <label class="col-md-12">Enter Page for View</label>
+                    <input id="PageNoViewer" type="text" name="PageNo" placeholder="Enter Page No" class="form-control" />
+                    <br />
+                    <button id="btnViewPageAds" type="button" class="btn btn-outline-primary">View Page Ads</button>
                 </div>
+            </div>
 
 
 
@@ -331,43 +359,53 @@ else
 
 
 
+            <div class="form-row col-md-12">
+                <div class="form-group col-md-12">
+                    <label class="col-sm-12">Ad Description</label>
+                    <input required class="form-control" id="Name" name="Name" placeholder="Enter Ad  Description">
+
+                </div>
+
+
+            </div>
+
+
+            <div class="form-row col-md-12">
+                <div class="form-group col-md-12">
+                    <label class="col-sm-12">Custom Specification</label>
+                    <input required class="form-control" id="CustomSpecification" name="CustomSpecification" placeholder="Enter Custom Specification">
+
+                </div>
+
+            </div>
 
             <div class="form-row col-md-12">
 
                 <div class="form-group col-md-4">
-                    <label class="col-sm-12">Name</label>
-                    <input required class="form-control" id="Name" name="Name" placeholder="Enter Add Name">
+                    <label class="col-sm-12">Ad Graphics</label>
+                    <input required class="form-control" id="AddGraphics" name="AddGraphics" placeholder="Enter Graphics">
+
+                </div>
+
+
+
+                <div class="form-group col-md-4">
+                    <label class="col-sm-12">Discount</label>
+                    <input required class="form-control" id="Discount" name="Discount" placeholder="Enter Discount">
 
                 </div>
 
 
                 <div class="form-group col-md-4">
-                    <label class="col-sm-12">Layout</label>
-                    <input required class="form-control" id="Layout" name="Layout" placeholder="Enter Layout">
+                    <label class="col-sm-12">Custom Price</label>
+                    <input required class="form-control" id="CustomPrice" name="CustomPrice" placeholder="Enter Custom Price">
 
                 </div>
             </div>
 
+
+
             <div class="form-row col-md-12">
-                <div class="form-group col-md-3">
-                    <label class="col-sm-12">Page No</label>
-                    <input required class="form-control" id="PageNo" name="PageNo" placeholder="Enter Page Number">
-
-                </div>
-
-                <div class="form-group col-md-5">
-                    <label class="col-sm-12">Page No 2 (for Spread Ads)</label>
-                    <input required class="form-control" id="PageTwo" name="PageTwo" placeholder="Enter Number in Case of Full Page WBleed">
-
-                </div>
-
-
-
-
-
-
-
-
                 <div class="form-group col-md-5">
                     <label class="col-sm-12">Select Status</label>
                     <select name="Status" id="Status" class="form-control">
@@ -381,32 +419,6 @@ else
                     </select>
                 </div>
 
-                <div class="form-group col-md-5">
-                    <label class="col-sm-12">Choose Page</label>
-                    <input required class="form-control" id="ChoosePage" name="ChoosePage" placeholder="Choose Page">
-
-                </div>
-
-                <div class="form-group col-md-5">
-                    <label class="col-sm-12">Ad Graphics</label>
-                    <input required class="form-control" id="AddGraphics" name="AddGraphics" placeholder="Enter Graphics">
-
-                </div>
-
-
-
-
-                <div class="form-group col-md-5">
-                    <label class="col-sm-12">Custom Specification</label>
-                    <input required class="form-control" id="CustomSpecification" name="CustomSpecification" placeholder="Custom Specification">
-
-                </div>
-
-                <div class="form-group col-md-5">
-                    <label class="col-sm-12">Discount</label>
-                    <input required class="form-control" id="Discount" name="Discount" placeholder="Enter Discount">
-
-                </div>
 
                 <div class="form-group col-md-5">
                     <label class="col-sm-12">Total</label>
@@ -415,21 +427,29 @@ else
                 </div>
 
 
-
-
-
-
-
-
-
             </div>
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
             <br />
 
-            <button id="actionButton" type="button" class="btn btn-outline-primary "><i class="fas fa-save mr-1"></i> SAVE</button>
-
-            <a href="@Url.Action("Index","Ads")" class="btn btn-outline-danger"> CANCEL</a>
-</form>
+            
 }
 <script>
 
@@ -458,6 +478,17 @@ else
             window.location.href = "@Url.Action("Index","Ads")";
 
 		});
+    });
+
+
+    $('#AdSize').on('change', function () {
+        if (this.value == 'Full Page W’ Bleed' || this.value == 'Full Page' || this.value == 'Full Spread')
+        {
+            $("#deluxeDiv").show();
+        }
+        else {
+            $("#deluxeDiv").hide();
+        }
     });
 
 

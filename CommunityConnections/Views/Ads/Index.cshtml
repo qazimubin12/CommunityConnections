@@ -4,8 +4,6 @@
     WebGrid grid = new WebGrid(Model.Ads, rowsPerPage: 20);
 }
 <style>
-
-
 </style>
 <div class="card">
     <div class="card-body">
@@ -41,11 +39,22 @@
             <div class="card-body">
                 <h2 class="card-title">Ad Save/Update</h2>
 
-                @{
-                    Html.RenderPartial("ActionPartial", Model);
-                }
-            </div>
+                <form id="actionForm">
+                    @{
+                        Html.RenderPartial("ActionPartial", Model);
+                    }
+                </form>
 
+                @if (Model.ID != 0)
+                {
+                    <button id="actionButton" type="button" class="btn btn-outline-primary"><i class="fas fa-save mr-1"></i> UPDATE</button>
+                }
+                else
+                {
+                    <button id="actionButton" type="button" class="btn btn-outline-primary "><i class="fas fa-save mr-1"></i> SAVE</button>
+                }
+                <a href="@Url.Action("Index","Ads")" class="btn btn-outline-danger"> CANCEL</a>
+            </div>
 
         </div>
     </div>
@@ -101,8 +110,8 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
     }
 </style>
 
-
 <script>
+
     $(document).ready(function () {
         var oldValue = '';
         $('.edit').editable('@Url.Action("NewAction","Ads")', {
@@ -129,95 +138,7 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
                 }
             }
         })
-
-
-
-        @*$('.editSelect').editable('@Url.Action("NewAction","Ads")', {
-            cssclass: 'jeditForm',
-            tooltip: 'click to edit me...',
-            width: 'none',
-            height: 'none',
-            type: 'select',
-            submit: 'Ok',
-            data: {
-                'Full Page': 'Full Page',
-                '3/4 Page': '3/4 Page',
-                '1/2 Page Vertical': '1/2 Page Vertical',
-                '1/2 Page': '1/2 Page',
-                '1/3 Page': '1/3 Page',
-                '1/4 Page': '1/4 Page',
-                '1/4 Page Vertical': '1/4 Page Vertical',
-                '1/8 Page': '1/8 Page',
-                'Full Spread': 'Full Spread',
-                '3/4 Spread': '3/4 Spread',
-                'Full Page W’ Bleed': 'Full Page W’ Bleed'
-            },
-
-            onsubmit: function (settings, original) {
-                oldValue = original.revert;
-            },
-            submitdata: function () {
-                return {
-                    id: $(this).data('id'),
-                    PropertyName: $(this).data('propertyname')
-                }
-            },
-            callback: function (value, settings) {
-                var jsonData = $.parseJSON(value);
-                if (jsonData.status) {
-                    $(this).text(jsonData.value);
-                }
-                else {
-                    $(this).text(oldValue);
-                }
-            }
-        })
-        $('.editSelect').click(function () {
-            $('select', this).addClass('form-control pull-left w200');
-            $('button', this).addClass('btn btn-sm btn-success margin10');
-        });
-
-
-        $('.editCustomerSelect').click(function () {
-            $('select', this).addClass('form-control pull-left w500');
-            $('button', this).addClass('btn btn-sm btn-success margin10');
-
-        });
-        $('.editCustomerSelect').editable('@Url.Action("NewAction","Ads")', {
-
-            cssclass: 'jeditForm',
-            tooltip: 'click to edit me...',
-            width: 'none',
-            height: 'none',
-            type: 'select',
-            submit: 'Ok',
-            loadurl: '/Ads/GetCustomers',
-
-
-            onsubmit: function (settings, original) {
-                oldValue = original.revert;
-            },
-            submitdata: function () {
-                return {
-                    id: $(this).data('id'),
-                    PropertyName: $(this).data('propertyname')
-                };
-            },
-            callback: function (value, settings) {
-                var jsonData = $.parseJSON(value);
-                if (jsonData.status) {
-                    $(this).text(jsonData.value);
-                }
-                else {
-                    $(this).text(oldValue);
-                }
-            },
-
-
-        });*@
-
-
-
+     
         $('.editStatusSelect').editable('@Url.Action("NewAction","Ads")', {
             cssclass: 'jeditForm',
             tooltip: 'click to edit me...',
@@ -230,7 +151,6 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
                 'Email': 'Email',
                 'Call': 'Call'
             },
-
             onsubmit: function (settings, original) {
                 oldValue = original.revert;
             },
@@ -263,16 +183,24 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
 			url: '@Url.Action("ActionPartial", "Ads")',
 			type: "get",
             data: { ID: $(this).attr("data-id") }
-
 		})
 		 .done(function (oData) {
              $("#actionForm").html(oData);
             })
      });
-
-
-
-
-
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

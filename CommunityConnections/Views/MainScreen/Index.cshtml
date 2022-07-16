@@ -684,6 +684,34 @@
             revert: "invalid"
         });
 
+        $(".droppable").droppable({
+            tolerance: "intersect",
+            accept: ".draggable",
+            activeClass: "ui-state-default",
+            hoverClass: "ui-state-hover",
+            drop: function (event, ui) {
+                var AdID = ui.draggable.attr("id");
+                var AdPage = (this).id;
+                $.ajax({
+                    url: '@Url.Action("PlaceAd", "MainScreen")',
+                    type: 'POST',
+                    data: {
+                        AdID: AdID,
+                        AdPage: AdPage
+                    }
+
+
+                }).done(function () {
+
+                    window.location.href = "@Url.Action("Index","MainScreen")";
+
+
+                });
+
+            }
+
+
+        });
 
         $("#launchPad").droppable({
 
@@ -713,34 +741,6 @@
 
         });
 
-        $(".droppable").droppable({
-            tolerance: "intersect",
-            accept: ".draggable",
-            activeClass: "ui-state-default",
-            hoverClass: "ui-state-hover",
-            drop: function (event, ui) {
-                var AdID = ui.draggable.attr("id");
-                var AdPage = (this).id;
-                $.ajax({
-                    url: '@Url.Action("PlaceAd", "MainScreen")',
-                    type: 'POST',
-                    data: {
-                        AdID: AdID,
-                        AdPage: AdPage
-                    }
-
-
-                }).done(function () {
-
-                    window.location.href = "@Url.Action("Index","MainScreen")";
-
-
-                });
-
-            }
-
-
-        });
 
          $(".btnSearchAdsInPage").click(function () {
             $.ajax({
@@ -771,12 +771,7 @@
             if (event.target == adsViewModal) {
                 adsViewModal.style.display = "none";
             }
-        }
-
-        //function ViewAdd(ID) {
-        //    window.location.href = "/MainScreen/ViewAd?ID=" + ID + "";
-        //};
-
+        };
 
 
         function ShowToggle(ID, Counter) {
