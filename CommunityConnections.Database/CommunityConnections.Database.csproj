@@ -160,6 +160,10 @@
     <Compile Include="Migrations\202207151227268_deluxe.designer.cs">
       <DependentUpon>202207151227268_deluxe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207161644304_adfieldsupdated.cs" />
+    <Compile Include="Migrations\202207161644304_adfieldsupdated.designer.cs">
+      <DependentUpon>202207161644304_adfieldsupdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -254,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207151227268_deluxe.resx">
       <DependentUpon>202207151227268_deluxe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207161644304_adfieldsupdated.resx">
+      <DependentUpon>202207161644304_adfieldsupdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

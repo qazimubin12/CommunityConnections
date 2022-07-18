@@ -236,7 +236,6 @@ namespace CommunityConnections.Controllers
             var ad = AdsServices.Instance.GetAds(ID);
             model.ID = ad.ID;
             model.PageNo = ad.PageNo;
-            model.Layout = ad.Layout;
             model.AdSize = ad.AdSize;
             model.Path = ad.Path;
             model.Name = ad.Name;

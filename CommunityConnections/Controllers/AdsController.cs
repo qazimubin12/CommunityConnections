@@ -79,13 +79,20 @@ namespace CommunityConnections.Controllers
             {
                 model.ID = Ad.ID;
                 model.PageNo = Ad.PageNo;
-                model.Layout = Ad.Layout;
                 model.AdSize = Ad.AdSize;
                 model.Path = Ad.Path;
                 model.Name = Ad.Name;
                 model.AdStatus = Ad.AdStatus;
                 model.PageTwo = Ad.PageTwo;
                 model.Status = Ad.Status;
+                model.Discount = Ad.Discount;
+                model.AdDate = Ad.AdDate;
+                model.AddGraphics = Ad.AddGraphics;
+                model.Book = Ad.Book;
+                model.Customer = Ad.Customer;
+                model.Repeat = Ad.Repeat;
+                model.Status = Ad.Status;
+                model.Total = Ad.Total;
             }
             return PartialView(model);
         }
@@ -123,7 +130,7 @@ namespace CommunityConnections.Controllers
 
 
 
-        public ActionResult GetAdsOnPage(int PageNo)
+        public ActionResult GetAdsOnPage(int PageNo, string AdSize, string Path)
         {
 
             AdsListingViewModel model = new AdsListingViewModel();
@@ -136,20 +143,32 @@ namespace CommunityConnections.Controllers
                 TotalAdsOnPageOne.Add(item);
             }
             model.PageOne = PageNo;
-            if(PageNo % 2 == 0)
-            {
-                PageNo++;
-            }
-            else
-            {
-                PageNo++;
-            }
+            PageNo++;
             model.Page_Two = PageNo;
             var AdsOnPagetwo = AdsServices.Instance.AdsonPage(PageNo);
             foreach (var item in AdsOnPagetwo)
             {
                 TotalAdsOnPageTwo.Add(item);
             }
+
+            if (Path != "")
+            {
+                var Ad = new Ads();
+                if (Path.Contains("Content/paths/"))
+                {
+                    Ad.Path = Path;
+
+                }
+                else
+                {
+                    Ad.Path = "Content/paths/" + Path;
+                }
+                Ad.AdSize = AdSize;
+                Ad.PageNo = PageNo;
+                string some = DateTime.Now.ToString("ddMMyyyyhhmmss").ToString();
+                Ad.Sort = some;
+                TotalAdsOnPageOne.Add(Ad);
+            } 
             model.AdsOnPageOne = TotalAdsOnPageOne;
             model.AdsOnPageTwo = TotalAdsOnPageTwo;
             return PartialView("MainScreenPartial",model);
@@ -191,7 +210,6 @@ namespace CommunityConnections.Controllers
                 var ad = AdsServices.Instance.GetAds(ID);
                 model.ID = ad.ID;
                 model.PageNo = ad.PageNo;
-                model.Layout = ad.Layout;
                 model.AdSize = ad.AdSize;
                 model.Path = ad.Path;
                 model.Name = ad.Name;
@@ -250,7 +268,6 @@ namespace CommunityConnections.Controllers
                         Ads.AdSize = ((Excel.Range)range.Cells[row, 3]).Text;
                         
                         Ads.PageNo = int.Parse(((Excel.Range)range.Cells[row, 1]).Text);
-                        Ads.Layout = ((Excel.Range)range.Cells[row, 2]).Text;
                         Ads.Path = ((Excel.Range)range.Cells[row, 4]).Text;
                         Ads.Name = ((Excel.Range)range.Cells[row, 5]).Text;
                         Ads.AdStatus = "Not Placed";
@@ -314,7 +331,6 @@ namespace CommunityConnections.Controllers
                 var ad = AdsServices.Instance.GetAds(model.ID);
 
                 ad.ID = model.ID;
-                ad.Layout = model.Layout;
                 ad.PageNo = model.PageNo;
                 ad.AdSize = model.AdSize;
                 ad.Status = model.Status;
@@ -330,25 +346,67 @@ namespace CommunityConnections.Controllers
 
                 }
                 ad.Name = model.Name;
-                ad.AdStatus = model.AdStatus;
-                ad.PageTwo = model.PageTwo;
-               
+                ad.AdStatus = "Placed";
+                if(ad.AdSize == "Full Spread" || ad.AdSize == "3/4 Spread")
+                {
+                    ad.PageTwo = ad.PageNo + 1;
+                }
+                ad.AdDate = model.AdDate;
+                ad.AddGraphics = model.AddGraphics;
+                ad.Book = model.Book;
+                ad.Customer = model.Customer;
+                ad.CustomSpecification = model.CustomSpecification;
+                if(model.Deluxe == "on")
+                {
+                    ad.Deluxe = true;
+                }
+                else
+                {
+                    ad.Deluxe = false;
+                }
+                ad.Discount = model.Discount;
+                ad.Total = model.Total;
                 AdsServices.Instance.UpdateAds(ad);
 
             }
             else
             {
                 var ad = new Ads();
-                ad.Layout = model.Layout;
                 ad.PageNo = model.PageNo;
                 ad.AdSize = model.AdSize;
-                ad.PageTwo= model.PageTwo;
                 ad.Status = model.Status;
+                if (model.Path.Contains("Content/paths/"))
+                {
+                    ad.Path = model.Path;
 
-                ad.Path = "Content/paths/" + model.Path;
+                }
+                else
+                {
+                    ad.Path = "Content/paths/" + model.Path;
+
+
+                }
                 ad.Name = model.Name;
-                ad.AdStatus = model.AdStatus;
-
+                ad.AdStatus = "Placed";
+                if (ad.AdSize == "Full Spread" || ad.AdSize == "3/4 Spread")
+                {
+                    ad.PageTwo = ad.PageNo + 1;
+                }
+                ad.AdDate = model.AdDate;
+                ad.AddGraphics = model.AddGraphics;
+                ad.Book = model.Book;
+                ad.Customer = model.Customer;
+                ad.CustomSpecification = model.CustomSpecification;
+                if (model.Deluxe == "on")
+                {
+                    ad.Deluxe = true;
+                }
+                else
+                {
+                    ad.Deluxe = false;
+                }
+                ad.Discount = model.Discount;
+                ad.Total = model.Total;
                 AdsServices.Instance.SaveAds(ad);
             }
 
@@ -403,83 +461,19 @@ namespace CommunityConnections.Controllers
 
             if (Ad != null)
             {
-                if(propertyname == "PageNo")
-                {
-                    Ad.PageNo = int.Parse(value);
-                }
-                if(propertyname == "Layout")
-                {
-                    Ad.Layout = value;
-                }
-
-                if (propertyname == "AdSize")
-                {
-                    Ad.AdSize = value;
-                }
-                if (propertyname == "Path")
-                {
-                    Ad.Path = value;
-                }
-
-                if (propertyname == "Name")
-                {
-                    Ad.Name = value;
-                }
-
-                if (propertyname == "PageTwo")
-                {
-                    Ad.PageTwo = int.Parse(value);
-                }
-
+                
 
                 if (propertyname == "Status")
                 {
                     Ad.Status = value;
                 }
 
-           
-
-                if (propertyname == "Book")
-                {
-                    Ad.Book = value;
-                }
-
-                if (propertyname == "Deluxe")
-                {
-                    Ad.Deluxe = bool.Parse(value);
-                }
-                if (propertyname == "Repeat")
-                {
-                    Ad.Repeat = value;
-                }
-                if(propertyname == "Customer")
-                {
-                    Ad.Customer = value;
-                }
+                       
                 if (propertyname == "AdStatus")
                 {
                     Ad.AdStatus = value;
                 }
-                if (propertyname == "ChoosePage")
-                {
-                    Ad.ChoosePage = int.Parse(value);
-                }
-                if (propertyname == "AddGraphics")
-                {
-                    Ad.AddGraphics = value;
-                }
-                if (propertyname == "CustomSpecification")
-                {
-                    Ad.CustomSpecification = value;
-                }
-                if (propertyname == "Discount")
-                {
-                    Ad.Discount = float.Parse(value);
-                }
-                if (propertyname == "Total")
-                {
-                    Ad.Total = float.Parse(value);
-                }
+                
                 
 
                 AdsServices.Instance.UpdateAds(Ad);

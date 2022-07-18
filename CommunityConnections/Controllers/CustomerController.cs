@@ -67,7 +67,7 @@ namespace CommunityConnections.Controllers
                 model.Cards = null;
                 model.CustomPricings = null;
                 model.Ads = null;
-                return PartialView("Action", model);
+                return View("Action", model);
             }
         }
 
