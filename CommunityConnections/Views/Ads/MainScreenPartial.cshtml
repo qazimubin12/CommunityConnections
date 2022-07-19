@@ -14,8 +14,8 @@
 
     .pages {
         background-color: white;
-        width: 1.62in;
-        height: 2.68in;
+        width: 2.62in;
+        height: 4.68in;
         border: solid 1px;
         float: left;
     }
@@ -41,76 +41,104 @@
 
     .fullsized {
         position: relative;
-        width: 1.625in;
-        height: 2.66in;
+        width: 2.60in;
+        height: 4.65in;
         padding: 0px;
     }
 
     .fullbleed {
         position: relative;
-        width: 3.22in;
-        height: 2.66in;
+        width: 5.22in;
+        height: 3.65in;
         padding: 0px;
     }
 
     .fullpageAD {
         margin-top: 12px;
         margin-left: 0px;
-        height: 2.4in;
-        width: 1.375in;
+        height: 4.4in;
+        width: 2.375in;
     }
 
     .Ad1by3 {
         margin-top: 12px;
         margin-left: 0px;
-        height: 0.73in;
-        width: 1.375in;
+        height: 1.35in;
+        width: 2.375in;
     }
 
     .Ad3by4 {
         margin-top: 12px;
         margin-left: 0px;
-        height: 1.75in;
-        width: 1.375in;
+        height: 2.75in;
+        width: 2.375in;
     }
 
     .AD1by8 {
         margin-top: 12px;
-        margin-left: 0px;
-        height: 0.5625in;
-        width: 0.65in;
+        margin-left: 10px;
+        height: 1.5625in;
+        width: 1.65in;
     }
 
     .Ad1By4Horizontal {
         margin-top: 12px;
         margin-left: 0px;
-        height: 0.5625in;
-        width: 1.375in;
+        height: 1.5625in;
+        width: 2.375in;
     }
 
     .Ad1By4Vertical {
         margin-top: 12px;
         margin-left: 0px;
-        height: 1.1875in;
-        width: 0.65in;
+        height: 2.1875in;
+        width: 1.65in;
     }
 
     .AdHalfPageVertical {
         margin-top: 12px;
         margin-left: 0px;
-        height: 2.425in;
-        width: 0.65in;
+        height: 3.425in;
+        width: 1.65in;
     }
 
     .AdHalfPageHorizontal {
         margin-top: 12px;
         margin-left: 0px;
-        height: 1.1875in;
-        width: 1.375in;
+        height: 2.1875in;
+        width: 2.375in;
     }
 </style>
 
-<div id="MainScreenContainer" class="form-row ">
+
+<div id="MainScreenContainer" class="form-row">
+
+    <div class="form-row col-md-12 ">
+
+        <div class="col-md-6" style=" margin-left: -80px; ">
+           
+                <label class="col-md-12" style="color:white;">Ad</label>
+                <input id="files" style="display:none;" type="file" />
+                <label id="uploadAdlabel" for="files" class="btn btn-success">Upload Ad</label>
+            
+        </div>
+        <div class="col-md-6" style=" margin-left: -80px; ">
+            <div class="form-group">
+
+                <label>Path</label>
+
+                <div style=" width: 450px; " class="custom-file">
+
+                
+                    <input disabled class="form-control col-md-12" value="@Model.Path" name="Path" id="Path" type="text" />
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
     <div class="form-group col-md-12">
         <div id="@Model.PageOne" class="droppable pages ">
             @if (Model.AdsOnPageOne != null)
@@ -262,7 +290,7 @@
                         </div>
 
                     }
-                       else if (item.AdSize == "Full Page W’ Bleed")
+                    else if (item.AdSize == "Full Page W’ Bleed")
                     {
                         <div id="@item.ID" class="draggable ">
                             <div class="col-md-12">
@@ -376,15 +404,13 @@
                 }
             }
         </div>
-        @if (Model.AdsOnPageOne == null || Model.AdsOnPageTwo == null)
-        {
-            <input id="files" style="display:none;" type="file" />
-            <label id="uploadAdlabel" for="files" style="position: absolute; height: 44px; margin-left: -210px; margin-top: 100px; " class="btn btn-success">Upload Ad</label>
-        }
+
     </div>
 </div>
 
 
 
+<script>
 
+</script>
 

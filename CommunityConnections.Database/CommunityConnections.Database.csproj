@@ -164,6 +164,14 @@
     <Compile Include="Migrations\202207161644304_adfieldsupdated.designer.cs">
       <DependentUpon>202207161644304_adfieldsupdated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207190534066_addescription.cs" />
+    <Compile Include="Migrations\202207190534066_addescription.designer.cs">
+      <DependentUpon>202207190534066_addescription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207190536284_mistakefix.cs" />
+    <Compile Include="Migrations\202207190536284_mistakefix.designer.cs">
+      <DependentUpon>202207190536284_mistakefix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -261,6 +269,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207161644304_adfieldsupdated.resx">
       <DependentUpon>202207161644304_adfieldsupdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207190534066_addescription.resx">
+      <DependentUpon>202207190534066_addescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207190536284_mistakefix.resx">
+      <DependentUpon>202207190536284_mistakefix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

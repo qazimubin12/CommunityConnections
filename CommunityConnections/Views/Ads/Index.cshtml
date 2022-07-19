@@ -10,57 +10,58 @@
         <h2>Ads</h2>
         <p>For File Edit Copy File Name with Extension and add before >> Content/paths/</p>
         <hr />
-
-
-
-        <form>
-            <div class="input-group">
-                <input type="text" name="searchterm" class="form-control" placeholder="Search." value="@Model.SearchTerm">
-                @Html.ValidationSummary("", new { @class = "text-danger" })
-
-
-
-                <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="submit"><i class="mdi mdi-account-search"></i> Search</button>
-                    <a class="btn btn-outline-success" href="@Url.Action("Action", "Ads")"><i class="mdi mdi-account-plus"></i>Add New</a>
-                    <a class="btn btn-outline-success" href="@Url.Action("Import", "Ads")"><i class="mdi mdi-account-plus"></i>Import</a>
-
-                </div>
-            </div>
-
-        </form>
     </div>
 </div>
-<br />
-<div class="row">
-    <div class="card col-md-5">
+<div class="row col-md-12">
+    <form id="actionForm">
+        <div class="card col-md-6" style="float:left;margin-right:20px;">
 
-        <div id="actionContainer">
-            <div class="card-body">
-                <h2 class="card-title">Ad Save/Update</h2>
+            @{
+                Html.RenderPartial("ActionPartial", Model);
+            }
 
-                <form id="actionForm">
-                    @{
-                        Html.RenderPartial("ActionPartial", Model);
-                    }
-                </form>
-
-                @if (Model.ID != 0)
-                {
-                    <button id="actionButton" type="button" class="btn btn-outline-primary"><i class="fas fa-save mr-1"></i> UPDATE</button>
-                }
-                else
-                {
-                    <button id="actionButton" type="button" class="btn btn-outline-primary "><i class="fas fa-save mr-1"></i> SAVE</button>
-                }
-                <a href="@Url.Action("Index","Ads")" class="btn btn-outline-danger"> CANCEL</a>
             </div>
 
-        </div>
-    </div>
+            <div class="card col-md-5">
+                <div class="card-body">
 
-    <div style="margin-left:30px;" class="card col-md-6">
+                    @{
+                        Html.RenderPartial("MainScreenPartial", Model);
+                    }
+                    @if (Model.ID != 0)
+                    {
+                        <button id="actionButton" type="button" class="btn btn-outline-primary"><i class="fas fa-save mr-1"></i> UPDATE</button>
+                    }
+                    else
+                    {
+                        <button id="actionButton" type="button" class="btn btn-outline-primary "><i class="fas fa-save mr-1"></i> SAVE</button>
+                    }
+                    <a href="@Url.Action("Index","Ads")" class="btn btn-outline-danger"> CANCEL</a>
+                </div>
+            </div>
+</form>
+
+</div>
+<div class="row">
+    <div class="card col-md-12">
         <div class="card-body">
+            <form>
+                <div class="input-group">
+                    <input type="text" name="searchterm" class="form-control" placeholder="Search." value="@Model.SearchTerm">
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+
+
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="submit"><i class="mdi mdi-account-search"></i> Search</button>
+                        <a class="btn btn-outline-success" href="@Url.Action("Action", "Ads")"><i class="mdi mdi-account-plus"></i>Add New</a>
+                        <a class="btn btn-outline-success" href="@Url.Action("Import", "Ads")"><i class="mdi mdi-account-plus"></i>Import</a>
+
+                    </div>
+                </div>
+
+            </form>
+            <hr />
             <h2 class="card-title">All Ads</h2>
             <div class="col-md-12">
                 <div class="col col-lg-12">
@@ -82,6 +83,7 @@ grid.Column(header: "Repeat", format:@<text><div data-id="@item.ID" data-propert
 grid.Column(header: "AddGraphics", format:@<text><div data-id="@item.ID" data-propertyname="AddGraphics">@item.AddGraphics</div></text>),
 grid.Column(header: "Deluxe", format:@<text><div data-id="@item.ID" data-propertyname="Deluxe">@item.Deluxe</div></text>),
 grid.Column(header: "CustomSpecification", format:@<text><div data-id="@item.ID" data-propertyname="CustomSpecification">@item.CustomSpecification</div></text>),
+grid.Column(header: "AdDescription", format:@<text><div data-id="@item.ID" data-propertyname="AdDescription">@item.AdDescription</div></text>),
 grid.Column(header: "Discount", format:@<text><div data-id="@item.ID" data-propertyname="Discount">@item.Discount</div></text>),
 grid.Column(header: "Total", format:@<text><div data-id="@item.ID" data-propertyname="Total">@item.Total</div></text>),
 grid.Column(header: "AdStatus", format:@<text><div class="edit" data-id="@item.ID" data-propertyname="AdStatus">@item.AdStatus</div></text>),
@@ -136,7 +138,7 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
                 }
             }
         })
-     
+
         $('.editStatusSelect').editable('@Url.Action("NewAction","Ads")', {
             cssclass: 'jeditForm',
             tooltip: 'click to edit me...',
@@ -175,16 +177,51 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
     });
 
 
+    $("#actionButton").click(function () {
+        var Path = $("#Path").val();
+        $.ajax({
+            url: '@Url.Action("Action", "Ads")',
+            type: "post",
+            data: $("#actionForm").serialize() + "&Path=" + Path
+            
+        })
+            .done(function () {
+
+                window.location.href = "@Url.Action("Index","Ads")";
+
+            })
+            .fail(function () {
+                console.log("error");
+            });
+
+    });
+
+
 
     $(".EditBtn").click(function () {
-		$.ajax({
-			url: '@Url.Action("ActionPartial", "Ads")',
-			type: "get",
+
+        var path = document.getElementById("Path");
+        $.ajax({
+            url: '@Url.Action("ActionPartial", "Ads")',
+            type: "get",
             data: { ID: $(this).attr("data-id") }
-		})
-		 .done(function (oData) {
-             $("#actionForm").html(oData);
-            })
+        })
+            .done(function (oData) {
+                $("#actionContainer").html(oData);
+            });
+
+
+        $.ajax({
+            url: '@Url.Action("GetPathOfAd", "Ads")',
+            type: "get",
+            data: { ID: $(this).attr("data-id") }
+        })
+            .done(function (oData) {
+                path.value = oData;
+            });
+
+
+
      });
 </script>
 

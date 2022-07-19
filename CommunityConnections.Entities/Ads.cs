@@ -16,7 +16,6 @@ namespace CommunityConnections.Entities
         public string Path { get; set; }
         public string AdStatus { get; set; }
         public string Sort { get; set; }
-
         public string Book { get; set; }
         public string Repeat { get; set; }
         public string Customer { get; set; }
@@ -26,5 +25,6 @@ namespace CommunityConnections.Entities
         public float Total { get; set; }
         public string Status { get; set; }
         public bool Deluxe { get; set; }
+        public string AdDescription { get; set; }
     }
 }
