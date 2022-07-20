@@ -1966,10 +1966,8 @@
     <Content Include="Views\Ads\Delete.cshtml" />
     <Content Include="Views\Ads\Import.cshtml" />
     <Content Include="Views\MainScreen\Index.cshtml" />
-    <Content Include="Views\MainScreen\SelectLayout.cshtml" />
     <Content Include="Views\MainScreen\ViewAd.cshtml" />
     <Content Include="Views\MainScreen\AdsView.cshtml" />
-    <Content Include="Views\MainScreen\Index2.cshtml" />
     <Content Include="Views\Section\Index.cshtml" />
     <Content Include="Views\Section\Delete.cshtml" />
     <Content Include="Views\Section\_Listing.cshtml" />

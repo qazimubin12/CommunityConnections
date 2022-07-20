@@ -84,21 +84,22 @@ namespace CommunityConnections.Controllers
                 model.ID = Ad.ID;
                 model.PageNo = Ad.PageNo;
                 model.AdSize = Ad.AdSize;
-                string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority +Request.ApplicationPath.TrimEnd('/') + "/";
+                model.WithoutBaseURLPath = Ad.Path;
+                string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
                 if (Ad.Path.Contains(baseUrl))
                 {
                     model.Path = Ad.Path;
+
                 }
                 else
                 {
-                    model.Path = baseUrl + Ad.Path;
+                    model.Path = baseUrl+Ad.Path;
                 }
+
                 model.Name = Ad.Name;
                 model.AdDescription = Ad.AdDescription;
                 model.AdStatus = Ad.AdStatus;
                 model.PageTwo = Ad.PageTwo;
-                model.Status = Ad.Status;
-                
                 model.Discount = Ad.Discount;
                 model.AdDate = Ad.AdDate;
                 model.AddGraphics = Ad.AddGraphics;
@@ -340,7 +341,7 @@ namespace CommunityConnections.Controllers
 
 
         [HttpPost]
-        public ActionResult Action(AdsListingViewModel model, string Path)
+        public ActionResult Action(AdsListingViewModel model, string Path,string WithoutBaseURLPath)
         {
 
             if (model.ID != 0) //update record
@@ -361,24 +362,16 @@ namespace CommunityConnections.Controllers
                 ad.PageNo = model.PageNo;
                 ad.AdSize = model.AdSize;
                 ad.Status = model.Status;
-                if (model.Path.Contains("Content/paths/"))
+                if (model.WithoutBaseURLPath.Contains("Content/paths/"))
                 {
-                    ad.Path = model.Path;
+                    ad.Path = model.WithoutBaseURLPath;
                 }
                 else
                 {
-                    ad.Path = "Content/paths/" + model.Path;
+                    ad.Path = "Content/paths/" + model.WithoutBaseURLPath;
                 }
 
-                string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
-                if (model.Path.Contains(baseUrl))
-                {
-                    ad.Path = model.Path;
-                }
-                else
-                {
-                    ad.Path = baseUrl + model.Path;
-                }
+              
                 ad.AdStatus = "Not Placed";
                 if (ad.AdSize == "Full Spread" || ad.AdSize == "3/4 Spread")
                 {
@@ -389,7 +382,6 @@ namespace CommunityConnections.Controllers
                 ad.Book = model.Book;
                 ad.Repeat = model.Repeat;
                 ad.Customer = model.Customer;
-                ad.AdStatus = model.AdStatus;
                 ad.CustomSpecification = model.CustomSpecification;
                 if (model.Deluxe.ToString() == "on")
                 {
@@ -403,6 +395,7 @@ namespace CommunityConnections.Controllers
                 ad.Total = model.Total;
 
                 AdsServices.Instance.UpdateAds(ad);
+                Session["AdID"] = ad.ID;
 
             }
             else
@@ -411,7 +404,6 @@ namespace CommunityConnections.Controllers
                 ad.PageNo = model.PageNo;
                 ad.AdSize = model.AdSize;
                 ad.Status = model.Status;
-                ad.AdStatus = model.AdStatus;
                 ad.Name = "AD" + DateTime.Now.ToString("hh:mm") + model.Path;
 
                 if (model.Path.Contains("Content/paths/"))
@@ -423,15 +415,7 @@ namespace CommunityConnections.Controllers
                     ad.Path = "Content/paths/" + model.Path;
                 }
 
-                string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
-                if (model.Path.Contains(baseUrl))
-                {
-                    ad.Path = model.Path;
-                }
-                else
-                {
-                    ad.Path = baseUrl + model.Path;
-                }
+
                 ad.AdStatus = "Not Placed";
                 if (ad.AdSize == "Full Spread" || ad.AdSize == "3/4 Spread")
                 {
@@ -455,13 +439,17 @@ namespace CommunityConnections.Controllers
                 ad.Total = model.Total;
                 ad.Repeat = model.Repeat;
                 AdsServices.Instance.SaveAds(ad);
+                Session["AdID"] = ad.ID;
             }
 
-            return RedirectToAction("Index", "Ads");
+           
 
+            return RedirectToAction("Index","MainScreen");
 
         }
 
+
+     
 
         public ActionResult LoadAdSizes(int id)
         {
@@ -577,9 +565,18 @@ namespace CommunityConnections.Controllers
         {
             var Ad = AdsServices.Instance.GetAds(ID);
             string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
-            string path = baseUrl + Ad.Path;
+            string path = baseUrl+Ad.Path;
             return Json(path, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public JsonResult GetWithoutBaseURLPathOfAd(int ID)
+        {
+            var Ad = AdsServices.Instance.GetAds(ID);
+            string path = Ad.Path;
+            return Json(path, JsonRequestBehavior.AllowGet);
+        }
+
 
 
 

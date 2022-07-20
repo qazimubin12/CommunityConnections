@@ -20,6 +20,7 @@ namespace CommunityConnections.ViewModels
         public List<MyList> CompleteList { get; set; }
 
         public Ads Ad { get; set; }
+        public Ads NotPlacedAD { get; set; }
         public int Page { get; set; } 
 
         public List<string> Layouts { get; set; }

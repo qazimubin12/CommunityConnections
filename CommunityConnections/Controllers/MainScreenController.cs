@@ -21,7 +21,15 @@ namespace CommunityConnections.Controllers
           
             model.NoOfPages = Pages;
             model.PlacedAds = AdsServices.Instance.GetPlacedAdss();
-            model.NonPlacedAds = AdsServices.Instance.GetNotPlacedAdss(SearchTerm);
+            if(Session["AdID"] != null)
+            {
+                int LastsavedAdID = int.Parse(Session["AdID"].ToString());
+                model.NotPlacedAD = AdsServices.Instance.GetNotPlacedAd(LastsavedAdID);
+            }
+            else
+            {
+                model.NonPlacedAds = AdsServices.Instance.GetNotPlacedAdss(SearchTerm);
+            }
             return View(model);
         }
 
@@ -194,7 +202,7 @@ namespace CommunityConnections.Controllers
 
             #endregion
 
-
+            Session["AdID"] = null;
             return RedirectToAction("Index", "MainScreen");
             
 

@@ -24,6 +24,7 @@ namespace CommunityConnections.ViewModels
         public int PageTwo { get; set; }
         public string AdSize { get; set; }
         public string Path { get; set; }
+        public string WithoutBaseURLPath { get; set; }
         public string AdStatus { get; set; }
         public string Sort { get; set; }
         public string Book { get; set; }

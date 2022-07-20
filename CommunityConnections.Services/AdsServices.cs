@@ -95,6 +95,18 @@ namespace CommunityConnections.Services
             return Adss;
         }
 
+
+        public Ads GetNotPlacedAd(int ID)
+        {
+            Ads Ad = null;
+            using (var context = new CCContext())
+            {
+                Ad = context.Ads.Where(x => x.AdStatus == "Not Placed" && x.ID == ID).FirstOrDefault(); 
+                          
+            }
+            return Ad;
+        }
+
         public List<Ads> GetPlacedAdss(string SearchTerm = "")
         {
             List<Ads> Adss = null;

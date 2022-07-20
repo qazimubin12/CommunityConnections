@@ -37,6 +37,7 @@
                         <button id="actionButton" type="button" class="btn btn-outline-primary "><i class="fas fa-save mr-1"></i> SAVE</button>
                     }
                     <a href="@Url.Action("Index","Ads")" class="btn btn-outline-danger"> CANCEL</a>
+                    <button type="button" disabled class="btn btn-danger"> Classified Ads</button>
                 </div>
             </div>
 </form>
@@ -179,16 +180,15 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
 
     $("#actionButton").click(function () {
         var Path = $("#Path").val();
+        var withoutbasePath = $("#WithoutBaseURLPath").val();
         $.ajax({
             url: '@Url.Action("Action", "Ads")',
             type: "post",
-            data: $("#actionForm").serialize() + "&Path=" + Path
-            
+            data: $("#actionForm").serialize() + "&Path=" + Path + "&WithoutBaseURLPath=" + withoutbasePath
+
         })
             .done(function () {
-
-                window.location.href = "@Url.Action("Index","Ads")";
-
+                window.location.href = "@Url.Action("Index", "MainScreen")";
             })
             .fail(function () {
                 console.log("error");
@@ -199,8 +199,9 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
 
 
     $(".EditBtn").click(function () {
-
+        var ele = document.getElementById("actionForm");
         var path = document.getElementById("Path");
+        var withoutbasePath = document.getElementById("WithoutBaseURLPath");
         $.ajax({
             url: '@Url.Action("ActionPartial", "Ads")',
             type: "get",
@@ -218,6 +219,18 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
         })
             .done(function (oData) {
                 path.value = oData;
+                window.scrollTo(ele.offsetLeft, ele.offsetTop);
+            });
+
+
+
+        $.ajax({
+            url: '@Url.Action("GetWithoutBaseURLPathOfAd", "Ads")',
+            type: "get",
+            data: { ID: $(this).attr("data-id") }
+        })
+            .done(function (oData) {
+                withoutbasePath.value = oData;
             });
 
 

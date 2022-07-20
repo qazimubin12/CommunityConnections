@@ -232,17 +232,30 @@
                     </tr>
                 </thead>
                 <tbody>
-
-                    @foreach (var item in Model.NonPlacedAds)
+                    @if (Model.NonPlacedAds != null)
                     {
-                        <tr>
+                        foreach (var item in Model.NonPlacedAds)
+                        {
+                            <tr>
 
-                            <td id="@item.ID" class="draggable">
-                                <div>
-                                    <h4 style="font-size:80px;">@item.Name</h4>
-                                </div>
-                            </td>
-                        </tr>
+                                <td id="@item.ID" class="draggable">
+                                    <div>
+                                        <h4 style="font-size:47px;">@item.Name</h4>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                <tr>
+
+                    <td id="@Model.NotPlacedAD.ID" class="draggable">
+                        <div>
+                            <h4 style="font-size:47px;">@Model.NotPlacedAD.Name</h4>
+                        </div>
+                    </td>
+                </tr>
                     }
                 </tbody>
             </table>
