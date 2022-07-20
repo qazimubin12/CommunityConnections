@@ -20,6 +20,7 @@ namespace CommunityConnections.Database
         public DbSet<Section> Sections { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<CustomPricings> CustomPricings { get; set; }
+        public DbSet<Book> Books { get; set; }
     }
 
 }

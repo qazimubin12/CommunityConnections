@@ -172,6 +172,14 @@
     <Compile Include="Migrations\202207190536284_mistakefix.designer.cs">
       <DependentUpon>202207190536284_mistakefix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207200924524_bookadded.cs" />
+    <Compile Include="Migrations\202207200924524_bookadded.designer.cs">
+      <DependentUpon>202207200924524_bookadded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207200928259_adiD.cs" />
+    <Compile Include="Migrations\202207200928259_adiD.designer.cs">
+      <DependentUpon>202207200928259_adiD.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -275,6 +283,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207190536284_mistakefix.resx">
       <DependentUpon>202207190536284_mistakefix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207200924524_bookadded.resx">
+      <DependentUpon>202207200924524_bookadded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207200928259_adiD.resx">
+      <DependentUpon>202207200928259_adiD.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

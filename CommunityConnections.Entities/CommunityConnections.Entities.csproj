@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Ads.cs" />
     <Compile Include="BaseEntity.cs" />
+    <Compile Include="Book.cs" />
     <Compile Include="Card.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="CustomPricings.cs" />

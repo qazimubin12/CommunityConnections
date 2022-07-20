@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdsServices.cs" />
+    <Compile Include="BookServices.cs" />
     <Compile Include="CPServices.cs" />
     <Compile Include="CardServices.cs" />
     <Compile Include="CustomerServices.cs" />
