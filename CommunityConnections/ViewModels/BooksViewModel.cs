@@ -14,8 +14,10 @@ namespace CommunityConnections.ViewModels
 
     public class BooksActionViewModel
     {
+        public List<Ads> Ads { get; set; }
         public int ID { get; set; }
         public string BookName { get; set; }
-        public int AdID  { get; set; }
     }
+
+   
 }

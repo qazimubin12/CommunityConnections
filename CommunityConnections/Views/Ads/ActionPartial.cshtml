@@ -23,8 +23,7 @@
 
                         <div class="form-group col-md-7">
                             <label class="col-sm-12">Select Customer</label>
-                            @Html.Hidden("ID")
-                            <input type="text" name="Customer" list="colors" class="form-control" id="co" value="@Model.Name" />
+                            <input type="text" name="Customer" list="customers" class="form-control" id="Customer" value="@Model.Customer" />
                             <datalist id="customers">
                                 @foreach (var item in Model.Customers)
                                 {
@@ -41,23 +40,7 @@
                                 }
                             </datalist>
 
-                            @*<select name="Customer" id="Customer" class="form-control">
-                                @foreach (var item in Model.Customers)
-                                {
-                                    @Html.Hidden("ID")
-
-                                    string CustomerName = item.FirstName + " " + item.MiddleName + " " + item.LastName;
-                                    if (Model.Customer == CustomerName)
-                                    {
-                                        <option selected value="@CustomerName">@CustomerName</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@CustomerName">@CustomerName</option>
-                                    }
-
-                                }
-                            </select>*@
+                          
                         </div>
 
                         <div class="form-group col-md-3">
@@ -81,9 +64,26 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label class="col-sm-12">Book No</label>
-                            <input required class="form-control" id="Book" value="@Model.Book" name="Book" placeholder="Enter Book Name">
+                            <label class="col-sm-12">Select Book</label>
+                            <input type="text" name="Book" list="books" class="form-control" id="Book" />
+                            <datalist id="books">
+                                @if (Model.Books != null)
+                                {
+                                    foreach (var item in Model.Books)
+                                    {
+                                        if (Model.Book == item.BookName)
+                                        {
+                                        <option selected value="@item.BookName" data-id="@item.ID" />
 
+                                        }
+                                        else
+                                        {
+                                        <option value="@item.BookName" data-id="@item.ID" />
+
+                                        }
+                                    }
+                                }
+                            </datalist>
                         </div>
 
 
@@ -278,8 +278,7 @@
 
                         <div class="form-group col-md-7">
                             <label class="col-sm-12">Select Customer</label>
-                            @Html.Hidden("ID")
-                            <input type="text" name="Customer" list="customers" class="form-control" id="co" value="@Model.Name" />
+                            <input type="text" name="Customer" list="customers" class="form-control" id="Customer" value="@Model.Name" />
                             <datalist id="customers">
                                 @foreach (var item in Model.Customers)
                                 {
@@ -288,24 +287,6 @@
                                     <option value="@CustomerName" data-id="@item.ID" />
                                 }
                             </datalist>
-
-                            @*<select name="Customer" id="Customer" class="form-control">
-            @foreach (var item in Model.Customers)
-            {
-                @Html.Hidden("ID")
-
-                string CustomerName = item.FirstName + " " + item.MiddleName + " " + item.LastName;
-                if (Model.Customer == CustomerName)
-                {
-                    <option selected value="@CustomerName">@CustomerName</option>
-                }
-                else
-                {
-                    <option value="@CustomerName">@CustomerName</option>
-                }
-
-            }
-        </select>*@
                         </div>
 
 
@@ -332,11 +313,18 @@
 
 
                         </div>
-
                         <div class="form-group col-md-4">
-                            <label class="col-sm-12">Book No</label>
-                            <input required class="form-control" id="Book" name="Book" placeholder="Enter Book Name">
-
+                            <label class="col-sm-12">Select Book</label>
+                            <input  type="text" name="Book" list="books" class="form-control" id="Book" />
+                            <datalist id="books">
+                                @if (Model.Books != null)
+                                {
+                                    foreach (var item in Model.Books)
+                                    {
+                                    <option value="@item.BookName" data-id="@item.ID" />
+                                    }
+                                }
+                            </datalist>
                         </div>
 
 
@@ -496,9 +484,12 @@
     });
 
 
-    $('#co').on('change', function () {
-        var id = $("option").filter("[value='" + $('#co').val() + "']").data("id");
-        $("[name='ID']").val(id);
+    $('#Customer').on('change', function () {
+        var id = $("option").filter("[value='" + $('#Customer').val() + "']").data("id");
+    });
+
+    $('#Book').on('change', function () {
+        var id = $("option").filter("[value='" + $('#Book').val() + "']").data("id");
     });
 
 

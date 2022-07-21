@@ -180,6 +180,10 @@
     <Compile Include="Migrations\202207200928259_adiD.designer.cs">
       <DependentUpon>202207200928259_adiD.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207210640461_booksrectified.cs" />
+    <Compile Include="Migrations\202207210640461_booksrectified.designer.cs">
+      <DependentUpon>202207210640461_booksrectified.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -289,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207200928259_adiD.resx">
       <DependentUpon>202207200928259_adiD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207210640461_booksrectified.resx">
+      <DependentUpon>202207210640461_booksrectified.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

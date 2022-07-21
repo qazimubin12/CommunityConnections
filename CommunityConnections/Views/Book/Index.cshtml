@@ -1,0 +1,41 @@
+﻿@model CommunityConnections.ViewModels.BooksListingViewModel
+@{
+    ViewBag.Title = "Index";
+}
+<div class="card">
+    <div class="card-body">
+        <h2>Books</h2>
+        <hr />
+
+
+        <div class="row mb-3">
+
+            <div class="col col-lg-12">
+                <form>
+                    <div class="input-group">
+                        <input type="text" name="searchterm" class="form-control" placeholder="Search." value="@Model.SearchTerm">
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+
+
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="submit"><i class="mdi mdi-account-search"></i> Search</button>
+                            <a class="btn btn-outline-success" href="@Url.Action("Action","Book")"><i class="mdi mdi-account-plus"></i>Add New</a>
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div id="actionContainer">
+            <div class="row">
+                <div class="col col-lg-12">
+                    @{
+                        Html.RenderPartial("_Listing", Model);
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

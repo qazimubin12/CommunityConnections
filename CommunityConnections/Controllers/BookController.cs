@@ -23,12 +23,11 @@ namespace CommunityConnections.Controllers
         public ActionResult Action(int ID = 0)
         {
             BooksActionViewModel model = new BooksActionViewModel();
-            
+            model.Ads = AdsServices.Instance.GetAdss();
             if (ID != 0)
             {
                 var Book = BookServices.Instance.GetBooks(ID);
                 model.ID = Book.ID;
-                model.AdID = Book.AdID;
                 model.BookName = Book.BookName;
 
                 return PartialView("Action", model);
@@ -49,7 +48,6 @@ namespace CommunityConnections.Controllers
                 var Book = BookServices.Instance.GetBooks(model.ID);
 
                 Book.ID = model.ID;
-                Book.AdID = model.AdID;
                 Book.BookName = model.BookName;
              
                 BookServices.Instance.UpdateBooks(Book);
@@ -58,7 +56,6 @@ namespace CommunityConnections.Controllers
             else
             {
                 var Book = new Book();
-                Book.AdID = model.AdID;
                 Book.BookName = model.BookName;
               
                 BookServices.Instance.SaveBooks(Book);

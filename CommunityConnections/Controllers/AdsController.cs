@@ -43,6 +43,7 @@ namespace CommunityConnections.Controllers
             model.StatusList = StatusList;
             #endregion
 
+            model.Books = BookServices.Instance.GetBookss();
 
 
 
@@ -55,6 +56,7 @@ namespace CommunityConnections.Controllers
             AdsListingViewModel model = new AdsListingViewModel();
             model.Ads = AdsServices.Instance.GetAdss();
             model.Customers = CustomerServices.Instance.GetCustomers();
+            model.Books = BookServices.Instance.GetBookss();
             var Ad = AdsServices.Instance.GetAds(ID);
             #region AdSizesList
             var LayoutList = new List<string>();
@@ -195,53 +197,53 @@ namespace CommunityConnections.Controllers
 
 
 
-        [HttpGet]
-        public ActionResult Action(int ID = 0)
-        {
-            AdsListingViewModel model = new AdsListingViewModel();
-            var LayoutList = new List<string>();
-            LayoutList.Add("Full Page W’ Bleed");
-            LayoutList.Add("Full Page");
-            LayoutList.Add("3/4 Page");
-            LayoutList.Add("1/2 Page Vertical");
-            LayoutList.Add("1/2 Page");
-            LayoutList.Add("1/3 Page");
-            LayoutList.Add("1/4 Page");
-            LayoutList.Add("1/4 Page Vertical");
-            LayoutList.Add("1/8 Page");
-            LayoutList.Add("Full Spread");
-            LayoutList.Add("3/4 Spread");
+        //[HttpGet]
+        //public ActionResult Action(int ID = 0)
+        //{
+        //    AdsListingViewModel model = new AdsListingViewModel();
+        //    var LayoutList = new List<string>();
+        //    LayoutList.Add("Full Page W’ Bleed");
+        //    LayoutList.Add("Full Page");
+        //    LayoutList.Add("3/4 Page");
+        //    LayoutList.Add("1/2 Page Vertical");
+        //    LayoutList.Add("1/2 Page");
+        //    LayoutList.Add("1/3 Page");
+        //    LayoutList.Add("1/4 Page");
+        //    LayoutList.Add("1/4 Page Vertical");
+        //    LayoutList.Add("1/8 Page");
+        //    LayoutList.Add("Full Spread");
+        //    LayoutList.Add("3/4 Spread");
 
-            var StatusList = new List<string>();
-            StatusList.Add("Running");
-            StatusList.Add("Email");
-            StatusList.Add("Call");
-            model.StatusList = StatusList;
+        //    var StatusList = new List<string>();
+        //    StatusList.Add("Running");
+        //    StatusList.Add("Email");
+        //    StatusList.Add("Call");
+        //    model.StatusList = StatusList;
 
 
 
             
-            model.Customers = CustomerServices.Instance.GetCustomers();
-            if (ID != 0)
-            {
-                var ad = AdsServices.Instance.GetAds(ID);
-                model.ID = ad.ID;
-                model.PageNo = ad.PageNo;
-                model.AdSize = ad.AdSize;
-                string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
-                model.Path = baseUrl + ad.Path;
-                model.Name = ad.Name;
-                model.AdStatus = ad.AdStatus;
-                model.PageTwo = ad.PageTwo;
-                model.Status = ad.Status;
-                return View("Action", model);
+        //    model.Customers = CustomerServices.Instance.GetCustomers();
+        //    if (ID != 0)
+        //    {
+        //        var ad = AdsServices.Instance.GetAds(ID);
+        //        model.ID = ad.ID;
+        //        model.PageNo = ad.PageNo;
+        //        model.AdSize = ad.AdSize;
+        //        string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
+        //        model.Path = baseUrl + ad.Path;
+        //        model.Name = ad.Name;
+        //        model.AdStatus = ad.AdStatus;
+        //        model.PageTwo = ad.PageTwo;
+        //        model.Status = ad.Status;
+        //        return View("Action", model);
 
-            }
-            else
-            {
-                return View("Action", model);
-            }
-        }
+        //    }
+        //    else
+        //    {
+        //        return View("Action", model);
+        //    }
+        //}
 
 
 
@@ -356,7 +358,7 @@ namespace CommunityConnections.Controllers
                 }
                 else
                 {
-                    ad.Name = "AD" + DateTime.Now.ToString("hh:mm") + model.Name;
+                    ad.Name = "AD" + model.Name;
 
                 }
                 ad.PageNo = model.PageNo;
@@ -371,8 +373,17 @@ namespace CommunityConnections.Controllers
                     ad.Path = "Content/paths/" + model.WithoutBaseURLPath;
                 }
 
-              
-                ad.AdStatus = "Not Placed";
+                if (ad.Status == "Placed" && model.AdStatus == "Not Placed")
+                {
+                    ad.AdStatus = "Placed";
+
+                }
+                else
+                {
+                    ad.AdStatus = "Not Placed";
+                    Session["AdID"] = ad.ID;
+
+                }
                 if (ad.AdSize == "Full Spread" || ad.AdSize == "3/4 Spread")
                 {
                     ad.PageTwo = ad.PageNo + 1;
@@ -382,6 +393,8 @@ namespace CommunityConnections.Controllers
                 ad.Book = model.Book;
                 ad.Repeat = model.Repeat;
                 ad.Customer = model.Customer;
+                ad.AdDescription = model.AdDescription;
+
                 ad.CustomSpecification = model.CustomSpecification;
                 if (model.Deluxe.ToString() == "on")
                 {
@@ -395,7 +408,6 @@ namespace CommunityConnections.Controllers
                 ad.Total = model.Total;
 
                 AdsServices.Instance.UpdateAds(ad);
-                Session["AdID"] = ad.ID;
 
             }
             else
@@ -404,7 +416,7 @@ namespace CommunityConnections.Controllers
                 ad.PageNo = model.PageNo;
                 ad.AdSize = model.AdSize;
                 ad.Status = model.Status;
-                ad.Name = "AD" + DateTime.Now.ToString("hh:mm") + model.Path;
+                ad.Name = "AD" + model.Path;
 
                 if (model.Path.Contains("Content/paths/"))
                 {

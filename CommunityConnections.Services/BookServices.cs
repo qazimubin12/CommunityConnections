@@ -43,14 +43,7 @@ namespace CommunityConnections.Services
         }
 
 
-        public Book GetBook(int AdID)
-        {
-            using (var context = new CCContext())
-            {
-                return context.Books.Where(x => x.AdID == AdID).FirstOrDefault();
-            }
-        }
-
+   
 
         public List<Book> GetBookss(string SearchTerm = "")
         {

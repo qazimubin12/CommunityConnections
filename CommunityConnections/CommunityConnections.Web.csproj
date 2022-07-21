@@ -1987,11 +1987,14 @@
     <Content Include="Views\Customer\CPAction.cshtml" />
     <Content Include="Views\Ads\ActionPartial.cshtml" />
     <Content Include="Views\Ads\MainScreenPartial.cshtml" />
+    <Content Include="Views\Book\Index.cshtml" />
+    <Content Include="Views\Book\_Listing.cshtml" />
+    <Content Include="Views\Book\Action.cshtml" />
+    <Content Include="Views\Book\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Book\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

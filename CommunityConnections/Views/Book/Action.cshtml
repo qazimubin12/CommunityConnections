@@ -1,0 +1,88 @@
+﻿@model CommunityConnections.ViewModels.BooksActionViewModel
+
+@{
+    ViewBag.Title = "Action";
+}
+
+
+@if (Model != null)
+{
+
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">
+                @if (Model.ID != 0)
+                {
+                    <span>Edit Book</span>
+                }
+                else
+                {
+                    <span>Save Book</span>
+                }
+            </h2>
+            <hr />
+
+
+
+
+            <form id="actionForm">
+                <div class="row">
+
+                    <input type="hidden" id="ID" name="ID" value="@Model.ID" />
+
+                    
+
+                    <div class="form-group col-md-4">
+                        @Html.LabelFor(model => model.BookName, htmlAttributes: new { @class = "control-label col-md-12" })
+                        @Html.EditorFor(model => model.BookName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.BookName, "", new { @class = "text-danger" })
+                    </div>
+
+                  
+
+                    
+                </div>
+
+                  
+
+                
+
+
+                <br />
+                @if (Model.ID != 0)
+                {
+                    <button id="actionButton" type="button" class="btn btn-outline-primary"><i class="fas fa-save mr-1"></i> UPDATE</button>
+                }
+                else
+                {
+                    <button id="actionButton" type="button" class="btn btn-outline-primary "><i class="fas fa-save mr-1"></i> SAVE</button>
+                }
+                <a href="@Url.Action("Index","Book")" class="btn btn-outline-danger"> CANCEL</a>
+            </form>
+
+        </div>
+    </div>
+}
+<script>
+     $("#actionButton").click(function () {
+		$.ajax({
+			url: '@Url.Action("Action", "Book")',
+			type: "post",
+			data: $("#actionForm").serialize()
+		})
+		.done(function () {
+
+            window.location.href = "@Url.Action("Index","Book")";
+
+		});
+     });
+
+
+    
+    
+
+
+
+
+</script>
+

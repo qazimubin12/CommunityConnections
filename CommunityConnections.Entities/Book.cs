@@ -9,6 +9,5 @@ namespace CommunityConnections.Entities
     public class Book:BaseEntity
     {
         public string BookName { get; set; }
-        public int AdID { get; set; }
     }
 }

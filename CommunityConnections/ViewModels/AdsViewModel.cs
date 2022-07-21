@@ -11,12 +11,14 @@ namespace CommunityConnections.ViewModels
     {
         public List<Ads> Ads { get; set; }
         public List<Customer> Customers { get; set; }
-        //public List<MyListViewModel> MyListViewModel { get; set; }
         public List<Ads> AdsOnPageOne { get; set; }
         public List<Ads> AdsOnPageTwo { get; set; }
         public string SearchTerm { get; set; }
         public List<string> Layouts { get; set; }
         public List<string> StatusList { get; set; }
+
+        public List<Book> Books { get; set; }
+
         public int ID { get; set; }
         public string Name { get; set; }
         public DateTime AdDate { get; set; }
@@ -70,11 +72,7 @@ namespace CommunityConnections.ViewModels
     }
 
 
-   public class AdViewModelActionView
-    {
-        public AdsListingViewModel ViewModel { get; set; }
-        public string Path { get; set; }
-    }
+   
 
 
 
