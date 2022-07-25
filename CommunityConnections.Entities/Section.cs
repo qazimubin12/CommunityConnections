@@ -8,6 +8,7 @@ namespace CommunityConnections.Entities
 {
     public class Section:BaseEntity
     {
+        public string Book { get; set; }
         public string SectionName { get; set; }
         public int StartPage { get; set; }
         public int EndPage { get; set; }

@@ -1991,6 +1991,7 @@
     <Content Include="Views\Book\_Listing.cshtml" />
     <Content Include="Views\Book\Action.cshtml" />
     <Content Include="Views\Book\Delete.cshtml" />
+    <Content Include="Views\Book\BooksAdsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

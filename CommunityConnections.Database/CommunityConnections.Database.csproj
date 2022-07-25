@@ -184,6 +184,10 @@
     <Compile Include="Migrations\202207210640461_booksrectified.designer.cs">
       <DependentUpon>202207210640461_booksrectified.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207240735186_sectionfix.cs" />
+    <Compile Include="Migrations\202207240735186_sectionfix.designer.cs">
+      <DependentUpon>202207240735186_sectionfix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -296,6 +300,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207210640461_booksrectified.resx">
       <DependentUpon>202207210640461_booksrectified.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207240735186_sectionfix.resx">
+      <DependentUpon>202207240735186_sectionfix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

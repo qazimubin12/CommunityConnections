@@ -50,6 +50,48 @@ namespace CommunityConnections.Controllers
             return View(model);
         }
 
+
+        //public ActionResult IndexSingle(int ID)
+        //{
+        //    AdsListingViewModel model = new AdsListingViewModel();
+        //    model.Ads = AdsServices.Instance.GetAdss();
+        //    model.ID = ID;
+        //    model.Customers = CustomerServices.Instance.GetCustomers();
+        //    #region AdSizesList
+        //    var LayoutList = new List<string>();
+        //    LayoutList.Add("Full Page W’ Bleed");
+        //    LayoutList.Add("Full Page");
+        //    LayoutList.Add("3/4 Page");
+        //    LayoutList.Add("1/2 Page Vertical");
+        //    LayoutList.Add("1/2 Page");
+        //    LayoutList.Add("1/3 Page");
+        //    LayoutList.Add("1/4 Page");
+        //    LayoutList.Add("1/4 Page Vertical");
+        //    LayoutList.Add("1/8 Page");
+        //    LayoutList.Add("Full Spread");
+        //    LayoutList.Add("3/4 Spread");
+        //    model.Layouts = LayoutList;
+        //    #endregion
+        //    #region StatusList
+        //    var StatusList = new List<string>();
+        //    StatusList.Add("Running");
+        //    StatusList.Add("Email");
+        //    StatusList.Add("Call");
+        //    model.StatusList = StatusList;
+        //    #endregion
+
+        //    model.Books = BookServices.Instance.GetBookss();
+
+
+
+        //    return PartialView("Index",model);
+        //}
+
+
+
+
+
+
         [HttpGet]
         public ActionResult ActionPartial(int ID = 0)
         {
@@ -345,7 +387,7 @@ namespace CommunityConnections.Controllers
         [HttpPost]
         public ActionResult Action(AdsListingViewModel model, string Path,string WithoutBaseURLPath)
         {
-
+            bool GoToMainScreen = false;
             if (model.ID != 0) //update record
             {
                 var ad = AdsServices.Instance.GetAds(model.ID);
@@ -362,6 +404,7 @@ namespace CommunityConnections.Controllers
 
                 }
                 ad.PageNo = model.PageNo;
+
                 ad.AdSize = model.AdSize;
                 ad.Status = model.Status;
                 if (model.WithoutBaseURLPath.Contains("Content/paths/"))
@@ -373,15 +416,17 @@ namespace CommunityConnections.Controllers
                     ad.Path = "Content/paths/" + model.WithoutBaseURLPath;
                 }
 
-                if (ad.Status == "Placed" && model.AdStatus == "Not Placed")
+                if (ad.AdStatus == "Placed" && model.AdStatus == "Not Placed")
                 {
                     ad.AdStatus = "Placed";
+                    GoToMainScreen = false;
 
                 }
                 else
                 {
                     ad.AdStatus = "Not Placed";
                     Session["AdID"] = ad.ID;
+                    GoToMainScreen = true;
 
                 }
                 if (ad.AdSize == "Full Spread" || ad.AdSize == "3/4 Spread")
@@ -455,8 +500,16 @@ namespace CommunityConnections.Controllers
             }
 
            
+            if(GoToMainScreen == true)
+            {
+                return RedirectToAction("Index", "MainScreen");
 
-            return RedirectToAction("Index","MainScreen");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Ads");
+
+            }
 
         }
 

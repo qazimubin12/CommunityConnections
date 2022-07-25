@@ -69,7 +69,7 @@ namespace CommunityConnections.Services
             {
                 if (!string.IsNullOrEmpty(SearchTerm))
                 {
-                    Sectionss = context.Sections.Where(x => x.MoveForward == "Yes" && x.SectionName != null && x.SectionName.ToLower()
+                    Sectionss = context.Sections.Where(x => x.MoveForward == "No" && x.SectionName != null && x.SectionName.ToLower()
                     .Contains(SearchTerm.ToLower())).ToList();
                 }
 
@@ -77,6 +77,17 @@ namespace CommunityConnections.Services
                 {
                     Sectionss = context.Sections.OrderBy(x => x.SectionName).ToList();
                 }
+            }
+            return Sectionss;
+        }
+
+        public List<Section> GetNotTrailingSectionsBookName(string BookName)
+        {
+            List<Section> Sectionss = null;
+            using (var context = new CCContext())
+            {
+                Sectionss = context.Sections.Where(x => x.MoveForward == "No" && x.Book == BookName).ToList();
+               
             }
             return Sectionss;
         }

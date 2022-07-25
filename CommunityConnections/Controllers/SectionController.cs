@@ -25,6 +25,7 @@ namespace CommunityConnections.Controllers
         {
             SectionActionViewModel model = new SectionActionViewModel();
             model.Sections = SectionServices.Instance.GetSectionss();
+            model.Books = BookServices.Instance.GetBookss();
             if (ID != 0)
             {
                 var section = SectionServices.Instance.GetSections(ID);
@@ -33,7 +34,7 @@ namespace CommunityConnections.Controllers
                 model.EndPage = section.EndPage;
                 model.SectionName = section.SectionName;
                 model.MoveForward = section.MoveForward;
-
+                model.Book = section.Book;
                 return PartialView("Action", model);
 
             }
@@ -69,6 +70,7 @@ namespace CommunityConnections.Controllers
                     }
                 }
                 section.MoveForward = model.MoveForward;
+                section.Book = model.Book;
                 SectionServices.Instance.UpdateSections(section);
 
             }
@@ -78,6 +80,7 @@ namespace CommunityConnections.Controllers
                 section.StartPage = model.StartPage;
                 section.EndPage = model.EndPage;
                 section.SectionName = model.SectionName;
+                section.Book = model.Book;
                 if (model.MoveForward == "Yes")
                 {
                     if (model.Monday == true)

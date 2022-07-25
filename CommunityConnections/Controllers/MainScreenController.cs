@@ -12,37 +12,47 @@ namespace CommunityConnections.Controllers
     {
         
 
-        public ActionResult Index(string SearchTerm)
-        {
-            MainScreenViewModel model = new MainScreenViewModel();
+        //public ActionResult Index(string SearchTerm)
+        //{
+        //    MainScreenViewModel model = new MainScreenViewModel();
 
-            int Pages = 0;
-            model.Sections = SectionServices.Instance.GetNotTrailingSections();
+        //    int Pages = 0;
+        //    model.Sections = SectionServices.Instance.GetNotTrailingSections();
           
-            model.NoOfPages = Pages;
-            model.PlacedAds = AdsServices.Instance.GetPlacedAdss();
-            if(Session["AdID"] != null)
+        //    model.NoOfPages = Pages;
+        //    model.PlacedAds = AdsServices.Instance.GetPlacedAdss();
+        //    if(Session["AdID"] != null)
+        //    {
+        //        int LastsavedAdID = int.Parse(Session["AdID"].ToString());
+        //        model.NotPlacedAD = AdsServices.Instance.GetNotPlacedAd(LastsavedAdID);
+        //    }
+        //    else
+        //    {
+        //        model.NonPlacedAds = AdsServices.Instance.GetNotPlacedAdss(SearchTerm);
+        //    }
+        //    return View(model);
+        //}
+
+
+
+
+        public ActionResult Index(int BookID = 0)
+        {
+         
+            MainScreenViewModel model = new MainScreenViewModel();
+            if(BookID != 0)
             {
-                int LastsavedAdID = int.Parse(Session["AdID"].ToString());
-                model.NotPlacedAD = AdsServices.Instance.GetNotPlacedAd(LastsavedAdID);
+                Session["Book"] = BookID;
             }
             else
             {
-                model.NonPlacedAds = AdsServices.Instance.GetNotPlacedAdss(SearchTerm);
+                BookID = int.Parse(Session["Book"].ToString());
             }
-            return View(model);
-        }
-
-        public ActionResult Index2(string SearchTerm)
-        {
-            MainScreenViewModel model = new MainScreenViewModel();
-
-            int Pages = 0;
-            model.Sections = SectionServices.Instance.GetNotTrailingSections();
-
-            model.NoOfPages = Pages;
-            model.PlacedAds = AdsServices.Instance.GetPlacedAdss();
-            model.NonPlacedAds = AdsServices.Instance.GetNotPlacedAdss(SearchTerm);
+            var Book = BookServices.Instance.GetBooks(BookID);
+            model.Sections = SectionServices.Instance.GetNotTrailingSectionsBookName(Book.BookName);
+            model.PlacedAds = AdsServices.Instance.GetPlacedAdssViaBookName(Book.BookName);
+            model.NonPlacedAds = AdsServices.Instance.GetNotPlacedAdsViaBookName(Book.BookName);
+            
             return View(model);
         }
 

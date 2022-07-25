@@ -181,6 +181,8 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
     $("#actionButton").click(function () {
         var Path = $("#Path").val();
         var withoutbasePath = $("#WithoutBaseURLPath").val();
+        var Status = $("#AdStatus").val();
+
         $.ajax({
             url: '@Url.Action("Action", "Ads")',
             type: "post",
@@ -188,7 +190,13 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
 
         })
             .done(function () {
-                window.location.href = "@Url.Action("Index", "MainScreen")";
+                if (Status == "Placed") {
+                    window.location.href = "@Url.Action("Index", "Ads")";
+
+                } else {
+                    window.location.href = "@Url.Action("Index", "MainScreen")";
+
+                }
             })
             .fail(function () {
                 console.log("error");
@@ -196,6 +204,17 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
 
     });
 
+
+
+    function CheckDeluxeHidden() {
+        var sizelmenet = document.getElementById("AdSize");
+        if (sizelmenet.value == 'Full Page W’ Bleed' || sizelmenet.value == 'Full Page' || sizelmenet.value == 'Full Spread') {
+            $("#deluxeDiv").show();
+        }
+        else {
+            $("#deluxeDiv").hide();
+        }
+    }
 
 
     $(".EditBtn").click(function () {
@@ -209,6 +228,7 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
         })
             .done(function (oData) {
                 $("#actionContainer").html(oData);
+                CheckDeluxeHidden();
             });
 
 

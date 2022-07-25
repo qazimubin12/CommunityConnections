@@ -30,6 +30,29 @@
 
                     <input type="hidden" id="ID" name="ID" value="@Model.ID" />
 
+                    <div class="form-group col-md-4">
+                        <label class="col-md-12">Select Book</label>
+                        <select class="form-control" name="Book">
+                            @foreach (var item in Model.Books)
+                            {
+                                if (Model.ID != 0)
+                                {
+                                    if (Model.Book == item.BookName)
+                                    {
+                                        <option value="@item.BookName" selected>@item.BookName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.BookName">@item.BookName</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="@item.BookName">@item.BookName</option>
+                                }
+                            }
+                        </select>
+                    </div>
 
                     <div class="form-group col-md-4">
                         @Html.LabelFor(model => model.SectionName, htmlAttributes: new { @class = "control-label col-md-12" })
@@ -43,47 +66,46 @@
                         @Html.EditorFor(model => model.StartPage, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.StartPage, "", new { @class = "text-danger" })
                     </div>
+                </div>
 
+                <div class="row">
                     <div class="form-group col-md-3">
                         @Html.LabelFor(model => model.EndPage, htmlAttributes: new { @class = "control-label col-md-12" })
                         @Html.EditorFor(model => model.EndPage, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.EndPage, "", new { @class = "text-danger" })
                     </div>
-                </div>
 
 
-                <div class="form-group">
-                    <label>Move Forward</label>
+                    <div class="form-group">
+                        <label>Move Forward</label>
 
-                    <select name="MoveForward">
-                        @if (Model.MoveForward != "")
-                        {
-                            if (Model.MoveForward == "Yes")
+                        <select class="form-control" name="MoveForward">
+                            @if (Model.MoveForward != "")
                             {
-                                <option selected value="Yes">Yes</option>
-                                <option value="No">No</option>
+                                if (Model.MoveForward == "Yes")
+                                {
+                                    <option selected value="Yes">Yes</option>
+                                    <option value="No">No</option>
 
+                                }
+                                else
+                                {
+                                    <option value="Yes">Yes</option>
+
+                                    <option selected value="No">No</option>
+
+                                }
                             }
                             else
                             {
+                                <option value="No">No</option>
                                 <option value="Yes">Yes</option>
-
-                                <option selected value="No">No</option>
-
                             }
-                        }
-                        else
-                        {
-                            <option value="No">No</option>
-                            <option value="Yes">Yes</option>
-                        }
 
-                    </select>
+                        </select>
 
 
-                </div>
-
-                <div class="row">
+                    </div>
 
                     <div class="form-group col-md-3">
                         <label>In between Any Section</label>
@@ -118,6 +140,7 @@
 
                     </div>
                 </div>
+                
 
 
                 <br />

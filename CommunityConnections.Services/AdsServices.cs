@@ -56,6 +56,19 @@ namespace CommunityConnections.Services
         }
 
 
+        public List<Ads> GetAdsWRTtoBookName(string SearchTerm)
+        {
+            List<Ads> Adss = null;
+            using (var context = new CCContext())
+            {
+
+                Adss = context.Ads.Where(x => x.Book == SearchTerm).ToList();
+
+            }
+            return Adss;
+        }
+
+
 
         public List<Ads> GetAdssViaName(string SearchTerm = "")
         {
@@ -96,6 +109,21 @@ namespace CommunityConnections.Services
         }
 
 
+
+
+        public List<Ads> GetNotPlacedAdsViaBookName(string BookName)
+        {
+            List<Ads> Adss = null;
+            using (var context = new CCContext())
+            {
+
+                Adss = context.Ads.Where(x => x.AdStatus == "Not Placed" && x.Book == BookName).ToList();
+
+            }
+            return Adss;
+        }
+
+
         public Ads GetNotPlacedAd(int ID)
         {
             Ads Ad = null;
@@ -120,6 +148,19 @@ namespace CommunityConnections.Services
                 {
                     Adss = context.Ads.Where(x => x.AdStatus == "Placed" ).OrderBy(x=>x.Sort).ToList();
                 }
+            }
+            return Adss;
+        }
+
+
+        public List<Ads> GetPlacedAdssViaBookName(string BookName)
+        {
+            List<Ads> Adss = null;
+            using (var context = new CCContext())
+            {
+                
+                    Adss = context.Ads.Where(x => x.AdStatus == "Placed" && x.Book == BookName).OrderBy(x => x.Sort).ToList();
+                
             }
             return Adss;
         }

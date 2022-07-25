@@ -9,6 +9,7 @@ namespace CommunityConnections.ViewModels
     public class MainScreenViewModel
     {
         public List<Ads> Ads { get; set; }
+        public List<Book> Books { get; set; }
         public List<string> StatusList { get; set; }
         public int SelectedPage { get; set; }
         public List<Ads> PlacedAds { get; set; }

@@ -65,7 +65,7 @@
 
                         <div class="form-group col-md-4">
                             <label class="col-sm-12">Select Book</label>
-                            <input type="text" name="Book" list="books" class="form-control" id="Book" />
+                            <input type="text" name="Book" list="books" class="form-control" id="Book" value="@Model.Book" />
                             <datalist id="books">
                                 @if (Model.Books != null)
                                 {
@@ -192,6 +192,7 @@
                             <label class="col-sm-12">Custom Specification</label>
                             <input class="form-control" id="CustomSpecification" value="@Model.CustomSpecification" name="CustomSpecification" placeholder="Custom Specification">
                             <input class="form-control" hidden id="Name" value="@Model.Name" name="Name" placeholder="Custom Specification">
+                            <input class="form-control" hidden id="AdStatus" value="@Model.AdStatus" name="AdStatus" placeholder="Custom Specification">
 
                         </div>
 
@@ -445,6 +446,8 @@
                         <div class="form-group col-md-5">
                             <label class="col-sm-12">Total</label>
                             <input required class="form-control" id="Total" name="Total" placeholder="Enter Total">
+                            <input class="form-control" hidden id="AdStatus" value="Not Placed" name="AdStatus" placeholder="Custom Specification">
+
 
                         </div>
 
@@ -504,6 +507,8 @@
             }
         });
     });
+
+
 
 
 

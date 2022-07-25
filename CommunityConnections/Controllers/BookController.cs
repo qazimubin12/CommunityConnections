@@ -24,6 +24,7 @@ namespace CommunityConnections.Controllers
         {
             BooksActionViewModel model = new BooksActionViewModel();
             model.Ads = AdsServices.Instance.GetAdss();
+            
             if (ID != 0)
             {
                 var Book = BookServices.Instance.GetBooks(ID);
@@ -37,6 +38,16 @@ namespace CommunityConnections.Controllers
             {
                 return View("Action", model);
             }
+        }
+
+
+        [HttpGet]
+        public ActionResult BooksAdsView(int BookID)
+        {
+            AdsListingViewModel model = new AdsListingViewModel();
+            var Book = BookServices.Instance.GetBooks(BookID);
+            model.Ads = AdsServices.Instance.GetAdsWRTtoBookName(Book.BookName);
+            return PartialView(model);
         }
 
 

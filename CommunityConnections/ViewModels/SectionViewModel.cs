@@ -9,12 +9,15 @@ namespace CommunityConnections.ViewModels
     public class SectionListingViewModel
     {
         public List<Section> Sections { get; set; }
+        
         public string SearchTerm { get; set; }
 
     }
     public class SectionActionViewModel
     {
         public int ID { get; set; }
+        public string Book { get; set; }
+        public List<Book> Books { get; set; }
         public List<Section> Sections { get; set; }
         public string SectionName { get; set; }
         public int StartPage { get; set; }
