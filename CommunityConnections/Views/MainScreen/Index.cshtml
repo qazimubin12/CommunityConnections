@@ -190,7 +190,7 @@
 </style>
 <body>
     <div class="container">
-        <div class="row">
+        <div style="padding-bottom:50px;" class="row">
             <div class="col-md-4">
                 <a style="font-size: 50px;" class="btn btn-block btn-primary" href="@Url.Action("","")">Back To Dashboard</a>
             </div>
@@ -203,11 +203,35 @@
                 <a style="font-size: 50px;" class="btn btn-block btn-info" href="@Url.Action("Index","Customer")">Back To Customer</a>
             </div>
 
-         
+
+
+        </div>
+        <div class="row">
+            <form method="post">
+                <div class="col-md-12">
+                        <select style="height:96px;width:100%; font-size:50px;" class="form-control" name="Book" id="Book">
+                            @foreach (var item in Model.Books)
+                            {
+                                if (Model.SelectedBook == item.BookName)
+                                {
+                                    <option selected value="@item.BookName">@item.BookName</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.BookName">@item.BookName</option>
+
+                                }
+                            }
+                        </select>
+                        <button style="font-size:50px; float:right;" class="btn btn-primary" type="submit">VIEW BOOK</button>
+
+                   
+                </div>
+            </form>
         </div>
 
     </div>
-
+    
     <br />
 
     <div class="row">
@@ -248,14 +272,14 @@
                     }
                     else
                     {
-                <tr>
+                        <tr>
 
-                    <td id="@Model.NotPlacedAD.ID" class="draggable">
-                        <div>
-                            <h4 style="font-size:47px;">@Model.NotPlacedAD.Name</h4>
-                        </div>
-                    </td>
-                </tr>
+                            <td id="@Model.NotPlacedAD.ID" class="draggable">
+                                <div>
+                                    <h4 style="font-size:47px;">@Model.NotPlacedAD.Name</h4>
+                                </div>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>
@@ -628,7 +652,7 @@
                         }
                     }
 
-                    
+
                 </tr>
 
             </table>
@@ -672,7 +696,7 @@
             }
         }
     </div>
-   
+
 
 
 
@@ -802,7 +826,7 @@
 
 
                     if (element.is(":visible")) {
-                    
+
 
                         element.attr('hidden', "hidden");
                         element2.attr('hidden', "hidden");
@@ -813,13 +837,13 @@
                     }
                     element.html(myData);
                 });
-            
+
         };
 
 
 
 
-       
+
 
     </script>
 

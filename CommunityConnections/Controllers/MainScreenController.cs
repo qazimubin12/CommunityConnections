@@ -36,23 +36,52 @@ namespace CommunityConnections.Controllers
 
 
 
+        [HttpGet]
         public ActionResult Index(int BookID = 0)
         {
          
             MainScreenViewModel model = new MainScreenViewModel();
+            model.Books = BookServices.Instance.GetBookss();
             if(BookID != 0)
             {
                 Session["Book"] = BookID;
             }
             else
             {
-                BookID = int.Parse(Session["Book"].ToString());
+                if (Session["Book"] == null)
+                {
+                    foreach (var item in model.Books)
+                    {
+                        BookID = item.ID;
+                        break;
+                    }
+                }
+                else
+                {
+                    BookID = int.Parse(Session["Book"].ToString());
+                }
             }
             var Book = BookServices.Instance.GetBooks(BookID);
+            model.SelectedBook = Book.BookName;
             model.Sections = SectionServices.Instance.GetNotTrailingSectionsBookName(Book.BookName);
             model.PlacedAds = AdsServices.Instance.GetPlacedAdssViaBookName(Book.BookName);
             model.NonPlacedAds = AdsServices.Instance.GetNotPlacedAdsViaBookName(Book.BookName);
             
+            return View(model);
+        }
+
+
+
+        [HttpPost]
+        public ActionResult Index(string Book)
+        {
+
+            MainScreenViewModel model = new MainScreenViewModel();
+            model.Books = BookServices.Instance.GetBookss();
+            model.SelectedBook = Book;
+            model.Sections = SectionServices.Instance.GetNotTrailingSectionsBookName(Book);
+            model.PlacedAds = AdsServices.Instance.GetPlacedAdssViaBookName(Book);
+            model.NonPlacedAds = AdsServices.Instance.GetNotPlacedAdsViaBookName(Book);
             return View(model);
         }
 

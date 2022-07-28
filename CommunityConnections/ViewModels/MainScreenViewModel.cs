@@ -16,6 +16,7 @@ namespace CommunityConnections.ViewModels
 
         public List<Ads> NonPlacedAds { get; set; }
         public int NoOfPages { get; set; }
+        public string SelectedBook { get; set; }
 
         public List<Section> Sections { get; set; }
         public List<MyList> CompleteList { get; set; }
