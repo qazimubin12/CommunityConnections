@@ -210,15 +210,82 @@ namespace CommunityConnections.Controllers
 
                 }
             }
-            if (fullpagecheck == false && EvenPageNumberForSpreadAd == false)
-            {
+            //if ()
+            //{
                 
+            //    Ad.PageNo = AdPage;
+            //    Ad.AdStatus = "Placed";
+            //    string some =  DateTime.Now.ToString("ddMMyyyyhhmmss").ToString();
+            //    Ad.Sort = some;
+            //    AdsServices.Instance.UpdateAds(Ad);
+            //    if(Ad.AdSize == "Full Spread")
+            //    {
+            //        AdPage++;
+            //        Ad.PageTwo = AdPageTwo;
+            //        AdsServices.Instance.UpdateAds(Ad);
+
+            //    }
+
+            //}
+            #endregion
+
+
+            #region CheckForAdsOnPage
+            int Adscount = 0;
+            int MaxAdsCanBePlaced = 8;
+            foreach (var item in AdsonPage)
+            {
+                if(item.AdSize == "1/3 Page")
+                {
+                    Adscount += 2; //Exceptional Case for three 1/3 Ads
+                }
+                if(item.AdSize == "1/2 Page" || item.AdSize == "1/2 Page Vertical")
+                {
+                    Adscount += 4;
+                }
+                if(item.AdSize == "3/4 Page")
+                {
+                    Adscount += 6;
+                }        
+                if(item.AdSize == "1/4 Page" || item.AdSize == "1/4 Page Vertical")
+                {
+                    Adscount += 2;
+                }
+                if(item.AdSize == "1/8 Page")
+                {
+                    Adscount += 1;
+                }
+            }
+
+            if (Ad.AdSize == "1/3 Page")
+            {
+                Adscount += 2; 
+            }
+            if (Ad.AdSize == "1/2 Page" || Ad.AdSize == "1/2 Page Vertical")
+            {
+                Adscount += 4;
+            }
+            if (Ad.AdSize == "3/4 Page")
+            {
+                Adscount += 6;
+            }
+            if (Ad.AdSize == "1/4 Page" || Ad.AdSize == "1/4 Page Vertical")
+            {
+                Adscount += 2;
+            }
+            if (Ad.AdSize == "1/8 Page")
+            {
+                Adscount += 1;
+            }
+            if (Adscount <= MaxAdsCanBePlaced && fullpagecheck == false && EvenPageNumberForSpreadAd == false)
+            {
+
                 Ad.PageNo = AdPage;
                 Ad.AdStatus = "Placed";
-                string some =  DateTime.Now.ToString("ddMMyyyyhhmmss").ToString();
+                string some = DateTime.Now.ToString("ddMMyyyyhhmmss").ToString();
                 Ad.Sort = some;
                 AdsServices.Instance.UpdateAds(Ad);
-                if(Ad.AdSize == "Full Spread")
+                if (Ad.AdSize == "Full Spread")
                 {
                     AdPage++;
                     Ad.PageTwo = AdPageTwo;
@@ -227,16 +294,7 @@ namespace CommunityConnections.Controllers
                 }
 
             }
-            #endregion
 
-
-            #region CheckForAdsOnPage
-            foreach (var item in AdsonPage)
-            {
-               
-                
-
-            }
 
 
             #endregion
