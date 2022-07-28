@@ -306,8 +306,10 @@
 
 
                                         <div class="btn-group-justified" role="group" aria-label="Basic example">
-                                            <button style="padding:0px;" hidden="hidden" data-id="@counter" onclick="" type="button" class="btnSearchAdsInPage btn btn-warning btn-sm"><i class="ti-search btn-icon-append"></i></button>
-                                            <span hidden="hidden" style="padding:0px; font-size:30px;" onclick="" type="button" data-item="@counter" class="StatusButton btn btn-warning btn-sm"></span>
+                                            <button style="padding:0px;" hidden="hidden" data-id="@counter" onclick="" type="button" class="btnSearchAdsInPage btn btn-success btn-sm"><i style="font-size:50px;" class="ti-search btn-icon-append"></i></button>
+                                            <button style="padding:0px; font-size:50px;" hidden="hidden" data-id="@counter" onclick="" type="button" class="DeluxeIcon btn btn-danger btn-sm">D</button>
+
+                                            <span hidden="hidden" style="font-size:50px; padding:0px; " onclick="" type="button" data-item="@counter" class="StatusButton btn btn-warning btn-sm"></span>
                                         </div>
 
 
@@ -475,8 +477,9 @@
 
 
                                         <div class="btn-group-justified" role="group" aria-label="Basic example">
-                                            <button style="padding:0px;" hidden="hidden" data-id="@counter" onclick="" type="button" class="btnSearchAdsInPage btn btn-warning btn-sm"><i class="ti-search btn-icon-append"></i></button>
-                                            <span hidden="hidden" style="padding:0px; font-size:30px;" onclick="" type="button" data-item="@counter" class="StatusButton btn btn-warning btn-sm"></span>
+                                            <button style="padding:0px;" hidden="hidden" data-id="@counter" onclick="" type="button" class="btnSearchAdsInPage btn btn-warning btn-sm"><i style="font-size:50px; " class="ti-search btn-icon-append"></i></button>
+                                            <button style="padding:0px; font-size:50px;" hidden="hidden" data-id="@counter" onclick="" type="button" class="DeluxeIcon btn btn-danger btn-sm">D</button>
+                                            <span hidden="hidden" style="padding:0px; font-size:50px;" onclick="" type="button" data-item="@counter" class="StatusButton btn btn-warning btn-sm"></span>
                                         </div>
 
 
@@ -712,7 +715,8 @@
         var dropSpace = $(window).width() - $("#launchPad").width();
         $("#dropZone").width(dropSpace - 70);
         $("#dropZone").height($("#launchPad").height());
-
+        var book = document.getElementById("Book");
+        var Book = book.value;
 
         $(".draggable").draggable({
             appendTo: "body",
@@ -734,7 +738,8 @@
                     type: 'POST',
                     data: {
                         AdID: AdID,
-                        AdPage: AdPage
+                        AdPage: AdPage,
+                        Book: Book
                     }
 
 
@@ -814,6 +819,8 @@
         function ShowToggle(ID, Counter) {
 
 
+
+
             $.ajax({
                 url: '@Url.Action("GetAdStatus", "MainScreen")',
                 type: "GET",
@@ -823,7 +830,6 @@
                     var myData = oData;
                     var element = $(`.StatusButton[data-item=${Counter}]`);
                     var element2 = $(`.btnSearchAdsInPage[data-id=${Counter}]`);
-
 
                     if (element.is(":visible")) {
 
@@ -837,6 +843,27 @@
                     }
                     element.html(myData);
                 });
+
+              $.ajax({
+                url: '@Url.Action("CheckDeluxe", "MainScreen")',
+                type: "GET",
+                data: { ID: ID }
+            })
+                .done(function (oData) {
+                    var myData = oData;
+                    var deluxeIcon = $(`.DeluxeIcon[data-id=${Counter}]`);
+                    if (myData == false) {
+                        deluxeIcon.attr('hidden', "hidden");
+                    } else {
+                        if (deluxeIcon.is(":visible")) {
+                            deluxeIcon.attr('hidden', "hidden");
+
+                        } else {
+                            deluxeIcon.removeAttr('hidden');
+                        }
+                    }
+
+               });
 
         };
 

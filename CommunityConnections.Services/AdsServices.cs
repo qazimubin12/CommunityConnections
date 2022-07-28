@@ -185,11 +185,29 @@ namespace CommunityConnections.Services
         }
 
 
-        public List<Ads> AdsonPage(int Page)
+        public List<Ads> AdsonPage(int Page,string Book)
         {
             using(var context = new CCContext())
             {
-                return context.Ads.Where(x => x.PageNo == Page && x.AdStatus == "Placed").OrderBy(x => x.Sort).ToList();
+                return context.Ads.Where(x => x.PageNo == Page && x.Book == Book && x.AdStatus == "Placed").OrderBy(x => x.Sort).ToList();
+            }
+        }
+
+        public List<Ads> AdsOnPageTwo(int PageTwo,string Book)
+        {
+            using (var context = new CCContext())
+            {
+                return context.Ads.Where(x => x.PageTwo == PageTwo &&x.Book ==Book && x.AdStatus == "Placed").OrderBy(x => x.Sort).ToList();
+            }
+        }
+
+
+
+        public List<Ads> AdsonPage(int Page)
+        {
+            using (var context = new CCContext())
+            {
+                return context.Ads.Where(x => x.PageNo == Page  && x.AdStatus == "Placed").OrderBy(x => x.Sort).ToList();
             }
         }
 
@@ -197,7 +215,7 @@ namespace CommunityConnections.Services
         {
             using (var context = new CCContext())
             {
-                return context.Ads.Where(x => x.PageTwo == PageTwo && x.AdStatus == "Placed").OrderBy(x => x.Sort).ToList();
+                return context.Ads.Where(x => x.PageTwo == PageTwo  && x.AdStatus == "Placed").OrderBy(x => x.Sort).ToList();
             }
         }
 

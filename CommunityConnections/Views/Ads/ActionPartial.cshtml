@@ -132,9 +132,7 @@
                         <div id="deluxeDiv" class="form-group col-md-2">
                             <label class="col-sm-12">Deluxe</label>
 
-                            @if (Model.Deluxe != null)
-                            {
-                                if (Model.Deluxe.ToString() == "on")
+                                @if (Model.Deluxe == true)
                                 {
                                     <input type="checkbox" checked name="Dexluxe" id="Deluxe" class="form-control" />
 
@@ -143,14 +141,8 @@
                                 else
                                 {
                                     <input type="checkbox" name="Dexluxe" id="Deluxe" class="form-control" />
-
                                 }
-                            }
-                            else
-                            {
-                                <input type="checkbox" name="Dexluxe" id="Deluxe" class="form-control" />
 
-                            }
 
                         </div>
 

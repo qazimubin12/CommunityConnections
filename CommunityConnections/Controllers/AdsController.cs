@@ -385,7 +385,7 @@ namespace CommunityConnections.Controllers
 
 
         [HttpPost]
-        public ActionResult Action(AdsListingViewModel model, string Path,string WithoutBaseURLPath)
+        public ActionResult Action(AdsListingViewModel model, string Path,string WithoutBaseURLPath,bool Deluxe)
         {
             bool GoToMainScreen = false;
             if (model.ID != 0) //update record
@@ -441,14 +441,8 @@ namespace CommunityConnections.Controllers
                 ad.AdDescription = model.AdDescription;
 
                 ad.CustomSpecification = model.CustomSpecification;
-                if (model.Deluxe.ToString() == "on")
-                {
-                    ad.Deluxe = true;
-                }
-                else
-                {
-                    ad.Deluxe = false;
-                }
+                ad.Deluxe = model.Deluxe;
+                
                 ad.Discount = model.Discount;
                 ad.Total = model.Total;
 

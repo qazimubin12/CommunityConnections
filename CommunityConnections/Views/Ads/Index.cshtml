@@ -182,11 +182,11 @@ grid.Column(header: "", format: @<a class="btn btn-warning" href="@Url.Action("D
         var Path = $("#Path").val();
         var withoutbasePath = $("#WithoutBaseURLPath").val();
         var Status = $("#AdStatus").val();
-
+        let deluxe = $('#Deluxe').is(':checked');
         $.ajax({
             url: '@Url.Action("Action", "Ads")',
             type: "post",
-            data: $("#actionForm").serialize() + "&Path=" + Path + "&WithoutBaseURLPath=" + withoutbasePath
+            data: $("#actionForm").serialize() + "&Path=" + Path + "&WithoutBaseURLPath=" + withoutbasePath + "&Deluxe=" + deluxe
 
         })
             .done(function () {

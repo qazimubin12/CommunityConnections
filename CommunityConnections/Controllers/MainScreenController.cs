@@ -87,7 +87,7 @@ namespace CommunityConnections.Controllers
 
 
         [HttpPost]
-        public ActionResult PlaceAd(int AdID, int AdPage)
+        public ActionResult PlaceAd(int AdID, int AdPage,string Book)
         {
             var Ad = AdsServices.Instance.GetAds(AdID);
 
@@ -102,8 +102,8 @@ namespace CommunityConnections.Controllers
             }
 
 
-            var AdsonPage = AdsServices.Instance.AdsonPage(AdPage);
-            var AdsOnPageTwo = AdsServices.Instance.AdsOnPageTwo(AdPage);
+            var AdsonPage = AdsServices.Instance.AdsonPage(AdPage,Book);
+            var AdsOnPageTwo = AdsServices.Instance.AdsOnPageTwo(AdPage,Book);
             bool fullpagecheck = false;
             bool EvenPageNumberForSpreadAd = false;
             int AdPageTwo = 0;
@@ -186,7 +186,7 @@ namespace CommunityConnections.Controllers
                 {
                      AdPageTwo = AdPage;
                     AdPageTwo++;
-                    var AdsonPageforSpreadAd = AdsServices.Instance.AdsonPage(AdPageTwo);
+                    var AdsonPageforSpreadAd = AdsServices.Instance.AdsonPage(AdPageTwo,Book);
                     foreach (var item in AdsonPageforSpreadAd)
                     {
 
@@ -242,6 +242,8 @@ namespace CommunityConnections.Controllers
             #endregion
 
             Session["AdID"] = null;
+            var book = BookServices.Instance.GetBook(Book);
+            Session["Book"] = book.ID;
             return RedirectToAction("Index", "MainScreen");
             
 
@@ -326,8 +328,9 @@ namespace CommunityConnections.Controllers
         [HttpGet]
         public ActionResult AdsView(int ID)
         {
+            string Book = Session["Book"].ToString();
             MainScreenViewModel model = new MainScreenViewModel();
-            model.AdsonPage = AdsServices.Instance.AdsonPage(ID);
+            model.AdsonPage = AdsServices.Instance.AdsonPage(ID,Book);
             model.SelectedPage = ID;
             var StatusList = new List<string>();
             StatusList.Add("Running");
@@ -370,6 +373,14 @@ namespace CommunityConnections.Controllers
             var AD = AdsServices.Instance.GetAds(ID);
             string status = AD.Status;
             return Json(status,JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult CheckDeluxe(int ID)
+        {
+            var AD = AdsServices.Instance.GetAds(ID);
+            bool deluxe = AD.Deluxe;
+            return Json(deluxe, JsonRequestBehavior.AllowGet);
         }
 
 
